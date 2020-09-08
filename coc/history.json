@@ -1,0 +1,26 @@
+{
+  "explPresets": {
+    "%2FUsers%2Fadmin%2F": {
+      "config": [
+        "j:"
+      ]
+    }
+  },
+  "explorerFiles": {
+    "%2FUsers%2Fadmin%2F": {
+      "config": [
+        "yabai",
+        "init",
+        "my:q",
+        "m"
+      ]
+    }
+  },
+  "files": {
+    "%2FUsers%2Fadmin%2F": {
+      "config%2Fnvim": [
+        "coc-setting.json"
+      ]
+    }
+  }
+}

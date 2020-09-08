@@ -1,0 +1,60 @@
+{
+  "title": "Multitouch Diamond Cursor (rev 2)",
+  "maintainers": [
+    "tekezo"
+  ],
+  "rules": [
+    {
+      "description": "Multitouch Diamond Cursor (rev 2)",
+      "available_since": "12.6.9",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "w",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+        "to": [{
+          "mouse_key": {
+            "vertical_wheel": -40
+          }
+        }],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multitouch_extension_finger_count_total",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+        "to": [{
+          "mouse_key": {
+            "vertical_wheel": 40
+          }
+        }],
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multitouch_extension_finger_count_total",
+              "value": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

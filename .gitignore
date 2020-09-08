@@ -1,0 +1,5 @@
+.DS_Store
+clash/
+nvim/plugged/
+nvim/autoload/
+coc/extensions/node_modules/

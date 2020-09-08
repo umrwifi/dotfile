@@ -1,0 +1,31 @@
+{
+	"title":"capslock to enter",
+	"rules": [{
+    "description": "set capslock to enter if press alone",
+		"manipulators": [
+			{
+				"type": "basic",
+				"from": {
+					"key_code": "caps_lock",
+					"modifiers": 
+					{
+						"optional": [
+							"any"
+						]
+					}
+				},
+				"to": [
+					{
+						"key_code": "caps_lock"
+					}
+				], 
+				"to_if_alone": [
+					{
+						"key_code": "return_or_enter"
+					}
+				]
+			}
+				]
+	} ]
+	
+

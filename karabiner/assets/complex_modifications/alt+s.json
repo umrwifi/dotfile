@@ -1,0 +1,62 @@
+[
+
+  {"title":" alt+s ",
+    "rules": [
+      {
+      "description": "alt+s",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "mandatory": [
+                "left_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code":"s"
+            ,"modifiers":[
+              "left_option"
+            ]
+            }
+          ,{
+              "key_code":"a"
+            ,"modifiers":[
+                "left_option"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+    , {
+      "description": "cmd+tab",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "escape",
+            "modifiers": {
+              "mandatory": [
+                "left_gui"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code":"tab"
+            ,"modifiers":[
+              "left_gui"
+            ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+    ]
+  }
+]
+

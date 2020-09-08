@@ -1,0 +1,25 @@
+
+{"title":"mind click 2 define",
+ "rules": [{
+                        "description": "mind click 2 define",
+                        "manipulators": [
+                            {
+                    "from": {
+                        "pointing_button": "button3"
+                    },
+                                "to": [
+                                    {
+                                        "key_code": "d",
+                                        "modifiers": [
+                                            "left_shift",
+                                            "left_gui"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+
+]
+}

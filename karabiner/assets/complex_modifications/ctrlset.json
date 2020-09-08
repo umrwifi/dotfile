@@ -1,0 +1,159 @@
+{"title":" CtrlIt ",
+ "rules": [
+   {
+                        "description": "ctrl+n",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "n",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "down_arrow"
+                                    }
+                                ],
+                                "type": "basic"
+                                ,"conditions": [
+                                  {
+                                    "type": "frontmost_application_unless",
+                                    "bundle_identifiers": [
+                                      "com.googlecode.iterm2"
+                                    ]
+                                  }
+                                ]
+                            }
+                        ]
+                    }
+,{
+                        "description": "ctrl+p",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_control"
+                                        ],
+                                        "optional": [
+                                            "any"
+
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "up_arrow"
+                                    }
+                                ],
+                                "conditions": [
+                                  {
+                                    "type": "frontmost_application_unless",
+                                    "bundle_identifiers": [
+                                      "com.googlecode.iterm2"
+                                    ]
+                                  }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+}                   
+
+                    ,{
+                      "description": "ctrl+m",
+                      "manipulators": [
+                        {
+                          "from": {
+                            "key_code": "m",
+                            "modifiers": {
+                              "mandatory": [
+                                "left_control"
+                              ],
+                              "optional": [
+                                "any"
+                              ]
+                            }
+                          },
+                          "to": [
+                            {
+                              "key_code": "return_or_enter"
+                            }
+                          ],
+                          "type": "basic"
+                        }
+                      ]
+                    }
+
+,{
+  "description": "ctrl+f",
+  "manipulators": [
+    {
+      "from": {
+        "key_code": "f",
+        "modifiers": {
+          "mandatory": [
+            "left_control"
+          ],
+          "optional": [
+            "any"
+          ]
+        }
+      },
+      "to": [
+        {
+          "key_code": "right_arrow"
+        }
+      ],
+      "conditions": [
+        {
+          "type": "frontmost_application_unless",
+          "bundle_identifiers": [
+            "com.googlecode.iterm2"
+          ]
+        }
+      ]
+      ,"type": "basic"
+    }
+  ]
+}
+,{
+  "description": "ctrl+b",
+  "manipulators": [
+    {
+      "from": {
+        "key_code": "b",
+        "modifiers": {
+          "mandatory": [
+            "left_control"
+          ],
+          "optional": [
+            "any"
+          ]
+        }
+      },
+      "to": [
+        {
+          "key_code": "left_arrow"
+        }
+      ],
+      "conditions": [
+        {
+          "type": "frontmost_application_unless",
+          "bundle_identifiers": [
+            "com.googlecode.iterm2"
+          ]
+        }
+      ]
+      ,"type": "basic"
+    }
+  ]
+}
+]
+}
