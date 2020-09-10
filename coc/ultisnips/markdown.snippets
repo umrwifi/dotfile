@@ -1,0 +1,98 @@
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+# List
+snippet 'li' "list" b
+- 
+endsnippet
+
+snippet 'todo' "checkbox" b
+- [ ] 
+endsnippet
+
+snippet 'done' "checkbox" e
+- [x]
+endsnippet
+
+# Title
+
+snippet 'h1' "heading1" Ab
+# 
+endsnippet
+
+snippet 'h2' "heading2" Ab
+## 
+endsnippet
+
+snippet 'h3' "heading3" Ab
+### 
+endsnippet
+
+snippet 'h4' "heading4" Ab
+#### 
+endsnippet
+
+snippet 'h5' "heading5" Ab
+##### 
+endsnippet
+
+# Link 
+
+snippet url
+<${1:${visual:Url}}>
+$0
+endsnippet
+
+snippet link 
+[${1:${visual:Link Title}}](${2:${visual:URL}})
+$0
+endsnippet
+
+snippet img 
+![${1:${visual:Image Title}}](${2:${visual:Image Source}})
+$0
+endsnippet
+
+# Other
+
+snippet hr
+
+---
+
+$0
+endsnippet
+
+snippet table "html table"
+| ${1:${visual:Column}} | ${2:${visual:Column}} |$7
+| ------ | ------ |
+| ${3:${visual:Cell}}   | ${4:${visual:Cell}}   |$8
+| ${5:${visual:Cell}}   | ${6:${visual:Cell}}   |$9
+endsnippet
+
+snippet code "codeblock with lan" b
+\`\`\`${1:${visual:Language}}
+  $2
+\`\`\`
+$0
+endsnippet
+snippet "cd(\w+)?" "codeblock with lan" br
+\`\`\``!p
+if match.group(1) == "html":
+snip.rv="html"
+elif match.group(1) == "css":
+snip.rv="css"
+elif match.group(1) == "js":
+    snip.rv="javascript"
+    `
+$1
+\`\`\`
+$0
+endsnippet

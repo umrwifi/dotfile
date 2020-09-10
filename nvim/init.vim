@@ -97,6 +97,9 @@ set wildignore+=.git*
 "let maplocalleader = "<CR>"
  " === Plug List
  call plug#begin('~/.config/nvim/plugged')
+Plug 'jiangmiao/auto-pairs'
+Plug 'Konfekt/FastFold'
+Plug 'rhysd/accelerated-jk'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'liuchengxu/vista.vim'
@@ -115,10 +118,25 @@ Plug 'tpope/vim-repeat'
 Plug 'rhysd/clever-f.vim'
 "Plug 'tpope/vim-obsession' "保存退出前vim状态
 call plug#end()            " 必须 :cd <CR>
-" markdown-preview
+"fast folding
+let g:markdown_folding = 1
+let g:tex_fold_enabled = 0
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:r_syntax_folding = 1
+let g:php_folding = 1
+"accelerated-jk
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+"auto-pairs
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutToggle = '' 
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
 let g:mkdp_refresh_slow = 1
+" markdown-preview
 nmap <leader><C-p> <Plug>MarkdownPreviewToggle
 "let g:vista_sidebar_position = ' topleft'
 " 启用悬浮窗预览
@@ -139,20 +157,34 @@ let g:vista_blink = [2, 100]
 " 优先选择lsp作为标签来源，其次ctags
 let g:vista_default_executive = 'coc'
 let g:vista_echo_cursor_strategy = 'scroll'
-nnoremap <leader>t :Vista <cr>
+nnoremap <buffer>tg :Vista!!<CR>
 nnoremap <silent> <leader>f  :Farf<cr>
 vnoremap <silent> <leader>f  :Farf<cr>
 nnoremap <silent> <leader>r  :Farr<cr>
 vnoremap <silent> <leader>r  :Farr<cr>
-let g:tagbar_compact = 1
-let g:tagbar_show_linenumbers = 1
+"tagbar
+function! TagbarRedraw()
+	if(winwidth(0)>80)
+		exe 'let g:tagbar_position="botright vertical"'
+	else
+		exe 'let g:tagbar_position="topleft"'
+endif
+endfunction
+autocmd VimResized * call TagbarRedraw()
+autocmd FileType markdown nnoremap <buffer>tg :Tagbar<CR>
 let g:tagbar_type_markdown = {
         \ 'ctagstype' : 'markdown',
-	\ 'kinds' : [
+        \ 'kinds' : [
                 \ 'h:headings',
         \ ],
     \ 'sort' : 0
     \ }
+let g:tagbar_show_linenumbers = -1
+let g:tagbar_singleclick = 1
+let g:tagbar_autofocus = 1
+"let g:tagbar_autopreview = 1
+let g:tagbar_iconchars = ['+', '-']  
+let g:tagbar_compact = 1
 "defx
 nmap <leader>e :Defx <CR>
 nnoremap <silent> <LocalLeader>e
@@ -201,7 +233,9 @@ function! s:defx_my_settings() abort
 	                \ defx#do_action('preview')
 endfunction
     "coc
-    let g:coc_global_extensions = ['coc-json','coc-vimlsp','coc-snippets','coc-lists','coc-markdownlint']
+let g:coc_global_extensions = [ 'coc-prettier','coc-json','coc-vimlsp','coc-snippets','coc-lists' ,'coc-markdownlint','coc-actions']
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+autocmd FileType markdown command! -nargs=0 Fix :CocCommand markdownlint.fixAll
     inoremap <silent><expr> <TAB>
           \ pumvisible() ? "\<C-n>" :
           \ <SID>check_back_space() ? "\<TAB>" :
@@ -271,8 +305,35 @@ call defx#custom#option('_', {
       \ })
 " end
 " 改键mapping List
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+" markdown task
+
+function! ToggleCheck()
+  if(match(getline('.'),'\[x\]') != -1) 
+	  exe '. s/\[x\]/\[\ \]/g'
+	  "clear highlight
+	  exe 'let @/="" ' 
+   elseif(match(getline('.'),'\[.\]') != -1)
+	  "clear highlight
+	  exe '. s/\[.\]/\[x\]/g'
+	  exe 'let @/="" '
+  endif
+ 
+endfunction
+autocmd FileType markdown nnoremap <localleader>d :call ToggleCheck() <CR>
+autocmd FileType markdown vnoremap <localleader>d :'<,'> s/\[.\]/\[x\]/g <CR>
+autocmd FileType markdown nnoremap <localleader>td :. s/-/-\ \[\ \]/g <CR> " change the list to checkbox
+autocmd FileType markdown vnoremap <localleader>td :'<,'> s/-/-\ \[\ \]/g <CR>
+fun! Redraw()
+let l = winline()
+let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
+return cmd
+endf
+
+nnoremap <expr>zz Redraw()
+"删除所有行末的空格
+"nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+"noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+"noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 noremap <leader>R  :wa <CR> :source ~/.config/nvim/init.vim <CR>
 noremap ,,  :e ~/.config/nvim/init.vim <CR>
 vnoremap < <gv

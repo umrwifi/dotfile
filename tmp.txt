@@ -121,3 +121,58 @@ times in msec
 189.880  000.155  000.155: sourcing /Users/admin/.config/nvim/plugged/vim-airline/autoload/airline/extensions/tabline/formatters/default.vim
 230.833  048.353: first screen update
 230.838  000.005: --- NVIM STARTED ---
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.025  000.025: --- NVIM STARTING ---
+001.499  001.474: locale set
+011.584  010.085: inits 1
+011.624  000.040: window checked
+011.635  000.012: parsing arguments
+011.907  000.271: expanding arguments
+012.008  000.101: inits 2
+012.935  000.927: init highlight
+013.197  000.262: waiting for UI
+016.784  003.587: done waiting for UI
+016.879  000.095: initialized screen early for UI
+018.275  001.208  001.208: sourcing README.md
+018.300  000.214: sourcing vimrc file(s)
+033.893  015.397  015.397: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/filetype.vim
+034.252  000.118  000.118: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/ftplugin.vim
+034.751  000.335  000.335: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/indent.vim
+036.171  000.789  000.789: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/syntax/syncolor.vim
+036.516  001.331  000.542: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/syntax/synload.vim
+036.626  001.642  000.311: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/syntax/syntax.vim
+038.957  000.936  000.936: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/gzip.vim
+039.119  000.044  000.044: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/health.vim
+039.701  000.496  000.496: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/man.vim
+041.561  000.565  000.565: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+041.687  001.883  001.318: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/matchit.vim
+042.241  000.459  000.459: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/matchparen.vim
+043.577  001.240  001.240: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/netrwPlugin.vim
+044.939  000.466  000.466: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/autoload/remote/host.vim
+045.676  000.387  000.387: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/autoload/remote/define.vim
+046.240  001.959  001.106: sourcing /Users/admin/.local/share/nvim/rplugin.vim
+046.259  002.560  000.601: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/rplugin.vim
+046.743  000.376  000.376: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/shada.vim
+046.929  000.070  000.070: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/spellfile.vim
+047.517  000.482  000.482: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/tarPlugin.vim
+047.845  000.215  000.215: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/tohtml.vim
+047.996  000.050  000.050: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/tutor.vim
+048.691  000.599  000.599: sourcing /usr/local/Cellar/neovim/0.4.4/share/nvim/runtime/plugin/zipPlugin.vim
+048.712  003.511: loading plugins
+048.937  000.225: loading packages
+049.067  000.130: loading after plugins
+049.101  000.034: inits 3
+057.873  008.772: reading ShaDa
+058.015  000.142: opening buffers
+058.109  000.094: BufEnter autocommands
+058.113  000.004: editing files in windows
+058.396  000.283: VimEnter autocommands
+058.401  000.005: UIEnter autocommands
+058.404  000.003: before starting main loop
+904.113  845.709: first screen update
+904.118  000.005: --- NVIM STARTED ---
