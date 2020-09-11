@@ -1,12 +1,9 @@
-" ===
-" === Auto load for first time uses
-" ===
+"  Auto load for first time uses
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
 	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
 set tabstop=2  "tab缩进
 set hidden
 set autoindent " 开启自动缩进
@@ -21,15 +18,16 @@ set wildmode=full "补全提示
 set backspace=indent,eol,start "退格可换行
 set undofile
 set undodir=~/.vim/undo
-"color desert
-function! s:SetHighlightings()
-  highlight Pmenu ctermbg=Gray ctermfg=White
-  highlight PmenuSel ctermbg=Green ctermfg=White
-  highlight Pmenu guibg=#333333 guifg=White 
-  highlight PmenuSel guibg=#6B8E30 guifg=White 
-endfunction
-call s:SetHighlightings()
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+"function! s:SetHighlightings()
+"  highlight Pmenu ctermbg=Gray ctermfg=White
+"  highlight PmenuSel ctermbg=Green ctermfg=White
+"  highlight Pmenu guibg=#333333 guifg=White 
+"  highlight PmenuSel guibg=#6B8E30 guifg=White 
+"endfunction
+"call s:SetHighlightings()
 "autocmd ColorScheme * call <SID>SetHighlightings()
+
 
  lang zh_CN.UTF-8
  ":command Done 1,$/- [x] / m $
@@ -95,218 +93,6 @@ set wildignore+=.git*
    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
  endif
 "let maplocalleader = "<CR>"
- " === Plug List
- call plug#begin('~/.config/nvim/plugged')
-Plug 'jiangmiao/auto-pairs'
-Plug 'Konfekt/FastFold'
-Plug 'rhysd/accelerated-jk'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'liuchengxu/vista.vim'
-Plug 'rhysd/vim-gfm-syntax'
-Plug 'brooth/far.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'majutsushi/tagbar',{'on':'Tagbar'}
-Plug 'ferrine/md-img-paste.vim',{'for':['markdown','vim-plug']}
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'plasticboy/vim-markdown',{'for':['markdown','vim-plug']}
-Plug 'ybian/smartim',{'for':['markdown','vim-plug']}
-Plug 'tpope/vim-repeat'
-Plug 'rhysd/clever-f.vim'
-"Plug 'tpope/vim-obsession' "保存退出前vim状态
-call plug#end()            " 必须 :cd <CR>
-"fast folding
-let g:markdown_folding = 1
-let g:tex_fold_enabled = 0
-let g:vimsyn_folding = 'af'
-let g:xml_syntax_folding = 1
-let g:javaScript_fold = 1
-let g:sh_fold_enabled= 7
-let g:r_syntax_folding = 1
-let g:php_folding = 1
-"accelerated-jk
-nmap j <Plug>(accelerated_jk_gj)
-nmap k <Plug>(accelerated_jk_gk)
-"auto-pairs
-let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutToggle = '' 
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 0
-let g:mkdp_refresh_slow = 1
-" markdown-preview
-nmap <leader><C-p> <Plug>MarkdownPreviewToggle
-"let g:vista_sidebar_position = ' topleft'
-" 启用悬浮窗预览
-"let g:vista_echo_cursor_strategy ='floating_win'
-" 侧边栏宽度.
-let g:vista_sidebar_width = 30
-" 设置为0，以禁用光标移动时的回显.
-let g:vista_echo_cursor = 1
-" 当前游标上显示详细符号信息的时间延迟.
-let g:vista_cursor_delay = 400
-" 跳转到一个符号时，自动关闭vista窗口.
-let g:vista_close_on_jump = 0
-"打开vista窗口后移动到它.
-let g:vista_stay_on_open = 1
-" 跳转到标记后闪烁光标2次，间隔100ms.
-let g:vista_blink = [2, 100]
-" 图标美化
-" 优先选择lsp作为标签来源，其次ctags
-let g:vista_default_executive = 'coc'
-let g:vista_echo_cursor_strategy = 'scroll'
-nnoremap <buffer>tg :Vista!!<CR>
-nnoremap <silent> <leader>f  :Farf<cr>
-vnoremap <silent> <leader>f  :Farf<cr>
-nnoremap <silent> <leader>r  :Farr<cr>
-vnoremap <silent> <leader>r  :Farr<cr>
-"tagbar
-function! TagbarRedraw()
-	if(winwidth(0)>80)
-		exe 'let g:tagbar_position="botright vertical"'
-	else
-		exe 'let g:tagbar_position="topleft"'
-endif
-endfunction
-autocmd VimResized * call TagbarRedraw()
-autocmd FileType markdown nnoremap <buffer>tg :Tagbar<CR>
-let g:tagbar_type_markdown = {
-        \ 'ctagstype' : 'markdown',
-        \ 'kinds' : [
-                \ 'h:headings',
-        \ ],
-    \ 'sort' : 0
-    \ }
-let g:tagbar_show_linenumbers = -1
-let g:tagbar_singleclick = 1
-let g:tagbar_autofocus = 1
-"let g:tagbar_autopreview = 1
-let g:tagbar_iconchars = ['+', '-']  
-let g:tagbar_compact = 1
-"defx
-nmap <leader>e :Defx <CR>
-nnoremap <silent> <LocalLeader>e
-\ :<C-u>Defx -resume -toggle -buffer-name=tab`tabpagenr()` <CR> 
-autocmd BufWritePost * call defx#redraw()
-autocmd FileType defx call s:defx_my_settings()
-function! s:defx_my_settings() abort
-	" Define mappings
-	nnoremap <silent><buffer><expr> <CR>
-				\ defx#is_directory() ? 
-				\ defx#do_action('open_tree') : 
-				\ defx#do_action('multi', ['drop'])
-	nnoremap <silent><buffer><expr> c
-				\ defx#do_action('copy')
-	nnoremap <silent><buffer><expr> m
-				\ defx#do_action('move')
-	nnoremap <silent><buffer><expr> p
-				\ defx#do_action('paste')
-	nnoremap <silent><buffer><expr> i
-				\ defx#do_action('multi', ['drop'])
-	nnoremap <silent><buffer><expr> c
-				\ defx#do_action('copy')
-	nnoremap <silent><buffer><expr> m
-				\ defx#do_action('move')
-	nnoremap <silent><buffer><expr> p
-				\ defx#do_action('paste')
-	nnoremap <silent><buffer><expr> i
-				\ defx#do_action('multi',[['drop','split']])
-	nnoremap <silent><buffer><expr> <C-g>
-				\ defx#do_action('print')
-	nnoremap <silent><buffer><expr> d
-				\ defx#do_action('remove')
-	nnoremap <silent><buffer><expr> r
-				\ defx#do_action('rename')
-	nnoremap <silent><buffer><expr> o
-				\ defx#is_directory() ? 
-				\ defx#do_action('open_or_close_tree') : 
-				\ defx#do_action('multi', ['drop'])
-	nnoremap <silent><buffer><expr> l
-				\ defx#is_directory() ? 
-				\ defx#do_action('open_tree') : 
-				\ defx#do_action('multi', ['drop'])
-	nnoremap <silent><buffer><expr> P
-	                \ defx#do_action('open', 'pedit')
-	nnoremap <silent><buffer><expr> p
-	                \ defx#do_action('preview')
-endfunction
-    "coc
-let g:coc_global_extensions = [ 'coc-prettier','coc-json','coc-vimlsp','coc-snippets','coc-lists' ,'coc-markdownlint','coc-actions']
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-autocmd FileType markdown command! -nargs=0 Fix :CocCommand markdownlint.fixAll
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ coc#refresh()
-    function! s:check_back_space() abort
-              let col = col('.') - 1
-                return !col || getline('.')[col - 1]  =~# '\      s'
-        endfunction
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>      "
-    "回车确认补全
-if exists('*complete_info')
-	  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-  else
-	    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-    endif
-"coclist
-noremap <C-p> :CocList files <CR>
- "far
-    nnoremap <silent> <leader>f  :Farf<cr>
-    vnoremap <silent> <leader>f  :Farf<cr>
-    nnoremap <silent> <leader>r  :Farr<cr>
-    vnoremap <silent> <leader>r  :Farr<cr>
-autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
-" there are some defaults for image directory and image name, you can change them
-" let g:mdip_imgdir = 'img'
-" let g:mdip_imgname = 'image'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#show_tabs = 0
- let g:airline#extensions#tabline#alt_sep = 1
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-nmap 1<leader> <Plug>AirlineSelectTab1
-nmap 2<leader> <Plug>AirlineSelectTab2
-nmap 3<leader> <Plug>AirlineSelectTab3
-nmap 4<leader> <Plug>AirlineSelectTab4
-nmap 5<leader> <Plug>AirlineSelectTab5
-nmap ]b :bnext<CR>
-nmap [b :bprevious<CR>
-let g:tmux_navigator_no_mappings = 1
-nnoremap <C-h> :TmuxNavigateLeft<cr>
-nnoremap <C-j> :TmuxNavigateDown<cr>
-nnoremap <C-k> :TmuxNavigateUp<cr>
-nnoremap <C-l> :TmuxNavigateRight<cr>
- "nnoremap <silent> <A-p>ng} :TmuxNavigatePrevious<cr>
-let g:vim_markdown_folding_disable = 1
-let g:vim_markdown_folding_level = 4
-let g:vim_markdown_conceal = 1
-let g:vim_markdown_autowrite = 0
-"source ~/md-snippets.vim
-let g:smartim_default = 'com.apple.keylayout.ABC'
-nnoremap <Leader>b :ls<CR>:b<Space>
-nmap <leader>f :vimgrep //**<left><left><left>
-vmap <leader>f :vimgrep /<C-R><C-W>/ *<CR>
-nmap cp :cp <CR>
-nmap cn :cn <CR>
-nmap co :copen <CR>
- nmap <leader>ww  :tabedit  ~/iCloud/wiki/todo.md <CR> :cd %% <CR>
-call defx#custom#option('_', { 
-	\ 'winwidth': 30, 
-	\ 'split': 'vertical',
-      \ 'direction': 'topleft',
-      \ 'show_ignored_files': 0,
-      \ 'buffer_name': '',
-      \ 'toggle': 1,
-      \ 'resume': 1
-      \ })
-" end
-" 改键mapping List
-" markdown task
-
 function! ToggleCheck()
   if(match(getline('.'),'\[x\]') != -1) 
 	  exe '. s/\[x\]/\[\ \]/g'
@@ -347,3 +133,276 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
 nnoremap	_d "_d
+nnoremap <Leader>b :ls<CR>:b<Space>
+ nmap <leader>ww  :tabedit  ~/iCloud/wiki/todo.md <CR> :cd %% <CR>
+ " === Plug List
+ call plug#begin('~/.config/nvim/plugged')
+Plug 'cocopon/iceberg.vim'
+Plug 'rhysd/vim-gfm-syntax'
+Plug 'Konfekt/FastFold'
+Plug 'rhysd/accelerated-jk'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'liuchengxu/vista.vim'
+Plug 'rhysd/vim-gfm-syntax'
+Plug 'brooth/far.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'majutsushi/tagbar',{'on':'Tagbar'}
+Plug 'ferrine/md-img-paste.vim',{'for':['markdown','vim-plug']}
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'christoomey/vim-tmux-navigator'
+"Plug 'plasticboy/vim-markdown',{'for':['markdown','vim-plug']}
+Plug 'ybian/smartim',{'for':['markdown','vim-plug']}
+Plug 'tpope/vim-repeat'
+Plug 'rhysd/clever-f.vim'
+"Plug 'tpope/vim-obsession' "保存退出前vim状态
+call plug#end()            " 必须 :cd <CR>
+"colorscheme
+colorscheme iceberg
+"fast folding
+let g:markdown_folding = 1
+let g:tex_fold_enabled = 0
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:r_syntax_folding = 1
+let g:php_folding = 1
+"accelerated-jk
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+"auto-pairs
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutToggle = '' 
+let g:AutoPairsShortcutBackInsert = '<C-B>'
+let g:AutoPairsMapCh = 0
+" markdown-preview
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 0
+let g:mkdp_refresh_slow = 1
+nmap <leader><C-p> <Plug>MarkdownPreviewToggle
+"let g:vista_sidebar_position = ' topleft'
+" 启用悬浮窗预览
+"let g:vista_echo_cursor_strategy ='floating_win'
+" 侧边栏宽度.
+let g:vista_sidebar_width = 30
+" 设置为0，以禁用光标移动时的回显.
+let g:vista_echo_cursor = 1
+" 当前游标上显示详细符号信息的时间延迟.
+let g:vista_cursor_delay = 400
+" 跳转到一个符号时，自动关闭vista窗口.
+let g:vista_close_on_jump = 0
+"打开vista窗口后移动到它.
+let g:vista_stay_on_open = 1
+" 跳转到标记后闪烁光标2次，间隔100ms.
+let g:vista_blink = [2, 100]
+" 图标美化
+" 优先选择lsp作为标签来源，其次ctags
+let g:vista_default_executive = 'coc'
+let g:vista_echo_cursor_strategy = 'scroll'
+"Far
+"let g:far#file_mask_favorites
+let g:far#default_file_mask = '*' 
+nnoremap tg :Vista!!<CR>
+nnoremap <silent> <leader>f  :Farf<cr>
+vnoremap <silent> <leader>f  :Farf<cr>
+nnoremap <silent> <leader>r  :Farr<cr>
+vnoremap <silent> <leader>r  :Farr<cr>
+"tagbar
+function! TagbarRedraw()
+	if(winwidth(0)>80)
+		exe 'let g:tagbar_position="botright vertical"'
+	else
+		exe 'let g:tagbar_position="topleft"'
+endif
+endfunction
+function! AutoOutline()
+				if(winwidth(0)>65&&line('$')>150)
+								exe 'Tagbar'
+				endif
+endfunction
+"autocmd VimResized * call TagbarRedraw()
+autocmd BufRead *.md  call AutoOutline()
+autocmd FileType markdown nnoremap <buffer>tg :Tagbar<CR>
+let g:tagbar_type_markdown = {
+        \ 'ctagstype' : 'markdown',
+        \ 'kinds' : [
+                        \ 'h:sections',
+                        \ 't:todo',
+                        \ 't:done',
+        \ ],
+    \ 'sort' : 0
+    \ }
+let g:tagbar_show_linenumbers = -1
+let g:tagbar_singleclick = 1
+let g:tagbar_autofocus = 0
+let g:tagbar_width = 30
+let g:tagbar_indent = 0
+let g:tagbar_autopreview = 1
+let g:tagbar_iconchars = ['+', '-']  
+let g:tagbar_compact = 1
+"defx
+call defx#custom#option('_', { 
+	\ 'winwidth': 30, 
+	\ 'split': 'vertical',
+      \ 'direction': 'topleft',
+      \ 'show_ignored_files': 0,
+      \ 'buffer_name': '',
+      \ 'toggle': 1,
+      \ 'resume': 1
+      \ })
+nmap <leader>e :Defx <CR>
+nnoremap <silent> <LocalLeader>e
+\ :<C-u>Defx -resume -toggle -buffer-name=tab`tabpagenr()` <CR> 
+autocmd BufWritePost * call defx#redraw()
+autocmd FileType defx call s:defx_my_settings()
+function! s:defx_my_settings() abort
+	" Define mappings
+  nnoremap <silent><buffer><expr> <CR>
+        \ defx#is_directory() ? 
+        \ defx#do_action('open_tree') : 
+        \ defx#do_action('multi', ['drop'])
+  nnoremap <silent><buffer><expr> c
+        \ defx#do_action('copy')
+  nnoremap <silent><buffer><expr> m
+        \ defx#do_action('move')
+  nnoremap <silent><buffer><expr> p
+        \ defx#do_action('paste')
+  nnoremap <silent><buffer><expr> i
+        \ defx#do_action('multi', ['drop'])
+  nnoremap <silent><buffer><expr> c
+        \ defx#do_action('copy')
+  nnoremap <silent><buffer><expr> m
+        \ defx#do_action('move')
+  nnoremap <silent><buffer><expr> i
+        \ defx#do_action('multi',[['drop','split']])
+  nnoremap <silent><buffer><expr> <C-g>
+        \ defx#do_action('print')
+  nnoremap <silent><buffer><expr> d
+        \ defx#do_action('remove')
+  nnoremap <silent><buffer><expr> r
+        \ defx#do_action('rename')
+  nnoremap <silent><buffer><expr> o
+        \ defx#is_directory() ? 
+        \ defx#do_action('open_or_close_tree') : 
+        \ defx#do_action('multi', ['drop'])
+  nnoremap <silent><buffer><expr> l
+        \ defx#is_directory() ? 
+        \ defx#do_action('open_tree') : 
+        \ defx#do_action('multi', ['drop'])
+  nnoremap <silent><buffer><expr> P
+        \ defx#do_action('open', 'pedit')
+  nnoremap <silent><buffer><expr> p
+        \ defx#do_action('preview')
+  nnoremap <silent><buffer><expr> q
+        \ defx#do_action('quit')
+  nnoremap <silent><buffer><expr> l
+  nnoremap <silent><buffer><expr> E
+        \ defx#do_action('open', 'vsplit')
+  nnoremap <silent><buffer><expr> K
+        \ defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> N
+        \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> M
+        \ defx#do_action('new_multiple_files')
+  nnoremap <silent><buffer><expr> C
+        \ defx#do_action('toggle_columns',
+        \                'mark:indent:icon:filename:type:size:time')
+  nnoremap <silent><buffer><expr> S
+        \ defx#do_action('toggle_sort', 'time')
+  nnoremap <silent><buffer><expr> !
+        \ defx#do_action('execute_command')
+  nnoremap <silent><buffer><expr> x
+        \ defx#do_action('execute_system')
+  nnoremap <silent><buffer><expr> yy
+        \ defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> .
+        \ defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> ;
+        \ defx#do_action('repeat')
+  nnoremap <silent><buffer><expr> h
+        \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> ~
+        \ defx#do_action('cd')
+  nnoremap <silent><buffer><expr> q
+        \ defx#do_action('quit')
+  nnoremap <silent><buffer><expr> <Space>
+        \ defx#do_action('toggle_select') . 'j'
+  nnoremap <silent><buffer><expr> *
+        \ defx#do_action('toggle_select_all')
+  nnoremap <silent><buffer><expr> j
+        \ line('.') == line('$') ? 'gg' : 'j'
+  nnoremap <silent><buffer><expr> k
+        \ line('.') == 1 ? 'G' : 'k'
+  nnoremap <silent><buffer><expr> <C-l>
+        \ defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> <C-g>
+        \ defx#do_action('print')
+  nnoremap <silent><buffer><expr> cd
+        \ defx#do_action('change_vim_cwd')
+endfunction
+    "coc
+let g:coc_global_extensions = [  'coc-tasks',  'coc-highlight',  'coc-prettier',  'coc-json',  'coc-vimlsp',  'coc-snippets',  'coc-lists' ,  'coc-markdownlint',  'coc-actions',  ]
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+autocmd FileType markdown command! -nargs=0 Fix :CocCommand markdownlint.fixAll
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
+    function! s:check_back_space() abort
+              let col = col('.') - 1
+                return !col || getline('.')[col - 1]  =~# '\      s'
+        endfunction
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>      "
+    "回车确认补全
+if exists('*complete_info')
+	  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  else
+	    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    endif
+"coc snippets
+autocmd FileType markdown inoremap <silent><expr> <TAB>
+												\ pumvisible() ? coc#_select_confirm() :
+												\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+												\ <SID>check_back_space() ? "\<TAB>" :
+												\ coc#refresh()
+
+"let g:coc_snippet_next = '<tab>'"coclist
+noremap <C-p> :CocList files <CR>
+ "far
+    nnoremap <silent> <leader>f  :Farf<cr>
+    vnoremap <silent> <leader>f  :Farf<cr>
+    nnoremap <silent> <leader>r  :Farr<cr>
+    vnoremap <silent> <leader>r  :Farr<cr>
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+" there are some defaults for image directory and image name, you can change them
+" let g:mdip_imgdir = 'img'
+" let g:mdip_imgname = 'image'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_tabs = 0
+ let g:airline#extensions#tabline#alt_sep = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+nmap 1<leader> <Plug>AirlineSelectTab1
+nmap 2<leader> <Plug>AirlineSelectTab2
+nmap 3<leader> <Plug>AirlineSelectTab3
+nmap 4<leader> <Plug>AirlineSelectTab4
+nmap 5<leader> <Plug>AirlineSelectTab5
+nmap ]b :bnext<CR>
+nmap [b :bprevious<CR>
+let g:tmux_navigator_no_mappings = 1
+nnoremap <C-h> :TmuxNavigateLeft<cr>
+nnoremap <C-j> :TmuxNavigateDown<cr>
+nnoremap <C-k> :TmuxNavigateUp<cr>
+nnoremap <C-l> :TmuxNavigateRight<cr>
+ "nnoremap <silent> <A-p>ng} :TmuxNavigatePrevious<cr>
+let g:vim_markdown_folding_disable = 1
+let g:vim_markdown_folding_level = 4
+let g:vim_markdown_conceal = 1
+let g:vim_markdown_autowrite = 0
+"source ~/md-snippets.vim
+let g:smartim_default = 'com.apple.keylayout.ABC'
+
