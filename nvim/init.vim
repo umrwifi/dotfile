@@ -4,6 +4,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+au! BufWritePost init.vim source %
 set tabstop=2  "tab缩进
 set hidden
 set autoindent " 开启自动缩进
@@ -20,13 +21,15 @@ set undofile
 set undodir=~/.vim/undo
 set conceallevel=2
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-"function! s:SetHighlightings()
+function! s:SetHighlightings()
 "  highlight Pmenu ctermbg=Gray ctermfg=White
 "  highlight PmenuSel ctermbg=Green ctermfg=White
 "  highlight Pmenu guibg=#333333 guifg=White 
-"  highlight PmenuSel guibg=#6B8E30 guifg=White 
-"endfunction
-"autocmd ColorScheme * call <SID>SetHighlightings()
+"  highlight TabLineSel guibg=#6B8E30 guifg=White 
+  hi default link BufTabLineCurrent PmenuSel
+  hi default link BufTabLineActive  TabLineSel
+endfunction
+autocmd ColorScheme * call <SID>SetHighlightings()
  "lang zh_CN.UTF-8
  ":command Done 1,$/- [x] / m $
  if has("autocmd")
@@ -89,7 +92,12 @@ set wildignore+=.git*
    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
  endif
+"mappings
 "let maplocalleader = "<CR>"
+nnoremap <silent> <expr> <BS> (getline('.') =~ '^\s*"' ? '<C-h>':'<BS>')
+"o/O键禁止自动注释 
+"nnoremap <expr> O getline('.')=~ '^\s*"' ? 'O<esc>S' : 'O'
+"nnoremap <expr> o getline('.')=~ '^\s*"' ? 'o<esc>S' : 'o'
 "markdown
 function! ToggleCheck()
   if(match(getline('.'),'\[x\]') != -1) 
@@ -238,21 +246,17 @@ vnoremap <silent> <leader>f  :Farf<cr>
 nnoremap <silent> <leader>r  :Farr<cr>
 vnoremap <silent> <leader>r  :Farr<cr>
 "tagbar
-function! TagbarRedraw()
-	if(winwidth(0)>80)
-		exe 'let g:tagbar_position="botright vertical"'
-	else
-		exe 'let g:tagbar_position="topleft"'
-endif
-endfunction
 function! AutoOutline()
 				if(winwidth(0)>65&&line('$')>150)
 								exe 'Tagbar'
 				endif
 endfunction
-"autocmd VimResized * call TagbarRedraw()
 autocmd BufRead *.md  call AutoOutline()
 autocmd FileType markdown nnoremap tg :Tagbar<CR>
+autocmd BufWinEnter * if &previewwindow | exe 'nmap j jP'| exe 'nmap k kP' |setlocal nonumber  | endif
+"autocmd BufWinEnter * if &previewwindow | setlocal nonumber  endif
+" TODO 不够优雅
+autocmd BufWinLeave * if 1 == 1 | exe 'nmap j <Plug>(accelerated_jk_gj)'| exe 'nmap k <Plug>(accelerated_jk_gk)' | endif
 let g:tagbar_type_markdown = {
         \ 'ctagstype' : 'markdown',
         \ 'kinds' : [
@@ -262,6 +266,8 @@ let g:tagbar_type_markdown = {
         \ ],
     \ 'sort' : 0
     \ }
+let g:tagbar_map_nexttag = "\]\]"
+let g:tagbar_map_prevtag = "\[\["
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_singleclick = 1
 let g:tagbar_autofocus = 0
@@ -271,7 +277,6 @@ let g:tagbar_autopreview = 0
 let g:tagbar_iconchars = ['+', '-']  
 let g:tagbar_compact = 1
 let g:tagbar_previewwin_pos = "botright"
-autocmd BufWinEnter * if &previewwindow | setlocal nonumber  endif
 
 "defx
 call defx#custom#option('_', { 
@@ -281,7 +286,8 @@ call defx#custom#option('_', {
       \ 'show_ignored_files': 0,
       \ 'buffer_name': '',
       \ 'toggle': 1,
-      \ 'resume': 1
+      \ 'resume': 1,
+      \ 'vertical_preview':1,
       \ })
 nnoremap tt :Defx <CR>
 nnoremap <silent> <LocalLeader>e
@@ -289,98 +295,59 @@ nnoremap <silent> <LocalLeader>e
 autocmd BufWritePost * call defx#redraw()
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
-	" Define mappings
   nnoremap <silent><buffer><expr> <CR>
         \ defx#is_directory() ? 
         \ defx#do_action('open_tree') : 
         \ defx#do_action('multi', ['drop'])
-  nnoremap <silent><buffer><expr> c
-        \ defx#do_action('copy')
-  nnoremap <silent><buffer><expr> m
-        \ defx#do_action('move')
-  nnoremap <silent><buffer><expr> p
-        \ defx#do_action('paste')
-  nnoremap <silent><buffer><expr> i
-        \ defx#do_action('multi', ['drop'])
-  nnoremap <silent><buffer><expr> c
-        \ defx#do_action('copy')
-  nnoremap <silent><buffer><expr> m
-        \ defx#do_action('move')
-  nnoremap <silent><buffer><expr> i
-        \ defx#do_action('multi',[['drop','split']])
-  nnoremap <silent><buffer><expr> <C-g>
-        \ defx#do_action('print')
-  nnoremap <silent><buffer><expr> d
-        \ defx#do_action('remove')
-  nnoremap <silent><buffer><expr> r
-        \ defx#do_action('rename')
+  nnoremap <silent><buffer><expr> c defx#do_action('copy')
+  nnoremap <silent><buffer><expr> m defx#do_action('move')
+  nnoremap <silent><buffer><expr> gp defx#do_action('paste')
+  nnoremap <silent><buffer><expr> i defx#do_action('multi', [['drop','split']])
+  nnoremap <silent><buffer><expr> E defx#do_action('open', 'vsplit')
+  nnoremap <silent><buffer><expr> <C-g> defx#do_action('print')
+  nnoremap <silent><buffer><expr> d defx#do_action('remove')
+  nnoremap <silent><buffer><expr> r defx#do_action('rename')
   nnoremap <silent><buffer><expr> o
         \ defx#is_directory() ? 
         \ defx#do_action('open_or_close_tree') : 
         \ defx#do_action('multi', ['drop'])
+	  nnoremap <silent><buffer><expr> cd
+	  \ defx#do_action('change_vim_cwd')
+  nnoremap <silent><buffer><expr> h defx#do_action('close_tree' )
+  nnoremap <silent><buffer><expr> H defx#do_action('cd',['..'] )
+  nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
+  nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
   nnoremap <silent><buffer><expr> l
         \ defx#is_directory() ? 
         \ defx#do_action('open_tree') : 
         \ defx#do_action('multi', ['drop'])
-  nnoremap <silent><buffer><expr> P
-        \ defx#do_action('open', 'pedit')
-  nnoremap <silent><buffer><expr> p
-        \ defx#do_action('preview')
-  nnoremap <silent><buffer><expr> q
-        \ defx#do_action('quit')
-  nnoremap <silent><buffer><expr> l
-  nnoremap <silent><buffer><expr> E
-        \ defx#do_action('open', 'vsplit')
-  nnoremap <silent><buffer><expr> K
-        \ defx#do_action('new_directory')
-  nnoremap <silent><buffer><expr> N
-        \ defx#do_action('new_file')
-  nnoremap <silent><buffer><expr> M
-        \ defx#do_action('new_multiple_files')
-  nnoremap <silent><buffer><expr> C
-        \ defx#do_action('toggle_columns',
-        \                'mark:indent:icon:filename:type:size:time')
-  nnoremap <silent><buffer><expr> S
-        \ defx#do_action('toggle_sort', 'time')
-  nnoremap <silent><buffer><expr> !
-        \ defx#do_action('execute_command')
-  nnoremap <silent><buffer><expr> x
-        \ defx#do_action('execute_system')
-  nnoremap <silent><buffer><expr> yy
-        \ defx#do_action('yank_path')
-  nnoremap <silent><buffer><expr> .
-        \ defx#do_action('toggle_ignored_files')
-  nnoremap <silent><buffer><expr> ;
-        \ defx#do_action('repeat')
-  nnoremap <silent><buffer><expr> h
-        \ defx#do_action('cd', ['..'])
-  nnoremap <silent><buffer><expr> ~
-        \ defx#do_action('cd')
-  nnoremap <silent><buffer><expr> q
-        \ defx#do_action('quit')
-  nnoremap <silent><buffer><expr> <Space>
-        \ defx#do_action('toggle_select') . 'j'
-  nnoremap <silent><buffer><expr> *
-        \ defx#do_action('toggle_select_all')
-  nnoremap <silent><buffer><expr> j
-        \ line('.') == line('$') ? 'gg' : 'j'
-  nnoremap <silent><buffer><expr> k
-        \ line('.') == 1 ? 'G' : 'k'
-  nnoremap <silent><buffer><expr> <C-l>
-        \ defx#do_action('redraw')
-  nnoremap <silent><buffer><expr> <C-g>
-        \ defx#do_action('print')
-  nnoremap <silent><buffer><expr> cd
-        \ defx#do_action('change_vim_cwd')
+  nnoremap <silent><buffer><expr> L defx#do_action('open')
+  nnoremap <silent><buffer><expr> p defx#do_action('multi',[['drop']]) .'<C-W>h'
+  nnoremap <silent><buffer><expr> P defx#do_action('preview')
+  nnoremap <silent><buffer><expr> q defx#do_action('quit')
+  nnoremap <silent><buffer><expr> N defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
+  nnoremap <silent><buffer><expr> s defx#do_action('toggle_sort', 'time')
+  nnoremap <silent><buffer><expr> gx defx#do_action('execute_system')
+  nnoremap <silent><buffer><expr> ! defx#do_action('execute_command')
+  nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> ; defx#do_action('repeat')
+  nnoremap <silent><buffer><expr> *  defx#do_action('toggle_select_all')
+  nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> zz defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
+  nnoremap <silent><buffer><expr> <S-Space> defx#do_action('toggle_select') . 'k'
 endfunction
     "coc
 let g:coc_global_extensions = [  'coc-tasks',  'coc-highlight',  'coc-prettier',  'coc-json',  'coc-vimlsp',  'coc-snippets',  'coc-lists' ,  'coc-markdownlint',  'coc-actions',  ]
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 autocmd FileType markdown command! -nargs=0 Fix :CocCommand markdownlint.fixAll
-    inoremap <silent><expr> <TAB>
-          \ pumvisible() ? "\<C-n>" :
-          \ <SID>check_back_space() ? "\<TAB>" :
-          \ coc#refresh()
+inoremap <silent><expr> <TAB>
+												\ pumvisible() ? "\<C-n>" :
+												"\ pumvisible() ? coc#_select_confirm() :
+												\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+												\ <SID>check_back_space() ? "\<TAB>" :
+												\ coc#refresh()
     function! s:check_back_space() abort
               let col = col('.') - 1
                 return !col || getline('.')[col - 1]  =~# '\      s'
@@ -393,19 +360,21 @@ if exists('*complete_info')
 	    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     endif
 "coc snippets
-autocmd FileType markdown inoremap <silent><expr> <TAB>
-												\ pumvisible() ? coc#_select_confirm() :
-												\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-												\ <SID>check_back_space() ? "\<TAB>" :
-												\ coc#refresh()
+"autocmd FileType markdown inoremap <silent><expr> <TAB>
+"												\ pumvisible() ? coc#_select_confirm() :
+"												\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"												\ <SID>check_back_space() ? "\<TAB>" :
+"												\ coc#refresh()
 
 "let g:coc_snippet_next = '<tab>'"coclist
 noremap <C-p> :CocList files <CR>
  "far
+    let g:far#default_file_mask = '*' 
     nnoremap <silent> <leader>f  :Farf<cr>
     vnoremap <silent> <leader>f  :Farf<cr>
     nnoremap <silent> <leader>r  :Farr<cr>
     vnoremap <silent> <leader>r  :Farr<cr>
+"mdip
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 " there are some defaults for image directory and image name, you can change them
 " let g:mdip_imgdir = 'img'
