@@ -18,6 +18,7 @@ set wildmode=full "补全提示
 set backspace=indent,eol,start "退格可换行
 set undofile
 set undodir=~/.vim/undo
+set conceallevel=2
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "function! s:SetHighlightings()
 "  highlight Pmenu ctermbg=Gray ctermfg=White
@@ -25,11 +26,8 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 "  highlight Pmenu guibg=#333333 guifg=White 
 "  highlight PmenuSel guibg=#6B8E30 guifg=White 
 "endfunction
-"call s:SetHighlightings()
 "autocmd ColorScheme * call <SID>SetHighlightings()
-
-
- lang zh_CN.UTF-8
+ "lang zh_CN.UTF-8
  ":command Done 1,$/- [x] / m $
  if has("autocmd")
    "autocmd BufLeave,FocusLost *  silent! wall "自动保存
@@ -44,13 +42,12 @@ filetype on
 syntax on
 syntax enable
 set infercase
-set nosplitright
-set nosplitbelow
+"set nosplitright set nosplitbelow
 set nocompatible
 set history=700
 set foldopen=hor
 set path+=** 
-set timeoutlen=1000 ttimeoutlen=100
+set timeoutlen=1000 ttimeoutlen=0
 set mouse=a
 set noswapfile
 set showcmd
@@ -93,28 +90,26 @@ set wildignore+=.git*
    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
  endif
 "let maplocalleader = "<CR>"
+"markdown
 function! ToggleCheck()
   if(match(getline('.'),'\[x\]') != -1) 
 	  exe '. s/\[x\]/\[\ \]/g'
-	  "clear highlight
 	  exe 'let @/="" ' 
    elseif(match(getline('.'),'\[.\]') != -1)
-	  "clear highlight
 	  exe '. s/\[.\]/\[x\]/g'
 	  exe 'let @/="" '
   endif
- 
 endfunction
 autocmd FileType markdown nnoremap <localleader>d :call ToggleCheck() <CR>
 autocmd FileType markdown vnoremap <localleader>d :'<,'> s/\[.\]/\[x\]/g <CR>
-autocmd FileType markdown nnoremap <localleader>td :. s/-/-\ \[\ \]/g <CR> " change the list to checkbox
-autocmd FileType markdown vnoremap <localleader>td :'<,'> s/-/-\ \[\ \]/g <CR>
+"change the list to checkbox
+autocmd FileType markdown nnoremap <localleader>td :. s/-/-\ \[\ \]/g <CR> :let @/=""<CR>  
+autocmd FileType markdown vnoremap <localleader>td :'<,'> s/-/-\ \[\ \]/g <CR> :let @/=""<CR>
 fun! Redraw()
 let l = winline()
 let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
 return cmd
 endf
-
 nnoremap <expr>zz Redraw()
 "删除所有行末的空格
 "nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -134,31 +129,63 @@ cnoremap <C-n> <Down>
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
 nnoremap	_d "_d
 nnoremap <Leader>b :ls<CR>:b<Space>
- nmap <leader>ww  :tabedit  ~/iCloud/wiki/todo.md <CR> :cd %% <CR>
- " === Plug List
+nnoremap <leader>ww  :tabedit  ~/iCloud/wiki/todo.md <CR> :cd %% <CR>
+" statusline
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+set statusline=
+set statusline+=%#PmenuSel#
+"set statusline+=%{StatuslineGit()}
+set statusline+=%#LineNr#
+set statusline+=\ %f
+"set statusline+=%m\ ”不知为何显示为\
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+set statusline+=\ 
+" === Plug List
  call plug#begin('~/.config/nvim/plugged')
 Plug 'cocopon/iceberg.vim'
-Plug 'rhysd/vim-gfm-syntax'
+Plug 'rhysd/vim-gfm-syntax',{'for':['markdown','vim-plug']}
 Plug 'Konfekt/FastFold'
 Plug 'rhysd/accelerated-jk'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'liuchengxu/vista.vim'
-Plug 'rhysd/vim-gfm-syntax'
-Plug 'brooth/far.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'],'on' : 'MarkdownPreviewToggle'}
+Plug 'liuchengxu/vista.vim',{'on':'Vista!!'}
+Plug 'brooth/far.vim',{'on':'Farf'}
 Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'majutsushi/tagbar',{'on':'Tagbar'}
 Plug 'ferrine/md-img-paste.vim',{'for':['markdown','vim-plug']}
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
+Plug 'ap/vim-buftabline'
+"Plug 'itchyny/lightline.vim'
 Plug 'christoomey/vim-tmux-navigator'
-"Plug 'plasticboy/vim-markdown',{'for':['markdown','vim-plug']}
+Plug 'plasticboy/vim-markdown',{'for':['markdown','vim-plug']}
 Plug 'ybian/smartim',{'for':['markdown','vim-plug']}
 Plug 'tpope/vim-repeat'
-Plug 'rhysd/clever-f.vim'
-"Plug 'tpope/vim-obsession' "保存退出前vim状态
-call plug#end()            " 必须 :cd <CR>
+Plug 'rhysd/clever-f.vim' 
+call plug#end()            " 必须 
+"buftabline
+let g:buftabline_show = 1
+let g:buftabline_numbers = 2
+let g:buftabline_indicators = 1
+let g:buftabline_separators = 0
+ nmap <leader>1 <Plug>BufTabLine.Go(1)
+        nmap <leader>2 <Plug>BufTabLine.Go(2)
+        nmap <leader>3 <Plug>BufTabLine.Go(3)
+        nmap <leader>4 <Plug>BufTabLine.Go(4)
+        nmap <leader>5 <Plug>BufTabLine.Go(5)
+        nmap <leader>6 <Plug>BufTabLine.Go(6)
 "colorscheme
 colorscheme iceberg
 "fast folding
@@ -225,7 +252,7 @@ function! AutoOutline()
 endfunction
 "autocmd VimResized * call TagbarRedraw()
 autocmd BufRead *.md  call AutoOutline()
-autocmd FileType markdown nnoremap <buffer>tg :Tagbar<CR>
+autocmd FileType markdown nnoremap tg :Tagbar<CR>
 let g:tagbar_type_markdown = {
         \ 'ctagstype' : 'markdown',
         \ 'kinds' : [
@@ -240,9 +267,12 @@ let g:tagbar_singleclick = 1
 let g:tagbar_autofocus = 0
 let g:tagbar_width = 30
 let g:tagbar_indent = 0
-let g:tagbar_autopreview = 1
+let g:tagbar_autopreview = 0
 let g:tagbar_iconchars = ['+', '-']  
 let g:tagbar_compact = 1
+let g:tagbar_previewwin_pos = "botright"
+autocmd BufWinEnter * if &previewwindow | setlocal nonumber  endif
+
 "defx
 call defx#custom#option('_', { 
 	\ 'winwidth': 30, 
@@ -253,7 +283,7 @@ call defx#custom#option('_', {
       \ 'toggle': 1,
       \ 'resume': 1
       \ })
-nmap <leader>e :Defx <CR>
+nnoremap tt :Defx <CR>
 nnoremap <silent> <LocalLeader>e
 \ :<C-u>Defx -resume -toggle -buffer-name=tab`tabpagenr()` <CR> 
 autocmd BufWritePost * call defx#redraw()
@@ -380,17 +410,6 @@ autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownCli
 " there are some defaults for image directory and image name, you can change them
 " let g:mdip_imgdir = 'img'
 " let g:mdip_imgname = 'image'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#show_tabs = 0
- let g:airline#extensions#tabline#alt_sep = 1
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-nmap 1<leader> <Plug>AirlineSelectTab1
-nmap 2<leader> <Plug>AirlineSelectTab2
-nmap 3<leader> <Plug>AirlineSelectTab3
-nmap 4<leader> <Plug>AirlineSelectTab4
-nmap 5<leader> <Plug>AirlineSelectTab5
 nmap ]b :bnext<CR>
 nmap [b :bprevious<CR>
 let g:tmux_navigator_no_mappings = 1
@@ -399,10 +418,10 @@ nnoremap <C-j> :TmuxNavigateDown<cr>
 nnoremap <C-k> :TmuxNavigateUp<cr>
 nnoremap <C-l> :TmuxNavigateRight<cr>
  "nnoremap <silent> <A-p>ng} :TmuxNavigatePrevious<cr>
+ " plasticboy vim-markdown
 let g:vim_markdown_folding_disable = 1
 let g:vim_markdown_folding_level = 4
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_autowrite = 0
 "source ~/md-snippets.vim
 let g:smartim_default = 'com.apple.keylayout.ABC'
-

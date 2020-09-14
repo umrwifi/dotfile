@@ -1,3 +1,3 @@
 <<<<<<< HEAD
 # dotfile
-put then on your home path
+put them on your home path
