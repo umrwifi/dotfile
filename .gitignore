@@ -1,10 +1,12 @@
 .DS_Store
 clash/
 nvim/plugged/
-nvim/tmp.txt
+*/tmp.txt
 nvim/autoload/
 coc/extensions/
 coc/history.json
 coc/mru
 coc/snippets-mru
 qBittorrent/
+karabiner/automatic_backups/
+menus/
