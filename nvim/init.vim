@@ -1,8 +1,8 @@
 "  Auto load for first time uses
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 au! BufWritePost init.vim source %
 set tabstop=2  "tab缩进
@@ -20,23 +20,21 @@ set backspace=indent,eol,start "退格可换行
 set undofile
 set undodir=~/.vim/undo
 set conceallevel=2
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 function! s:SetHighlightings()
-"  highlight Pmenu ctermbg=Gray ctermfg=White
-"  highlight PmenuSel ctermbg=Green ctermfg=White
-"  highlight Pmenu guibg=#333333 guifg=White 
-"  highlight TabLineSel guibg=#6B8E30 guifg=White 
-  hi default link BufTabLineCurrent PmenuSel
-  hi default link BufTabLineActive  TabLineSel
+  "  highlight Pmenu ctermbg=Gray ctermfg=White
+  "  highlight PmenuSel ctermbg=Green ctermfg=White
+  "  highlight Pmenu guibg=#333333 guifg=White 
+  "  highlight PmenuSel guibg=#6B8E30 guifg=White 
+  hi default link BufTabLineActive  TabLine 
 endfunction
 autocmd ColorScheme * call <SID>SetHighlightings()
- "lang zh_CN.UTF-8
- ":command Done 1,$/- [x] / m $
- if has("autocmd")
-   "autocmd BufLeave,FocusLost *  silent! wall "自动保存
-   autocmd FocusLost *  silent! wall "自动保存
-   "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
- endif  
+"lang zh_CN.UTF-8
+":command Done 1,$/- [x] / m $
+if has("autocmd")
+  autocmd BufLeave,FocusLost *  silent! wall "自动保存
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+  "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif  
 filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和文件类型相关脚本
 filetype plugin on
 set tags=./tags;,tags;
@@ -45,7 +43,8 @@ filetype on
 syntax on
 syntax enable
 set infercase
-"set nosplitright set nosplitbelow
+set nosplitright 
+set nosplitbelow
 set nocompatible
 set history=700
 set foldopen=hor
@@ -65,47 +64,65 @@ set backupcopy=yes
 set ignorecase smartcase    " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏
 set foldmethod=manual
 set foldlevelstart=4
-set clipboard=unnamed "剪切板设置
+set clipboard=unnamed "系统剪切板
 set termguicolors
 let g:python3_host_skip_check=1
 let g:python3_host_prog  = '/usr/local/bin/python3'
-let mapleader = ","
-set updatetime=100
+set updatetime=200
 set lazyredraw            " improve scrolling performanc
 set regexpengine=1        " use old regexp engine
 if has("patch-8.1.1564")
-        " Recently vim can merge signcolumn and number       column into one
-set signcolumn=number
+  " Recently vim can merge signcolumn and number       column into one
+  set signcolumn=number
 else
-set signcolumn=yes
+  set signcolumn=yes
 endif
 set wildignore+=.git*
- " 改变insert模式和normal模式的光标
- if $TERM_PROGRAM =~ "iTerm" 
-   let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-   let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
- endif 
- if exists('$TMUX')
-   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
- else
-   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
- endif
+" 改变insert模式和normal模式的光标
+if $TERM_PROGRAM =~ "iTerm" 
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif 
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 "mappings
+let mapleader = ","
 "let maplocalleader = "<CR>"
 nnoremap <silent> <expr> <BS> (getline('.') =~ '^\s*"' ? '<C-h>':'<BS>')
 "o/O键禁止自动注释 
 "nnoremap <expr> O getline('.')=~ '^\s*"' ? 'O<esc>S' : 'O'
 "nnoremap <expr> o getline('.')=~ '^\s*"' ? 'o<esc>S' : 'o'
+function! ConditionalPairMap(open, close)
+  let line = getline('.')
+  let col = col('.')
+  if col < col('$') || stridx(line, a:close, col + 1) != -1
+    return a:open
+  else
+    return a:open . a:close . repeat("\<left>", len(a:close))
+  endif 
+endfunction
+inoremap <expr> ( ConditionalPairMap('(', ')')
+inoremap <expr> { ConditionalPairMap('{', '}')
+inoremap <expr> [ ConditionalPairMap('[', ']')
+inoremap {<CR> {<CR>}<Esc>O
+inoremap <expr> ) getline('.')[col('.')-1] == ")" ? "\<Right>" : ")"
+inoremap <expr> } getline('.')[col('.')-1] == "}" ? "\<Right>" : "}"
+
+nmap ]b :bnext<CR>
+nmap [b :bprevious<CR>
 "markdown
 function! ToggleCheck()
   if(match(getline('.'),'\[x\]') != -1) 
-	  exe '. s/\[x\]/\[\ \]/g'
-	  exe 'let @/="" ' 
-   elseif(match(getline('.'),'\[.\]') != -1)
-	  exe '. s/\[.\]/\[x\]/g'
-	  exe 'let @/="" '
+    exe '. s/\[x\]/\[\ \]/g'
+    exe 'let @/="" ' 
+  elseif(match(getline('.'),'\[.\]') != -1)
+    exe '. s/\[.\]/\[x\]/g'
+    exe 'let @/="" '
   endif
 endfunction
 autocmd FileType markdown nnoremap <localleader>d :call ToggleCheck() <CR>
@@ -114,9 +131,9 @@ autocmd FileType markdown vnoremap <localleader>d :'<,'> s/\[.\]/\[x\]/g <CR>
 autocmd FileType markdown nnoremap <localleader>td :. s/-/-\ \[\ \]/g <CR> :let @/=""<CR>  
 autocmd FileType markdown vnoremap <localleader>td :'<,'> s/-/-\ \[\ \]/g <CR> :let @/=""<CR>
 fun! Redraw()
-let l = winline()
-let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
-return cmd
+  let l = winline()
+  let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
+  return cmd
 endf
 nnoremap <expr>zz Redraw()
 "删除所有行末的空格
@@ -131,13 +148,13 @@ nnoremap <leader>! : !gcc % && ./a.out <CR>
 autocmd Filetype markdown nnoremap <buffer> <leader>! ?```<CR> jV  /```<CR> ky  :!pbpaste>a.c && gcc a.c && ./a.out <CR>
 "set scrolloff=999 "typewriter mode
 nmap <expr> <silent> <leader>d len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
- "double !! to excute r!
+"double !! to excute r!
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
 nnoremap	_d "_d
 nnoremap <Leader>b :ls<CR>:b<Space>
-nnoremap <leader>ww  :tabedit  ~/iCloud/wiki/todo.md <CR> :cd %% <CR>
+nnoremap <leader>ww :tabedit  ~/iCloud/Documents/wiki/todo.md <CR> :cd '%:h' <CR>
 " statusline
 function! GitBranch()
   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
@@ -161,7 +178,7 @@ set statusline+=\ %p%%
 set statusline+=\ %l:%c
 set statusline+=\ 
 " === Plug List
- call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'cocopon/iceberg.vim'
 Plug 'rhysd/vim-gfm-syntax',{'for':['markdown','vim-plug']}
 Plug 'Konfekt/FastFold'
@@ -170,30 +187,30 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'],'on' : 'MarkdownPreviewToggle'}
 Plug 'liuchengxu/vista.vim',{'on':'Vista!!'}
 Plug 'brooth/far.vim',{'on':'Farf'}
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'majutsushi/tagbar',{'on':'Tagbar'}
+Plug 'preservim/tagbar',{'on':['Tagbar','TagbarOpen']}
 Plug 'ferrine/md-img-paste.vim',{'for':['markdown','vim-plug']}
 Plug 'tpope/vim-surround'
 Plug 'ap/vim-buftabline'
-"Plug 'itchyny/lightline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'plasticboy/vim-markdown',{'for':['markdown','vim-plug']}
 Plug 'ybian/smartim',{'for':['markdown','vim-plug']}
 Plug 'tpope/vim-repeat'
 Plug 'rhysd/clever-f.vim' 
 call plug#end()            " 必须 
+
 "buftabline
 let g:buftabline_show = 1
 let g:buftabline_numbers = 2
 let g:buftabline_indicators = 1
 let g:buftabline_separators = 0
- nmap <leader>1 <Plug>BufTabLine.Go(1)
-        nmap <leader>2 <Plug>BufTabLine.Go(2)
-        nmap <leader>3 <Plug>BufTabLine.Go(3)
-        nmap <leader>4 <Plug>BufTabLine.Go(4)
-        nmap <leader>5 <Plug>BufTabLine.Go(5)
-        nmap <leader>6 <Plug>BufTabLine.Go(6)
+nmap 1<leader> <Plug>BufTabLine.Go(1)
+nmap 2<leader> <Plug>BufTabLine.Go(2)
+nmap 3<leader> <Plug>BufTabLine.Go(3)
+nmap 4<leader> <Plug>BufTabLine.Go(4)
+nmap 5<leader> <Plug>BufTabLine.Go(5)
+nmap 6<leader> <Plug>BufTabLine.Go(6)
 "colorscheme
 colorscheme iceberg
 "fast folding
@@ -209,7 +226,6 @@ let g:php_folding = 1
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
 "auto-pairs
-let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutToggle = '' 
 let g:AutoPairsShortcutBackInsert = '<C-B>'
 let g:AutoPairsMapCh = 0
@@ -240,32 +256,33 @@ let g:vista_echo_cursor_strategy = 'scroll'
 "Far
 "let g:far#file_mask_favorites
 let g:far#default_file_mask = '*' 
-nnoremap tg :Vista!!<CR>
+nnoremap tg :TagbarOpen f <CR>
 nnoremap <silent> <leader>f  :Farf<cr>
 vnoremap <silent> <leader>f  :Farf<cr>
 nnoremap <silent> <leader>r  :Farr<cr>
 vnoremap <silent> <leader>r  :Farr<cr>
 "tagbar
 function! AutoOutline()
-				if(winwidth(0)>65&&line('$')>150)
-								exe 'Tagbar'
-				endif
+  if(winwidth(0)>65&&line('$')>150)
+    exe 'Tagbar'
+  endif
 endfunction
 autocmd BufRead *.md  call AutoOutline()
-autocmd FileType markdown nnoremap tg :Tagbar<CR>
+autocmd FileType markdown nnoremap tg :TagbarOpen f<CR>
 autocmd BufWinEnter * if &previewwindow | exe 'nmap j jP'| exe 'nmap k kP' |setlocal nonumber  | endif
 "autocmd BufWinEnter * if &previewwindow | setlocal nonumber  endif
 " TODO 不够优雅
 autocmd BufWinLeave * if 1 == 1 | exe 'nmap j <Plug>(accelerated_jk_gj)'| exe 'nmap k <Plug>(accelerated_jk_gk)' | endif
 let g:tagbar_type_markdown = {
-        \ 'ctagstype' : 'markdown',
-        \ 'kinds' : [
-                        \ 'h:sections',
-                        \ 't:todo',
-                        \ 't:done',
-        \ ],
-    \ 'sort' : 0
-    \ }
+      \ 'ctagstype' : 'markdown',
+      \ 'kinds' : [
+      \ 'h:sections',
+      \ 't:todo',
+      \ 't:done',
+      \ ],
+      \ 'sort' : 0,
+      \ 'excmd' : 'number'
+      \ }
 let g:tagbar_map_nexttag = "\]\]"
 let g:tagbar_map_prevtag = "\[\["
 let g:tagbar_show_linenumbers = -1
@@ -280,8 +297,8 @@ let g:tagbar_previewwin_pos = "botright"
 
 "defx
 call defx#custom#option('_', { 
-	\ 'winwidth': 30, 
-	\ 'split': 'vertical',
+      \ 'winwidth': 30, 
+      \ 'split': 'vertical',
       \ 'direction': 'topleft',
       \ 'show_ignored_files': 0,
       \ 'buffer_name': '',
@@ -291,7 +308,7 @@ call defx#custom#option('_', {
       \ })
 nnoremap tt :Defx <CR>
 nnoremap <silent> <LocalLeader>e
-\ :<C-u>Defx -resume -toggle -buffer-name=tab`tabpagenr()` <CR> 
+      \ :<C-u>Defx -resume -toggle -buffer-name=tab`tabpagenr()` <CR> 
 autocmd BufWritePost * call defx#redraw()
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
@@ -311,8 +328,8 @@ function! s:defx_my_settings() abort
         \ defx#is_directory() ? 
         \ defx#do_action('open_or_close_tree') : 
         \ defx#do_action('multi', ['drop'])
-	  nnoremap <silent><buffer><expr> cd
-	  \ defx#do_action('change_vim_cwd')
+  nnoremap <silent><buffer><expr> cd
+        \ defx#do_action('change_vim_cwd')
   nnoremap <silent><buffer><expr> h defx#do_action('close_tree' )
   nnoremap <silent><buffer><expr> H defx#do_action('cd',['..'] )
   nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
@@ -338,27 +355,29 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
   nnoremap <silent><buffer><expr> <S-Space> defx#do_action('toggle_select') . 'k'
 endfunction
-    "coc
+"coc
 let g:coc_global_extensions = [  'coc-tasks',  'coc-highlight',  'coc-prettier',  'coc-json',  'coc-vimlsp',  'coc-snippets',  'coc-lists' ,  'coc-markdownlint',  'coc-actions',  ]
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 autocmd FileType markdown command! -nargs=0 Fix :CocCommand markdownlint.fixAll
 inoremap <silent><expr> <TAB>
-												\ pumvisible() ? "\<C-n>" :
-												"\ pumvisible() ? coc#_select_confirm() :
-												\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-												\ <SID>check_back_space() ? "\<TAB>" :
-												\ coc#refresh()
-    function! s:check_back_space() abort
-              let col = col('.') - 1
-                return !col || getline('.')[col - 1]  =~# '\      s'
-        endfunction
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>      "
-    "回车确认补全
+      \ pumvisible() ? "\<C-n>" :
+      "\ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\      s'
+endfunction
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>      "
+"回车确认补全
 if exists('*complete_info')
-	  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-  else
-	    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-    endif
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 "coc snippets
 "autocmd FileType markdown inoremap <silent><expr> <TAB>
 "												\ pumvisible() ? coc#_select_confirm() :
@@ -366,31 +385,29 @@ if exists('*complete_info')
 "												\ <SID>check_back_space() ? "\<TAB>" :
 "												\ coc#refresh()
 
-"let g:coc_snippet_next = '<tab>'"coclist
-noremap <C-p> :CocList files <CR>
- "far
-    let g:far#default_file_mask = '*' 
-    nnoremap <silent> <leader>f  :Farf<cr>
-    vnoremap <silent> <leader>f  :Farf<cr>
-    nnoremap <silent> <leader>r  :Farr<cr>
-    vnoremap <silent> <leader>r  :Farr<cr>
+"let g:coc_snippet_next = '<tab>'
+"coclist
+noremap <C-P> :CocList  --auto-preivew files <CR>
+"far
+let g:far#default_file_mask = '*' 
+nnoremap <silent> <leader>f  :Farf<cr>
+vnoremap <silent> <leader>f  :Farf<cr>
+nnoremap <silent> <leader>r  :Farr<cr>
+vnoremap <silent> <leader>r  :Farr<cr>
 "mdip
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 " there are some defaults for image directory and image name, you can change them
 " let g:mdip_imgdir = 'img'
 " let g:mdip_imgname = 'image'
-nmap ]b :bnext<CR>
-nmap [b :bprevious<CR>
 let g:tmux_navigator_no_mappings = 1
 nnoremap <C-h> :TmuxNavigateLeft<cr>
 nnoremap <C-j> :TmuxNavigateDown<cr>
 nnoremap <C-k> :TmuxNavigateUp<cr>
 nnoremap <C-l> :TmuxNavigateRight<cr>
- "nnoremap <silent> <A-p>ng} :TmuxNavigatePrevious<cr>
- " plasticboy vim-markdown
+" plasticboy vim-markdown
 let g:vim_markdown_folding_disable = 1
 let g:vim_markdown_folding_level = 4
 let g:vim_markdown_conceal = 1
 let g:vim_markdown_autowrite = 0
-"source ~/md-snippets.vim
+"smartim
 let g:smartim_default = 'com.apple.keylayout.ABC'
