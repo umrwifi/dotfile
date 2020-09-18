@@ -5,31 +5,17 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 au! BufWritePost init.vim source %
-set tabstop=2  "tab缩进
-set hidden
-set autoindent " 开启自动缩进
-set shiftwidth=2 " 自动缩进n个空格
-set expandtab  "用space代替tab
-set encoding=utf-8
-set termencoding=utf-8
-set nrformats= "转换为10进制
-set fileencodings=ucs-bom,utf-8,cp936 "防windows 中文乱码
-set wildmenu "补全提示
-set wildmode=full "补全提示
-set backspace=indent,eol,start "退格可换行
-set undofile
-set undodir=~/.vim/undo
-set conceallevel=2
 function! s:SetHighlightings()
-  "  highlight Pmenu ctermbg=Gray ctermfg=White
-  "  highlight PmenuSel ctermbg=Green ctermfg=White
-  "  highlight Pmenu guibg=#333333 guifg=White 
-  "  highlight PmenuSel guibg=#6B8E30 guifg=White 
-  hi default link BufTabLineActive  TabLine 
+    highlight Pmenu guibg=gray guifg=white
+    hi PmenuSel guibg=#6B8E30  guifg=white 
+    hi default link BufTabLineActive  TabLine 
 endfunction
-autocmd ColorScheme * call <SID>SetHighlightings()
+"colorscheme
+autocmd ColorScheme * call s:SetHighlightings()
+colorscheme default
+autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
 "lang zh_CN.UTF-8
-":command Done 1,$/- [x] / m $
+":command Done 1,$ /- [x] / m $
 if has("autocmd")
   autocmd BufLeave,FocusLost *  silent! wall "自动保存
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
@@ -37,6 +23,23 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 endif  
 filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和文件类型相关脚本
 filetype plugin on
+"自动刷新文件
+set autoread
+au CursorHold * checktime
+set tabstop=2  "tab缩进
+set hidden
+set autoindent " 开启自动缩进
+set shiftwidth=2 " 自动缩进n个空格
+set expandtab  "用space代替tab
+set encoding=utf-8
+set termencoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936 "防windows 中文乱码
+set wildmenu "补全提示
+set wildmode=full "补全提示
+set backspace=indent,eol,start "退格可换行
+set undofile
+set undodir=~/.vim/undo
+set conceallevel=2
 set tags=./tags;,tags;
 set ofu=syntaxcomplete#Complete " 自动补全代码
 filetype on
@@ -62,9 +65,21 @@ set number "绝对行号，与相对行号同时生效时只显示当前行的�
 set incsearch  "输入搜索内容时就显示搜索结果
 set backupcopy=yes 
 set ignorecase smartcase    " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏
-set foldmethod=manual
+set foldmethod=syntax
 set foldlevelstart=4
 set clipboard=unnamed "系统剪切板
+let g:clipboard = {
+  \ 'name': 'pbcopy',
+  \ 'copy': {
+  \    '+': 'pbcopy',
+  \    '*': 'pbcopy',
+  \  },
+  \ 'paste': {
+  \    '+': 'pbpaste',
+  \    '*': 'pbpaste',
+  \ },
+  \ 'cache_enabled': 0,
+  \ } 
 set termguicolors
 let g:python3_host_skip_check=1
 let g:python3_host_prog  = '/usr/local/bin/python3'
@@ -90,32 +105,40 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+set statusline=
+set statusline+=%#PmenuSel#
+"set statusline+=%{StatuslineGit()}
+set statusline+=%#LineNr#
+set statusline+=\ %f
+"set statusline+=%m\ ”不知为何显示为\
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+set statusline+=\ 
 "mappings
 let mapleader = ","
 "let maplocalleader = "<CR>"
-nnoremap <silent> <expr> <BS> (getline('.') =~ '^\s*"' ? '<C-h>':'<BS>')
-"o/O键禁止自动注释 
-"nnoremap <expr> O getline('.')=~ '^\s*"' ? 'O<esc>S' : 'O'
-"nnoremap <expr> o getline('.')=~ '^\s*"' ? 'o<esc>S' : 'o'
-function! ConditionalPairMap(open, close)
-  let line = getline('.')
-  let col = col('.')
-  if col < col('$') || stridx(line, a:close, col + 1) != -1
-    return a:open
-  else
-    return a:open . a:close . repeat("\<left>", len(a:close))
-  endif 
-endfunction
-inoremap <expr> ( ConditionalPairMap('(', ')')
-inoremap <expr> { ConditionalPairMap('{', '}')
-inoremap <expr> [ ConditionalPairMap('[', ']')
-inoremap {<CR> {<CR>}<Esc>O
-inoremap <expr> ) getline('.')[col('.')-1] == ")" ? "\<Right>" : ")"
-inoremap <expr> } getline('.')[col('.')-1] == "}" ? "\<Right>" : "}"
-
 nmap ]b :bnext<CR>
 nmap [b :bprevious<CR>
 "markdown
+"let g:markdown_fenced_languages = ['javascript=js','vim','bash=sh']
+autocmd BufNewFile *.md call AddTitle() 
+function! AddTitle() 
+  if(!getline('1'))
+      call append(0,"# ".expand('%:r'))
+  endif
+endfunction
 function! ToggleCheck()
   if(match(getline('.'),'\[x\]') != -1) 
     exe '. s/\[x\]/\[\ \]/g'
@@ -126,10 +149,13 @@ function! ToggleCheck()
   endif
 endfunction
 autocmd FileType markdown nnoremap <localleader>d :call ToggleCheck() <CR>
-autocmd FileType markdown vnoremap <localleader>d :'<,'> s/\[.\]/\[x\]/g <CR>
-"change the list to checkbox
-autocmd FileType markdown nnoremap <localleader>td :. s/-/-\ \[\ \]/g <CR> :let @/=""<CR>  
-autocmd FileType markdown vnoremap <localleader>td :'<,'> s/-/-\ \[\ \]/g <CR> :let @/=""<CR>
+autocmd FileType markdown vnoremap <localleader>d : s/\[.\]/\[x\]/g <CR>
+autocmd FileType markdown nnoremap <localleader>td :. s/-/-\ \[\ \]/g <CR> " change the list to checkbox
+autocmd FileType markdown vnoremap <localleader>td : s/-/-\ \[\ \]/g <CR>
+autocmd FileType markdown nnoremap ]] /^#\+\s<CR> :let @/ = ""<CR>
+autocmd FileType markdown nnoremap [[ ?^#\+\s<CR> :let @/ = ""<CR>
+autocmd FileType markdown vnoremap ]] : s/^#\{1,5\}\s/#&/g <CR> :let @/ = ""<CR>
+autocmd FileType markdown vnoremap [[ : s/^##/#/g <CR> :let @/ = ""<CR>
 fun! Redraw()
   let l = winline()
   let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
@@ -156,50 +182,41 @@ nnoremap	_d "_d
 nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <leader>ww :tabedit  ~/iCloud/Documents/wiki/todo.md <CR> :cd '%:h' <CR>
 " statusline
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
-set statusline=
-set statusline+=%#PmenuSel#
-"set statusline+=%{StatuslineGit()}
-set statusline+=%#LineNr#
-set statusline+=\ %f
-"set statusline+=%m\ ”不知为何显示为\
-set statusline+=%=
-set statusline+=%#CursorColumn#
-set statusline+=\ %y
-set statusline+=\ %{&fileencoding}
-set statusline+=\[%{&fileformat}\]
-set statusline+=\ %p%%
-set statusline+=\ %l:%c
-set statusline+=\ 
-" === Plug List
 call plug#begin('~/.config/nvim/plugged')
-Plug 'cocopon/iceberg.vim'
-Plug 'rhysd/vim-gfm-syntax',{'for':['markdown','vim-plug']}
-Plug 'Konfekt/FastFold'
+"Plug 'cocopon/iceberg.vim'
+Plug 'rhysd/vim-gfm-syntax'
+"Plug 'Konfekt/FastFold'
 Plug 'rhysd/accelerated-jk'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'],'on' : 'MarkdownPreviewToggle'}
 Plug 'liuchengxu/vista.vim',{'on':'Vista!!'}
 Plug 'brooth/far.vim',{'on':'Farf'}
-"Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'preservim/tagbar',{'on':['Tagbar','TagbarOpen']}
 Plug 'ferrine/md-img-paste.vim',{'for':['markdown','vim-plug']}
 Plug 'tpope/vim-surround'
 Plug 'ap/vim-buftabline'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'plasticboy/vim-markdown',{'for':['markdown','vim-plug']}
 Plug 'ybian/smartim',{'for':['markdown','vim-plug']}
 Plug 'tpope/vim-repeat'
 Plug 'rhysd/clever-f.vim' 
+Plug 'cohama/lexima.vim'
 call plug#end()            " 必须 
+"lexima
+"map放在最上面声明
+inoremap <expr> <cr>  pumvisible() ? complete_info()["selected"] != "-1" ?
+                 \ "\<C-y>"  : "\<c-e>" . lexima#expand('<CR>', 'i') :  lexima#expand('<CR>', 'i')
+call lexima#add_rule({'char': '<', 'input_after': '>', 'filetype': 'markdown'})
+call lexima#add_rule({'char': '>', 'at': '\%#>', 'leave': 1, 'filetype': 'markdown'})
+call lexima#add_rule({'char': '<BS>', 'at': '\%#>', 'delete': 1, 'filetype': 'markdown'})
+call lexima#add_rule({'char': '<CR>' , 'at': '\%#>', 'input': '<CR>','input_after':'<CR>', 'filetype': 'markdown'})
+call lexima#add_rule({'char': '```', 'input_after': '```', 'filetype': 'markdown'})
+call lexima#add_rule({'char': '```', 'at': '\%#```', 'leave': 1, 'filetype': 'markdown'})
+call lexima#add_rule({'char': '<BS>', 'at': '\%#```', 'delete': 1, 'filetype': 'markdown'})
+call lexima#add_rule({'char': '<CR>' , 'at': '\%#```', 'input': '<CR>','input_after':'<CR>', 'filetype': 'markdown'})
 
+"vim surround 
+let g:surround_{char2nr('c')} = "```\r```"
 "buftabline
 let g:buftabline_show = 1
 let g:buftabline_numbers = 2
@@ -211,10 +228,8 @@ nmap 3<leader> <Plug>BufTabLine.Go(3)
 nmap 4<leader> <Plug>BufTabLine.Go(4)
 nmap 5<leader> <Plug>BufTabLine.Go(5)
 nmap 6<leader> <Plug>BufTabLine.Go(6)
-"colorscheme
-colorscheme iceberg
 "fast folding
-let g:markdown_folding = 1
+let g:markdown_folding = 0
 let g:tex_fold_enabled = 0
 let g:vimsyn_folding = 'af'
 let g:xml_syntax_folding = 1
@@ -225,10 +240,6 @@ let g:php_folding = 1
 "accelerated-jk
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
-"auto-pairs
-let g:AutoPairsShortcutToggle = '' 
-let g:AutoPairsShortcutBackInsert = '<C-B>'
-let g:AutoPairsMapCh = 0
 " markdown-preview
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
@@ -371,23 +382,17 @@ function! s:check_back_space() abort
 endfunction
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>      "
 "回车确认补全
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+"if exists('*complete_info')
+"  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+"else
+"  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"endif
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-"coc snippets
-"autocmd FileType markdown inoremap <silent><expr> <TAB>
-"												\ pumvisible() ? coc#_select_confirm() :
-"												\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-"												\ <SID>check_back_space() ? "\<TAB>" :
-"												\ coc#refresh()
-
-"let g:coc_snippet_next = '<tab>'
+vmap <tab> <Plug>(coc-snippets-select)
 "coclist
-noremap <C-P> :CocList  --auto-preivew files <CR>
+noremap <C-P> :CocList files <CR>
+noremap <leader><C-P> :CocList <CR>
 "far
 let g:far#default_file_mask = '*' 
 nnoremap <silent> <leader>f  :Farf<cr>
@@ -404,10 +409,14 @@ nnoremap <C-h> :TmuxNavigateLeft<cr>
 nnoremap <C-j> :TmuxNavigateDown<cr>
 nnoremap <C-k> :TmuxNavigateUp<cr>
 nnoremap <C-l> :TmuxNavigateRight<cr>
-" plasticboy vim-markdown
-let g:vim_markdown_folding_disable = 1
-let g:vim_markdown_folding_level = 4
-let g:vim_markdown_conceal = 1
-let g:vim_markdown_autowrite = 0
 "smartim
 let g:smartim_default = 'com.apple.keylayout.ABC'
+"FastFold
+"let g:markdown_folding = 0
+"let g:tex_fold_enabled = 0
+"let g:vimsyn_folding = 'af'
+"let g:xml_syntax_folding = 1
+"let g:javaScript_fold = 1
+"let g:sh_fold_enabled= 7
+"let g:r_syntax_folding = 1
+"let g:php_folding = 1

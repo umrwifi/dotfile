@@ -96,3 +96,35 @@ $1
 \`\`\`
 $0
 endsnippet
+# python visual
+snippet d "Description" 
+if(${1:variable}){
+${`!p
+snip.rv = snip.v.text.strip("*")`}
+}
+endsnippet
+
+# origin visual doesn't work
+# snippet d "Description" 
+# if(${1:variable}){
+# ${VISUAl}
+# }
+# endsnippet
+
+#global !p
+#def  fraction(a,b):
+#			try:
+#				  return "%.if" % (float(a)/float(b))
+#      except(ValueError,ZeroDivisionError):
+#				  return "ERR"
+#endglobal
+
+# caculater
+snippet words "caculater typing speed" 
+${1:120} in ${2:20} is
+${`!p
+snip.rv = float(t[1]) / float(t[2])
+#snip.rv = fraction(t[1],t[2])
+`
+}
+endsnippet

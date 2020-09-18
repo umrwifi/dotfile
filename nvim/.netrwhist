@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/Users/admin'
 let g:netrw_dirhist_5='/Users/admin/.grip/cache-4.5.2'
 let g:netrw_dirhist_4='/Users/admin/.grip'
 let g:netrw_dirhist_3='/Users/admin/.config/menus/applications-merged'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_0='/Users/admin/Library/Mobile Documents/com~apple~CloudDocs
 let g:netrw_dirhist_9='/Users/admin/Library/Mobile Documents/com~apple~CloudDocs/学习/C'
 let g:netrw_dirhist_8='/Users/admin/Library/Mobile Documents/com~apple~CloudDocs/学习/C/ 716901010031邹健伟程序设计(C)实验一程序 '
 let g:netrw_dirhist_7='/Users/admin/Library/Mobile Documents/com~apple~CloudDocs/学习/C'
-let g:netrw_dirhist_6='/Users/admin/Library/Mobile Documents/com~apple~CloudDocs/学习/C/ 716901010031邹健伟程序设计(C)实验一程序 '
