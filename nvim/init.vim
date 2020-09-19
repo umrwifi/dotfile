@@ -8,11 +8,11 @@ au! BufWritePost init.vim source %
 function! s:SetHighlightings()
     highlight Pmenu guibg=gray guifg=white
     hi PmenuSel guibg=#6B8E30  guifg=white 
-    hi default link BufTabLineActive  TabLine 
+    "hi default link BufTabLineActive  TabLine 
 endfunction
 "colorscheme
 autocmd ColorScheme * call s:SetHighlightings()
-colorscheme default
+colorscheme slate
 autocmd BufNewFile *.py 0put =\"#!/usr/bin/python\<nl>\"|$
 "lang zh_CN.UTF-8
 ":command Done 1,$ /- [x] / m $
@@ -58,7 +58,7 @@ set noswapfile
 set showcmd
 set showmatch
 set laststatus=2
-set cursorline
+"set cursorline
 set ruler
 set relativenumber  "相对行号  
 set number "绝对行号，与相对行号同时生效时只显示当前行的绝对行号
@@ -185,7 +185,7 @@ nnoremap <leader>ww :tabedit  ~/iCloud/Documents/wiki/todo.md <CR> :cd '%:h' <CR
 call plug#begin('~/.config/nvim/plugged')
 "Plug 'cocopon/iceberg.vim'
 Plug 'rhysd/vim-gfm-syntax'
-"Plug 'Konfekt/FastFold'
+Plug 'Konfekt/FastFold',{'for':['markdown']}
 Plug 'rhysd/accelerated-jk'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'],'on' : 'MarkdownPreviewToggle'}
@@ -280,10 +280,9 @@ function! AutoOutline()
 endfunction
 autocmd BufRead *.md  call AutoOutline()
 autocmd FileType markdown nnoremap tg :TagbarOpen f<CR>
-autocmd BufWinEnter * if &previewwindow | exe 'nmap j jP'| exe 'nmap k kP' |setlocal nonumber  | endif
+autocmd BufWinEnter * if &previewwindow | exe 'nmap <C-J> jP'| exe 'nmap <C-K> kP' |setlocal nonumber  | endif
 "autocmd BufWinEnter * if &previewwindow | setlocal nonumber  endif
-" TODO 不够优雅
-autocmd BufWinLeave * if 1 == 1 | exe 'nmap j <Plug>(accelerated_jk_gj)'| exe 'nmap k <Plug>(accelerated_jk_gk)' | endif
+autocmd BufWinLeave * if !&previewwindow | exe 'unmap <C-J>'| exe 'unmap <C-K>' | endif
 let g:tagbar_type_markdown = {
       \ 'ctagstype' : 'markdown',
       \ 'kinds' : [
@@ -412,11 +411,11 @@ nnoremap <C-l> :TmuxNavigateRight<cr>
 "smartim
 let g:smartim_default = 'com.apple.keylayout.ABC'
 "FastFold
-"let g:markdown_folding = 0
-"let g:tex_fold_enabled = 0
-"let g:vimsyn_folding = 'af'
-"let g:xml_syntax_folding = 1
-"let g:javaScript_fold = 1
-"let g:sh_fold_enabled= 7
-"let g:r_syntax_folding = 1
-"let g:php_folding = 1
+let g:markdown_folding = 0
+let g:tex_fold_enabled = 0
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:r_syntax_folding = 1
+let g:php_folding = 1
