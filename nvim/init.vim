@@ -41,7 +41,7 @@ set infercase
 set nocompatible
 set history=700
 set foldopen=hor
-set path+=** 
+set path+=**
 set timeoutlen=1000 ttimeoutlen=0
 set mouse=a
 set noswapfile
@@ -79,14 +79,14 @@ let g:clipboard = {
   \    '*': 'pbpaste',
   \ },
   \ 'cache_enabled': 0,
-  \ } 
+  \ }
 set termguicolors
 let g:python3_host_skip_check=1
 let g:python3_host_prog  = '/usr/local/bin/python3'
 set updatetime=200
 set lazyredraw            " improve scrolling performanc
 set regexpengine=1        " use old regexp engine
-set vdir=~/Documents/nvim/view
+set vdir=~/Documents/.nvim/view
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number       column into one
   set signcolumn=number
@@ -115,19 +115,20 @@ set statusline+=\ %{&fileencoding}
 set statusline+=\[%{&fileformat}\]
 set statusline+=\ %p%%
 set statusline+=\ %l:%c
-set statusline+=\ 
+set statusline+=\
 "mappings
 let mapleader = ","
 nmap ]b :bnext<CR>
 nmap [b :bprevious<CR>
 nmap <leader>q :xa<CR>
+vnoremap gy y']
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
 nnoremap	_d "_d
 nnoremap <leader>b :ls<CR>: bd<C-B>
 nnoremap <leader>ww :tabedit  ~/Documents/wiki/index.md <CR> :cd '%:h' <CR>
-nnoremap tsk :tabedit  ~/Documents/wiki/dpca/todo.md <CR> :cd '%:h' <CR>
+nmap gtd :e ~/Documents/wiki/dpca/todo.md<CR>
 fun! Redraw()
   let l = winline()
   let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
@@ -137,6 +138,8 @@ nnoremap <expr>H Redraw()
 noremap ,,  :e ~/.config/nvim/init.vim <CR>
 vnoremap < <gv
 vnoremap > >gv
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 nnoremap <leader>! : !gcc % && ./a.out <CR>
 nmap <expr> <silent> <leader>d len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
 "markdown
@@ -149,7 +152,7 @@ endfunction
 function! ToggleCheck()
   if(match(getline('.'),'\[x\]') != -1)
     exe '. s/\[x\]/\[\ \]/g'
-    exe 'let @/="" ' 
+    exe 'let @/="" '
   elseif(match(getline('.'),'\[.\]') != -1)
     exe '. s/\[.\]/\[x\]/g'
     exe 'let @/="" '
@@ -161,48 +164,29 @@ autocmd FileType markdown nnoremap <localleader>td :. s/-/-\ \[\ \]/g <CR> " cha
 autocmd FileType markdown vnoremap <localleader>td : s/-/-\ \[\ \]/g <CR>
 autocmd FileType markdown nnoremap ]] /^#\+\s<CR> :let @/ = ""<CR>0zt
 autocmd FileType markdown nnoremap [[ ?^#\+\s<CR> :let @/ = ""<CR>0zt
-autocmd FileType markdown vnoremap ]] : s/^#\{1,5\}\s/#&/g <CR> :let @/ = ""<CR>
-autocmd FileType markdown vnoremap [[ : s/^##/#/g <CR> :let @/ = ""<CR>
+autocmd FileType markdown vnoremap ]] /^#\+\s<CR>
+autocmd FileType markdown vnoremap [[ ?^#\+\s<CR>
+"autocmd FileType markdown vnoremap ]] : s/^#\{1,5\}\s/#&/g <CR> :let @/ = ""<CR>
+"autocmd FileType markdown vnoremap [[ : s/^##/#/g <CR> :let @/ = ""<CR>
 autocmd Filetype markdown nnoremap <buffer> <leader>! ?```<CR> jV  /```<CR> ky  :!pbpaste>a.c && gcc a.c && ./a.out <CR>
 function! MarkdownLevel()
-       if getline(v:lnum) =~ '^# .*$'
-           return "0"
-       endif
-       if getline(v:lnum-2) =~ '^# .*$'
-           return ">1"
-       endif
-       if getline(v:lnum+2) =~ '^#\+ .*$'
-           return "<1"
-       endif
        if getline(v:lnum) =~ '^## .*$'
-           return "1"
-       endif
-       if getline(v:lnum-2) =~ '^## .*$'
            return ">2"
        endif
-       if getline(v:lnum+2) =~ '^#\+ .*$'
-           return "<2"
-       endif
-       if getline(v:lnum) =~ '^## .*$'
-           return "1"
-       endif
-       if getline(v:lnum-2) =~ '^## .*$'
-           return ">2"
-       endif
-       if getline(v:lnum+2) =~ '^#\+ .*$'
+       if getline(v:lnum+2) =~ '^## .*$'
            return "<2"
        endif
        if getline(v:lnum) =~ '^### .*$'
-           return "2"
-       endif
-       if getline(v:lnum-2) =~ '^### .*$'
            return ">3"
        endif
-       if getline(v:lnum+2) =~ '^#\+ .*$'
+       if getline(v:lnum+2) =~ '^### .*$'
            return "<3"
        endif
        " match - / - [ ] but not - [x] 
        if getline(v:lnum) =~ '^- \(\[x]\)\@!.*$'
+           return ">6"
+       endif
+       if getline(v:lnum) =~ '^- \[x\] .*$'
            return ">6"
        endif
        if getline(v:lnum) =~ '^- \[x\] .*$'&&
@@ -214,20 +198,20 @@ function! MarkdownLevel()
        endif
        return "=" 
 endfunction
-au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
-au BufEnter *.md setlocal foldmethod=expr   
-autocmd BufWritePost *.md mkview
-autocmd BufEnter *.md silent! loadview
+au BufEnter *.md setlocal foldexpr=MarkdownLevel()
+au BufEnter *.md setlocal foldmethod=expr
+"autocmd BufWritePost *.md mkview
+"autocmd BufEnter *.md silent! loadview
 " statusline
 call plug#begin('~/.config/nvim/plugged')
-"Plug 'cocopon/iceberg.vim'
-Plug 'w0ng/vim-hybrid'
+Plug 'cocopon/iceberg.vim'
+Plug 'freitass/todo.txt-vim'
+"Plug 'w0ng/vim-hybrid'
 Plug 'rhysd/vim-gfm-syntax'
 Plug 'Konfekt/FastFold',{'for':['markdown']}
 Plug 'rhysd/accelerated-jk'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'],'on' : 'MarkdownPreviewToggle'}
-Plug 'liuchengxu/vista.vim',{'on':'Vista!!'}
 Plug 'brooth/far.vim',{'on':'Farf'}
 Plug 'preservim/tagbar',{'on':['Tagbar','TagbarOpen']}
 Plug 'ferrine/md-img-paste.vim',{'for':['markdown','vim-plug']}
@@ -238,6 +222,8 @@ Plug 'tpope/vim-repeat'
 Plug 'rhysd/clever-f.vim'
 Plug 'cohama/lexima.vim'
 call plug#end()            " 必须
+"clever-f
+let g:clever_f_use_migemo=1
 "colorscheme
 function! s:SetHighlightings()
     "highlight Pmenu guibg=gray guifg=white
@@ -245,7 +231,7 @@ function! s:SetHighlightings()
     "hi default link BufTabLineActive  TabLine
 endfunction
 autocmd ColorScheme * call s:SetHighlightings()
-colorscheme hybrid
+colorscheme iceberg
 "set background=light
 "lexima
 "map放在最上面声明
@@ -283,9 +269,6 @@ let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
 let g:mkdp_refresh_slow = 1
 nmap <localleader><C-p> <Plug>MarkdownPreviewToggle
-"vista
-"let g:vista_default_executive = "coc"
-nnoremap tt :Vista!!<CR>
 "Far
 let g:far#default_file_mask = '*'
 nnoremap <silent> <leader>f  :Farf<cr>
@@ -299,7 +282,7 @@ function! AutoOutline()
     exe 'Tagbar'
   endif
 endfunction
-autocmd BufRead *.md  call AutoOutline()
+"autocmd BufRead *.md  call AutoOutline()
 let g:tagbar_map_previewwin='gp'
 let g:tagbar_map_nexttag = "\]\]"
 let g:tagbar_map_prevtag = "\[\["
@@ -313,19 +296,21 @@ let g:tagbar_autopreview = 0
 let g:tagbar_iconchars = ['+', '-']
 let g:tagbar_compact = 1
 let g:tagbar_previewwin_pos = "belowright"
-autocmd Filetype tagbar nmap <buffer><expr>k IsPwinOpen()==1? 'kgp':'<Plug>(accelerated_jk_gk)'  
+autocmd Filetype tagbar nmap <buffer><expr>k IsPwinOpen()==1? 'kgp':'<Plug>(accelerated_jk_gk)'
 autocmd Filetype tagbar nmap <buffer><expr>j IsPwinOpen()==1? 'jgp':'<Plug>(accelerated_jk_gj)'
 autocmd Filetype tagbar nmap <buffer><expr>P IsPwinOpen()==1? ':pclose<CR>':':call TagbarWinPreview()<CR>'
+autocmd Filetype tagbar nmap <buffer><expr><ESC> IsPwinOpen()==1? ':pclose<CR>':'<ESC>'
+"autocmd CursorHold __Tagbar__* ++nested exe 'normal gp'
 function! IsPwinOpen()
     for win in range(1, winnr('$'))
         if getwinvar(win, '&previewwindow')
                 return 1
             break
-        endif 
+        endif
 endfor
 	return 0
 endf
-function! TagbarWinPreview() 
+function! TagbarWinPreview()
 let fileinfo = tagbar#state#get_current_file(0)
 if empty(fileinfo)
         return {}
@@ -348,8 +333,6 @@ let g:tagbar_type_markdown = {
       \ 'ctagstype' : 'markdown',
       \ 'kinds' : [
       \ 'h:sections',
-      \ 't:todo',
-      \ 't:done',
       \ ],
       \ 'sort' : 0,
       \ 'excmd' : 'number'
@@ -378,19 +361,19 @@ vmap ts <Plug>(coc-translator-pv)
 "coc-explorer
 nmap <leader>e :CocCommand explorer --width 30 <CR>
 let g:path =""
-function! Explorer_preview() 
+function! Explorer_preview()
 "TODO 判断他在buffer列表中
 if (g:path!='')
 exe "wincmd w"
 if(len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1)
-silent exe "bd" .g:path
+silent! exe "bd" .g:path
 else
 exe "bp"
-silent exe "bd" .g:path
+silent! exe "bd" .g:path
 endif
-exe "wincmd w"
+exe "wincmd p"
 endif
-let g:path = CocAction('runCommand','explorer.getNodeInfo',0 ).fullpath   
+let g:path = CocAction('runCommand','explorer.getNodeInfo',0 ).fullpath
 call CocAction('runCommand', 'explorer.doAction', 0, ['expandable?', 'expand', 'open'])
 "exe "vs ". g:path
 endfunction
@@ -401,7 +384,7 @@ autocmd FileType coc-explorer call Explorerinit()
 autocmd InsertEnter let g:path=""
 "coclist
 noremap <C-P> :CocList --number-select --auto-preview --ignore-case files<CR>
-noremap <leader><C-P> :CocList --number-select --ignore-case<CR>
+noremap <leader><C-P> :CocList --number-select --ignore-case 
 nnoremap <leader>tg :CocList --auto-preview outline <CR>
 "far
 let g:far#default_file_mask = '*'
