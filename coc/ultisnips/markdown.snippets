@@ -10,7 +10,7 @@
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
 # List
-snippet 'li' "list" b
+snippet 'list' "markdown list" b
 - 
 endsnippet
 
@@ -19,11 +19,10 @@ snippet 'todo' "checkbox" b
 endsnippet
 
 snippet 'done' "checkbox" e
-- [x]
+- [x] 
 endsnippet
 
 # Title
-
 snippet 'h1' "heading1" Ab
 # 
 endsnippet
@@ -44,25 +43,32 @@ snippet 'h5' "heading5" Ab
 ##### 
 endsnippet
 
-# Link 
+snippet 'task' "markdown gtd task" Ab
+## $1
 
-snippet url
+$2
+
+### DONE
+
+endsnippet
+
+# Link 
+snippet url "markdown url"
 <${1:${visual:Url}}>
 $0
 endsnippet
 
-snippet link 
+snippet link  "markdown link"
 [${1:${visual:Link Title}}](${2:${visual:URL}})
 $0
 endsnippet
 
-snippet img 
+snippet img  "markdown image"
 ![${1:${visual:Image Title}}](${2:${visual:Image Source}})
 $0
 endsnippet
 
 # Other
-
 snippet hr
 
 ---
@@ -70,16 +76,20 @@ snippet hr
 $0
 endsnippet
 
-snippet table "html table"
+snippet table "markdown table"
 | ${1:${visual:Column}} | ${2:${visual:Column}} |$7
 | ------ | ------ |
 | ${3:${visual:Cell}}   | ${4:${visual:Cell}}   |$8
 | ${5:${visual:Cell}}   | ${6:${visual:Cell}}   |$9
+
+$0
 endsnippet
 
 snippet code "codeblock with lan" b
 \`\`\`${1:${visual:Language}}
-  $2
+  ${2:`!p
+snip.rv = snip.v.text.strip("*")`
+}
 \`\`\`
 $0
 endsnippet
@@ -96,6 +106,7 @@ $1
 \`\`\`
 $0
 endsnippet
+
 # python visual
 snippet d "Description" 
 if(${1:variable}){

@@ -162,39 +162,33 @@ autocmd FileType markdown nnoremap <localleader>d :call ToggleCheck() <CR>
 autocmd FileType markdown vnoremap <localleader>d : s/\[.\]/\[x\]/g <CR>
 autocmd FileType markdown nnoremap <localleader>td :. s/-/-\ \[\ \]/g <CR> " change the list to checkbox
 autocmd FileType markdown vnoremap <localleader>td : s/-/-\ \[\ \]/g <CR>
-autocmd FileType markdown nnoremap ]] /^#\+\s<CR> :let @/ = ""<CR>0zt
-autocmd FileType markdown nnoremap [[ ?^#\+\s<CR> :let @/ = ""<CR>0zt
+autocmd FileType markdown nnoremap ]] /^#\+\s<CR> :let @/ = ""<CR>^zz
+autocmd FileType markdown nnoremap [[ ?^#\+\s<CR> :let @/ = ""<CR>^zz
 autocmd FileType markdown vnoremap ]] /^#\+\s<CR>
 autocmd FileType markdown vnoremap [[ ?^#\+\s<CR>
 "autocmd FileType markdown vnoremap ]] : s/^#\{1,5\}\s/#&/g <CR> :let @/ = ""<CR>
 "autocmd FileType markdown vnoremap [[ : s/^##/#/g <CR> :let @/ = ""<CR>
 autocmd Filetype markdown nnoremap <buffer> <leader>! ?```<CR> jV  /```<CR> ky  :!pbpaste>a.c && gcc a.c && ./a.out <CR>
 function! MarkdownLevel()
+       if getline(v:lnum) =~ '^# .*$'
+           return ">1"
+       endif
        if getline(v:lnum) =~ '^## .*$'
            return ">2"
-       endif
-       if getline(v:lnum+2) =~ '^## .*$'
-           return "<2"
        endif
        if getline(v:lnum) =~ '^### .*$'
            return ">3"
        endif
-       if getline(v:lnum+2) =~ '^### .*$'
-           return "<3"
-       endif
        " match - / - [ ] but not - [x] 
        if getline(v:lnum) =~ '^- \(\[x]\)\@!.*$'
-           return ">6"
+           return ">7"
        endif
        if getline(v:lnum) =~ '^- \[x\] .*$'
-           return ">6"
-       endif
-       if getline(v:lnum) =~ '^- \[x\] .*$'&&
-        \ getline(v:lnum-1) =~ '^$'
-           return ">6"
-       endif
-       if getline(v:lnum) =~ '^\s\+- .*$'
            return ">7"
+       endif
+       " 如果是缩进列表
+       if getline(v:lnum) =~ '^\s\+- .*$'
+           return ">8"
        endif
        return "=" 
 endfunction
@@ -204,9 +198,9 @@ au BufEnter *.md setlocal foldmethod=expr
 "autocmd BufEnter *.md silent! loadview
 " statusline
 call plug#begin('~/.config/nvim/plugged')
-Plug 'cocopon/iceberg.vim'
+"Plug 'cocopon/iceberg.vim'
 Plug 'freitass/todo.txt-vim'
-"Plug 'w0ng/vim-hybrid'
+Plug 'w0ng/vim-hybrid'
 Plug 'rhysd/vim-gfm-syntax'
 Plug 'Konfekt/FastFold',{'for':['markdown']}
 Plug 'rhysd/accelerated-jk'
@@ -221,7 +215,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-repeat'
 Plug 'rhysd/clever-f.vim'
 Plug 'cohama/lexima.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'terryma/vim-expand-region'  "扩大选中范围
+"Plug 'preservim/nerdcommenter'
 call plug#end()            " 必须
+"indent-guide
+"let g:indent_guides_enable_on_vim_startup = 1
 "clever-f
 let g:clever_f_use_migemo=1
 "colorscheme
@@ -231,7 +230,7 @@ function! s:SetHighlightings()
     "hi default link BufTabLineActive  TabLine
 endfunction
 autocmd ColorScheme * call s:SetHighlightings()
-colorscheme iceberg
+colorscheme hybrid
 "set background=light
 "lexima
 "map放在最上面声明
@@ -302,21 +301,21 @@ autocmd Filetype tagbar nmap <buffer><expr>P IsPwinOpen()==1? ':pclose<CR>':':ca
 autocmd Filetype tagbar nmap <buffer><expr><ESC> IsPwinOpen()==1? ':pclose<CR>':'<ESC>'
 "autocmd CursorHold __Tagbar__* ++nested exe 'normal gp'
 function! IsPwinOpen()
-    for win in range(1, winnr('$'))
-        if getwinvar(win, '&previewwindow')
-                return 1
-            break
-        endif
+  for win in range(1, winnr('$'))
+    if getwinvar(win, '&previewwindow')
+        return 1
+      break
+    endif
 endfor
 	return 0
 endf
 function! TagbarWinPreview()
 let fileinfo = tagbar#state#get_current_file(0)
 if empty(fileinfo)
-        return {}
+  return {}
 endif
 if !has_key(fileinfo.tline,line('.'))
-        return {}
+  return {}
 endif
 let taginfo= fileinfo.tline[line('.')]
 let cmd=taginfo.getPrototype(0)
@@ -330,23 +329,23 @@ exe 'wincmd l'
 "TODO 让他准确的回到tagbar窗口
 endfunction
 let g:tagbar_type_markdown = {
-      \ 'ctagstype' : 'markdown',
-      \ 'kinds' : [
-      \ 'h:sections',
-      \ ],
-      \ 'sort' : 0,
-      \ 'excmd' : 'number'
-      \ }
+  \ 'ctagstype' : 'markdown',
+  \ 'kinds' : [
+  \ 'h:sections',
+  \ ],
+  \ 'sort' : 0,
+  \ 'excmd' : 'number'
+  \ }
 "coc
 let g:coc_global_extensions = [ 'coc-translator','coc-explorer','coc-imselect', 'coc-tasks',  'coc-highlight',  'coc-prettier',  'coc-json',  'coc-vimlsp',  'coc-snippets',  'coc-lists' ,  'coc-markdownlint',  'coc-actions',  ]
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 autocmd FileType markdown command! -nargs=0 Fix :CocCommand markdownlint.fixAll
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      "\ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>":
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  "\ pumvisible() ? coc#_select_confirm() :
+  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ <SID>check_back_space() ? "\<TAB>":
+  \ coc#refresh()
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
