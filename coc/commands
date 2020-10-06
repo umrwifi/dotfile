@@ -1,5 +1,5 @@
 prettier.formatFile
+markdownlint.fixAll
 snippets.editSnippets
 snippets.openSnippetFiles
-markdownlint.fixAll
 explorer

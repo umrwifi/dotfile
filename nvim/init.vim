@@ -29,9 +29,8 @@ set backspace=indent,eol,start "退格可换行
 set undofile
 set undodir=~/.vim/undo
 set conceallevel=2
-set tags=./tags;,tags;
 set ofu=syntaxcomplete#Complete " 自动补全代码
-set synmaxcol=1000
+"set synmaxcol=1000
 filetype on
 syntax on
 syntax enable
@@ -39,7 +38,7 @@ set infercase
 "set nosplitright
 "set nosplitbelow
 set nocompatible
-set history=700
+set history=200
 set foldopen=hor
 set path+=**
 set timeoutlen=1000 ttimeoutlen=0
@@ -143,11 +142,13 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 nnoremap <leader>! : !gcc % && ./a.out <CR>
 nmap <expr> <silent> <leader>d len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
 "markdown
-autocmd BufNewFile *.md call AddTitle()
-function! AddTitle()
-  if(!getline('1'))
-      call append(0,"# ".expand('%:r'))
-  endif
+autocmd BufNewFile *.md call HexoTitle()
+function! HexoTitle()
+      call append(0,"---")
+      call append(1,"title: ".expand('%:r'))
+      call append(2,"date: ")
+      call append(3,"tags: ")
+      call append(4,"---")
 endfunction
 function! ToggleCheck()
   if(match(getline('.'),'\[x\]') != -1)
@@ -194,11 +195,11 @@ function! MarkdownLevel()
 endfunction
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()
 au BufEnter *.md setlocal foldmethod=expr
-"autocmd BufWritePost *.md mkview
-"autocmd BufEnter *.md silent! loadview
+autocmd BufWritePost *.md mkview
+autocmd BufEnter *.md silent! loadview
 " statusline
 call plug#begin('~/.config/nvim/plugged')
-"Plug 'cocopon/iceberg.vim'
+Plug 'cocopon/iceberg.vim'
 Plug 'freitass/todo.txt-vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'rhysd/vim-gfm-syntax'
@@ -286,7 +287,7 @@ let g:tagbar_map_previewwin='gp'
 let g:tagbar_map_nexttag = "\]\]"
 let g:tagbar_map_prevtag = "\[\["
 let g:tagbar_map_togglefold = "l"
-let g:tagbar_show_linenumbers = -1
+let g:tagbar_show_linenumbers = 2
 let g:tagbar_singleclick = 1
 let g:tagbar_autofocus = 0
 let g:tagbar_width = 30
@@ -337,7 +338,7 @@ let g:tagbar_type_markdown = {
   \ 'excmd' : 'number'
   \ }
 "coc
-let g:coc_global_extensions = [ 'coc-translator','coc-explorer','coc-imselect', 'coc-tasks',  'coc-highlight',  'coc-prettier',  'coc-json',  'coc-vimlsp',  'coc-snippets',  'coc-lists' ,  'coc-markdownlint',  'coc-actions',  ]
+let g:coc_global_extensions = [ 'coc-sh','coc-translator','coc-explorer','coc-imselect', 'coc-tasks',  'coc-highlight',  'coc-prettier',  'coc-json',  'coc-vimlsp',  'coc-snippets',  'coc-lists' ,  'coc-markdownlint',  'coc-actions',  ]
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 autocmd FileType markdown command! -nargs=0 Fix :CocCommand markdownlint.fixAll
 inoremap <silent><expr> <TAB>

@@ -38,8 +38,8 @@ alt - x : yabai -m space --focus recent
 alt - z : yabai -m space --focus prev 
 alt - c : yabai -m space --focus next
 
-shift + alt - x : yabai -m window --space recent; yabai -m space --focus recent
-shift + alt - z : yabai -m window --space prev; yabai -m space 
+shift + alt - x : yabai -m window --space recent
+shift + alt - z : yabai -m window --space prev
 shift + alt - c : yabai -m window --space next 
 cmd + alt - d : yabai -m space --destroy
 cmd + alt - n : yabai -m space --create
@@ -51,6 +51,7 @@ shift + alt - p  : yabai -m window --display prev
 shift + alt - n  : yabai -m window --display next
 
 # layout
+alt - r : yabai -m window --toggle rotate
 alt - d : yabai -m window --toggle split
 alt - f : yabai -m window --toggle zoom-fullscreen 
 
