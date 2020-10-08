@@ -80,8 +80,7 @@ snippet table "markdown table"
 | ${1:${visual:Column}} | ${2:${visual:Column}} |$7
 | ------ | ------ |
 | ${3:${visual:Cell}}   | ${4:${visual:Cell}}   |$8
-| ${5:${visual:Cell}}   | ${6:${visual:Cell}}   |$9
-
+| ${5:${visual:Cell}}   | ${6:${visual:Cell}}   |$9 
 $0
 endsnippet
 
@@ -90,8 +89,7 @@ snippet code "codeblock with lan" b
   ${2:`!p
 snip.rv = snip.v.text.strip("*")`
 }
-\`\`\`
-$0
+\`\`\` $0
 endsnippet
 snippet "cd(\w+)?" "codeblock with lan" br
 \`\`\``!p
@@ -103,8 +101,7 @@ elif match.group(1) == "js":
     snip.rv="javascript"
     `
 $1
-\`\`\`
-$0
+\`\`\` $0
 endsnippet
 
 # python visual

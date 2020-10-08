@@ -58,3 +58,5 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 # stack
 alt - s : yabai -m config layout stack
 alt - e : yabai -m config layout bsp
+
+shift + cmd - space : osascript ~/mdfind.applescript

@@ -1,10 +1,11 @@
 #!/bin/sh
 cp -i -R ~/.config  ./config.lock
 mv -i ./*  ~/.config
+cd  ~/.config
 
 link="
 .tmux.conf
-.bash_profile
+.bashrc
 .ctags
 "
 for i in $link ; do
@@ -18,4 +19,11 @@ for i in $link ; do
      ln -s  ~/.config/$i  ~/
   fi
 done
+
+# install nvim
+# yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+# yum install -y neovim python3-neovim
+# install ctags
+# 判断nvim 版本
+# install tmux
 

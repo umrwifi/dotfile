@@ -205,7 +205,9 @@ Plug 'w0ng/vim-hybrid'
 Plug 'rhysd/vim-gfm-syntax'
 Plug 'Konfekt/FastFold',{'for':['markdown']}
 Plug 'rhysd/accelerated-jk'
+if  has('nvim-0.3.2') 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'],'on' : 'MarkdownPreviewToggle'}
 Plug 'brooth/far.vim',{'on':'Farf'}
 Plug 'preservim/tagbar',{'on':['Tagbar','TagbarOpen']}
