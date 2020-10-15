@@ -114,12 +114,12 @@ set statusline+=\ %{&fileencoding}
 set statusline+=\[%{&fileformat}\]
 set statusline+=\ %p%%
 set statusline+=\ %l:%c
-set statusline+=\
 "mappings
 let mapleader = ","
 nmap ]b :bnext<CR>
 nmap [b :bprevious<CR>
 nmap <leader>q :xa<CR>
+nmap <RightMouse> :tag <CR>
 vnoremap gy y']
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -141,64 +141,9 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 nnoremap <leader>! : !gcc % && ./a.out <CR>
 nmap <expr> <silent> <leader>d len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
-"markdown
-autocmd BufNewFile *.md call HexoTitle()
-function! HexoTitle()
-      call append(0,"---")
-      call append(1,"title: ".expand('%:r'))
-      call append(2,"date: ")
-      call append(3,"tags: ")
-      call append(4,"---")
-endfunction
-function! ToggleCheck()
-  if(match(getline('.'),'\[x\]') != -1)
-    exe '. s/\[x\]/\[\ \]/g'
-    exe 'let @/="" '
-  elseif(match(getline('.'),'\[.\]') != -1)
-    exe '. s/\[.\]/\[x\]/g'
-    exe 'let @/="" '
-  endif
-endfunction
-autocmd FileType markdown nnoremap <localleader>d :call ToggleCheck() <CR>
-autocmd FileType markdown vnoremap <localleader>d : s/\[.\]/\[x\]/g <CR>
-autocmd FileType markdown nnoremap <localleader>td :. s/-/-\ \[\ \]/g <CR> " change the list to checkbox
-autocmd FileType markdown vnoremap <localleader>td : s/-/-\ \[\ \]/g <CR>
-autocmd FileType markdown nnoremap ]] /^#\+\s<CR> :let @/ = ""<CR>^zz
-autocmd FileType markdown nnoremap [[ ?^#\+\s<CR> :let @/ = ""<CR>^zz
-autocmd FileType markdown vnoremap ]] /^#\+\s<CR>
-autocmd FileType markdown vnoremap [[ ?^#\+\s<CR>
-"autocmd FileType markdown vnoremap ]] : s/^#\{1,5\}\s/#&/g <CR> :let @/ = ""<CR>
-"autocmd FileType markdown vnoremap [[ : s/^##/#/g <CR> :let @/ = ""<CR>
-autocmd Filetype markdown nnoremap <buffer> <leader>! ?```<CR> jV  /```<CR> ky  :!pbpaste>a.c && gcc a.c && ./a.out <CR>
-function! MarkdownLevel()
-       if getline(v:lnum) =~ '^# .*$'
-           return ">1"
-       endif
-       if getline(v:lnum) =~ '^## .*$'
-           return ">2"
-       endif
-       if getline(v:lnum) =~ '^### .*$'
-           return ">3"
-       endif
-       " match - / - [ ] but not - [x] 
-       if getline(v:lnum) =~ '^- \(\[x]\)\@!.*$'
-           return ">7"
-       endif
-       if getline(v:lnum) =~ '^- \[x\] .*$'
-           return ">7"
-       endif
-       " 如果是缩进列表
-       if getline(v:lnum) =~ '^\s\+- .*$'
-           return ">8"
-       endif
-       return "=" 
-endfunction
-au BufEnter *.md setlocal foldexpr=MarkdownLevel()
-au BufEnter *.md setlocal foldmethod=expr
-autocmd BufWritePost *.md mkview
-autocmd BufEnter *.md silent! loadview
 " statusline
 call plug#begin('~/.config/nvim/plugged')
+Plug 'eaglelzy/vim-hexo'
 Plug 'cocopon/iceberg.vim'
 Plug 'freitass/todo.txt-vim'
 Plug 'w0ng/vim-hybrid'
@@ -208,10 +153,8 @@ Plug 'rhysd/accelerated-jk'
 if  has('nvim-0.3.2') 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'],'on' : 'MarkdownPreviewToggle'}
 Plug 'brooth/far.vim',{'on':'Farf'}
 Plug 'preservim/tagbar',{'on':['Tagbar','TagbarOpen']}
-Plug 'ferrine/md-img-paste.vim',{'for':['markdown','vim-plug']}
 Plug 'tpope/vim-surround'
 Plug 'ap/vim-buftabline'
 Plug 'christoomey/vim-tmux-navigator'
@@ -220,6 +163,8 @@ Plug 'rhysd/clever-f.vim'
 Plug 'cohama/lexima.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-expand-region'  "扩大选中范围
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'],'on' : 'MarkdownPreviewToggle'}
+Plug 'ferrine/md-img-paste.vim',{'for':['markdown','vim-plug']}
 "Plug 'preservim/nerdcommenter'
 call plug#end()            " 必须
 "indent-guide
@@ -266,11 +211,6 @@ let g:php_folding = 1
 "accelerated-jk
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
-" markdown-preview
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 0
-let g:mkdp_refresh_slow = 1
-nmap <localleader><C-p> <Plug>MarkdownPreviewToggle
 "Far
 let g:far#default_file_mask = '*'
 nnoremap <silent> <leader>f  :Farf<cr>
@@ -342,7 +282,6 @@ let g:tagbar_type_markdown = {
 "coc
 let g:coc_global_extensions = [ 'coc-sh','coc-translator','coc-explorer','coc-imselect', 'coc-tasks',  'coc-highlight',  'coc-prettier',  'coc-json',  'coc-vimlsp',  'coc-snippets',  'coc-lists' ,  'coc-markdownlint',  'coc-actions',  ]
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-autocmd FileType markdown command! -nargs=0 Fix :CocCommand markdownlint.fixAll
 inoremap <silent><expr> <TAB>
   \ pumvisible() ? "\<C-n>" :
   "\ pumvisible() ? coc#_select_confirm() :
@@ -394,11 +333,6 @@ nnoremap <silent> <leader>f  :Farf<cr>
 vnoremap <silent> <leader>f  :Farf<cr>
 nnoremap <silent> <leader>r  :Farr<cr>
 vnoremap <silent> <leader>r  :Farr<cr>
-"mdip
-autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
-" there are some defaults for image directory and image name, you can change them
-" let g:mdip_imgdir = 'img'
-" let g:mdip_imgname = 'image'
 let g:tmux_navigator_no_mappings = 1
 nnoremap <C-h> :TmuxNavigateLeft<cr>
 nnoremap <C-j> :TmuxNavigateDown<cr>
@@ -413,3 +347,15 @@ let g:javaScript_fold = 1
 let g:sh_fold_enabled= 7
 let g:r_syntax_folding = 1
 let g:php_folding = 1
+"按文件类型加载
+"ftplugin/markdown.vim
+autocmd BufNewFile *.md call HexoTitle()
+function! HexoTitle()
+  if getline(1)==""
+      call setline(1,"---")
+      call setline(2,"title: ".expand('%:r'))
+      call setline(3,"date:" .strftime("%F")."")
+      call setline(4,"tags: ")
+      call setline(5,"---")
+    endif
+endfunction

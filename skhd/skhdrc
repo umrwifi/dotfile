@@ -28,6 +28,7 @@ shift + alt - w : yabai -m window --resize top:0:-100  || yabai -m window --resi
 shift + alt - s : yabai -m window --resize top:0:100 || yabai -m window --resize bottom:0:100
 
 #  float window
+alt - i : yabai -m window --toggle float ;
 shift + alt - up     : yabai -m window --toggle float;yabai -m window --grid 1:1:0:0:1:1
 shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
 shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
@@ -37,12 +38,23 @@ shift + alt - down   : yabai -m window --toggle float;yabai -m window --grid 8:8
 alt - x : yabai -m space --focus recent
 alt - z : yabai -m space --focus prev 
 alt - c : yabai -m space --focus next
-
 shift + alt - x : yabai -m window --space recent
 shift + alt - z : yabai -m window --space prev
 shift + alt - c : yabai -m window --space next 
+
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+ctrl + cmd - 1  : yabai -m window --space 1; yabai -m space --focus 1
+ctrl + cmd - 2  : yabai -m window --space 2; yabai -m space --focus 2
+ctrl + cmd - 3  : yabai -m window --space 3; yabai -m space --focus 3
+
 cmd + alt - d : yabai -m space --destroy
-cmd + alt - n : yabai -m space --create
+shift + cmd - n : yabai -m space --create && \
+                   index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
+                   yabai -m window --space "${index}" 
+                   #&& \
+#                   yabai -m space --focus "${index}"
 
 # display
 alt - n : yabai -m display --focus next 
@@ -59,4 +71,6 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 alt - s : yabai -m config layout stack
 alt - e : yabai -m config layout bsp
 
-shift + cmd - space : osascript ~/mdfind.applescript
+shift + cmd - space : osascript ~/Documents/shells/mac_shell/mdfind.applescript
+
+# https://github.com/koekeishiya/yabai
