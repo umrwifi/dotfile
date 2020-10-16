@@ -81,7 +81,7 @@ let g:clipboard = {
   \ }
 set termguicolors
 let g:python3_host_skip_check=1
-let g:python3_host_prog  = '/usr/local/bin/python3'
+let g:python3_host_prog  = '/usr/local/Cellar/python@3.9/3.9.0/bin/python3' 
 set updatetime=200
 set lazyredraw            " improve scrolling performanc
 set regexpengine=1        " use old regexp engine
