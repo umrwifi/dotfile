@@ -49,7 +49,7 @@ set showmatch
 set laststatus=2
 "set cursorline
 set ruler
-set relativenumber  "相对行号
+set relativenumber  "相对用docker部署安装书签服务行号
 set number "绝对行号，与相对行号同时生效时只显示当前行的绝对行号
 set incsearch  "输入搜索内容时就显示搜索结果
 set backupcopy=yes
@@ -125,16 +125,19 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
 nnoremap	_d "_d
+nnoremap	_p "_p
 nnoremap <leader>b :ls<CR>: bd<C-B>
-nnoremap <leader>ww :tabedit  ~/Documents/wiki/index.md <CR> :cd '%:h' <CR>
-nmap gtd :e ~/Documents/wiki/dpca/todo.md<CR>
+nnoremap <leader>ww :e ~/Documents/wiki/index.md <CR> :cd '%:h' <CR>
+nnoremap gtd :e ~/Documents/wiki/dpca/todo.md<CR>
+nnoremap ]t gt
+nnoremap [t Gt
 fun! Redraw()
   let l = winline()
   let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
   return cmd
 endf
 nnoremap <expr>H Redraw()
-noremap ,,  :e ~/.config/nvim/init.vim <CR>
+noremap <leader><leader>  :tabe  ~/.config/nvim/init.vim <CR>
 vnoremap < <gv
 vnoremap > >gv
 vnoremap <C-j> :m '>+1<CR>gv=gv
@@ -143,12 +146,12 @@ nnoremap <leader>! : !gcc % && ./a.out <CR>
 nmap <expr> <silent> <leader>d len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
 " statusline
 call plug#begin('~/.config/nvim/plugged')
-Plug 'eaglelzy/vim-hexo'
+Plug 'umrwifi/vim-hexo'
 Plug 'cocopon/iceberg.vim'
 Plug 'freitass/todo.txt-vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'rhysd/vim-gfm-syntax'
-Plug 'Konfekt/FastFold',{'for':['markdown']}
+"Plug 'Konfekt/FastFold',{'for':['markdown']}
 Plug 'rhysd/accelerated-jk'
 if  has('nvim-0.3.2') 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -167,6 +170,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'ferrine/md-img-paste.vim',{'for':['markdown','vim-plug']}
 "Plug 'preservim/nerdcommenter'
 call plug#end()            " 必须
+"vim-hexo
+let g:hexoRootPath='/Users/admin/hexo/'
 "indent-guide
 "let g:indent_guides_enable_on_vim_startup = 1
 "clever-f
@@ -176,6 +181,7 @@ function! s:SetHighlightings()
     "highlight Pmenu guibg=gray guifg=white
     "hi PmenuSel guibg=#6B8E30  guifg=white
     "hi default link BufTabLineActive  TabLine
+    highlight LineNr guifg=#72787e
 endfunction
 autocmd ColorScheme * call s:SetHighlightings()
 colorscheme hybrid
@@ -319,13 +325,17 @@ call CocAction('runCommand', 'explorer.doAction', 0, ['expandable?', 'expand', '
 "exe "vs ". g:path
 endfunction
 function! Explorerinit()
-nnoremap <buffer><CR> :call Explorer_preview()<CR>
+  nnoremap <buffer><CR> :call Explorer_preview()<CR>
+  set winblend=50
+  nmap <buffer> <Leader>fg :call <SID>coc_list_current_dir('-I grep')<CR>
+  nmap <buffer> <Leader>fG :call <SID>coc_list_current_dir('-I grep -regex')<CR>
+  nmap <buffer> <C-p> :call <SID>coc_list_current_dir('files')<CR>
 endfunction
 autocmd FileType coc-explorer call Explorerinit()
 autocmd InsertEnter let g:path=""
 "coclist
-noremap <C-P> :CocList --number-select --auto-preview --ignore-case files<CR>
-noremap <leader><C-P> :CocList --number-select --ignore-case 
+noremap <C-P> :CocList --number-select --ignore-case files <CR>
+noremap <leader><C-P> :CocList --number-select --ignore-case <CR> 
 nnoremap <leader>tg :CocList --auto-preview outline <CR>
 "far
 let g:far#default_file_mask = '*'
@@ -357,5 +367,6 @@ function! HexoTitle()
       call setline(3,"date:" .strftime("%F")."")
       call setline(4,"tags: ")
       call setline(5,"---")
+      exe  "normal G"
     endif
 endfunction

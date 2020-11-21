@@ -44,13 +44,13 @@ function! MarkdownLevel()
 endfunction
 au BufEnter *.md setlocal foldexpr=MarkdownLevel()
 au BufEnter *.md setlocal foldmethod=expr
-autocmd BufWritePost *.md mkview
-autocmd BufEnter *.md silent! loadview
+autocmd BufWritePost todo.md mkview
+autocmd BufEnter todo.md silent! loadview
 " markdown-preview
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
 let g:mkdp_refresh_slow = 1
-nmap gV <Plug>MarkdownPreviewToggle
+nmap <localleader><C-p> <Plug>MarkdownPreviewToggle
 "mdip
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 " there are some defaults for image directory and image name, you can change them

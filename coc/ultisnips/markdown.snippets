@@ -43,15 +43,6 @@ snippet 'h5' "heading5" Ab
 ##### 
 endsnippet
 
-snippet 'task' "markdown gtd task" Ab
-## $1
-
-$2
-
-### DONE
-
-endsnippet
-
 # Link 
 snippet url "markdown url"
 <${1:${visual:Url}}>
@@ -87,16 +78,29 @@ endsnippet
 snippet code "codeblock with lan" b
 \`\`\`${1:${visual:shell}}
   ${2:`!p
-snip.rv = snip.v.text.strip("*")` }}
+snip.rv = snip.v.text.strip("*")
+`
+}
 \`\`\`
-$0
 endsnippet
 
 # python visual
 snippet d "Description" 
 if(${1:variable}){
 ${`!p
-snip.rv = snip.v.text.strip("*")`}
+snip.rv = snip.v.text.strip("*")
+`
+}
+}
+endsnippet
+
+# caculater
+snippet words "caculater typing speed" 
+${1:120} in ${2:20} is
+${`!p
+snip.rv = float(t[1]) / float(t[2])
+#snip.rv = fraction(t[1],t[2])
+`
 }
 endsnippet
 
@@ -115,12 +119,3 @@ endsnippet
 #				  return "ERR"
 #endglobal
 
-# caculater
-snippet words "caculater typing speed" 
-${1:120} in ${2:20} is
-${`!p
-snip.rv = float(t[1]) / float(t[2])
-#snip.rv = fraction(t[1],t[2])
-`
-}
-endsnippet

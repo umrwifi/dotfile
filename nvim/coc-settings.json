@@ -8,14 +8,15 @@
   "imselect.defaultInput": "com.apple.keylayout.ABC",
   "explorer.width": 30,
   "explorer.previewAction.onHover": false,
-  "explorer.keyMappings": {
+  "explorer.file.autoReveal": true,
+  "explorer.keyMappings.global": {
     "i": false,
     "gk": "expandablePrev",
     "gj": "expandableNext",
     "*": "toggleSelection",
     "<tab>": "actionMenu",
     "h": "collapse",
-    "l": ["expandable?", "expand", "open"],
+    "l": "expand",
     "J": ["toggleSelection", "nodeNext"],
     "K": ["toggleSelection", "nodePrev"],
     "gl": "expandRecursive",
