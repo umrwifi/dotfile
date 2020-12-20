@@ -10,3 +10,15 @@ coc/snippets-mru
 qBittorrent/
 karabiner/automatic_backups/
 menus/
+coc/commands
+coc/explorer-actions
+coc/list-commands-history.json
+coc/list-explorerActions-history.json
+coc/list-explorerFiles-history.json
+coc/list-files-history.json
+coc/list-lists-history.json
+coc/list-location-history.json
+coc/list-outline-history.json
+coc/lists
+configstore/update-notifier-npm.json
+nvim/.netrwhist

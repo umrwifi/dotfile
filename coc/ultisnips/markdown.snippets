@@ -10,18 +10,10 @@
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
 # List
-snippet 'list' "markdown list" b
-- 
-endsnippet
 
-snippet 'todo' "checkbox" b
-- [ ] 
-endsnippet
-
-snippet 'done' "checkbox" e
+snippet '<' "checkbox" e
 - [x] 
 endsnippet
-
 # Title
 snippet 'h1' "heading1" Ab
 # 
@@ -45,17 +37,17 @@ endsnippet
 
 # Link 
 snippet url "markdown url"
-<${1:${visual:Url}}>
+<${1: `!p snip.rv = snip.v.text.strip("*")`}>
 $0
 endsnippet
 
 snippet link  "markdown link"
-[${1:${visual:Link Title}}](${2:${visual:URL}})
+[${1:${visual:Link Title}}](${2:`!p snip.rv = snip.v.text.strip("*")`})
 $0
 endsnippet
 
 snippet img  "markdown image"
-![${1:${visual:Image Title}}](${2:${visual:Image Source}})
+![${1:${visual:Image Title}}](${2:`!p snip.rv = snip.v.text.strip("*")`})
 $0
 endsnippet
 
@@ -67,16 +59,22 @@ snippet hr
 $0
 endsnippet
 
+# table
 snippet table "markdown table"
 | ${1:${visual:Column}} | ${2:${visual:Column}} |$7
 | ------ | ------ |
 | ${3:${visual:Cell}}   | ${4:${visual:Cell}}   |$8
-| ${5:${visual:Cell}}   | ${6:${visual:Cell}}   |$9 
-$0
+| ${5:${visual:Cell}}   | ${6:${visual:Cell}}   |$0 
+endsnippet
+
+code
+
+snippet backquote  "single code block"
+\`${1:`!p snip.rv = snip.v.text.strip("*")`}\`$0
 endsnippet
 
 snippet code "codeblock with lan" b
-\`\`\`${1:${visual:shell}}
+\`\`\`${1:${visual:bash}}
   ${2:`!p
 snip.rv = snip.v.text.strip("*")
 `
