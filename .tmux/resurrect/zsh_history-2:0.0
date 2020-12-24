@@ -1,9 +1,0 @@
-
-*************************************************************
- Amazon kindlegen(MAC OSX) V2.9 build 1028-0897292 
- A command line e-book compiler 
- Copyright Amazon.com and its Affiliates 2014 
-*************************************************************
-
-Info:I9005:option: -c0: No compression
-Error(kindlegen):E30010: Unsupported argument  -lLn
