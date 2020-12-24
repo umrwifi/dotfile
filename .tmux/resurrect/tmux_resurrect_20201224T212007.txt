@@ -1,0 +1,19 @@
+pane	0-proxy	1	:clash	1	:*	1	:/Users/admin/.config/clash	1	zsh	:
+pane	0-proxy	1	:clash	1	:*	2	:/Users/admin	0	zsh	:
+pane	1-local	1	:zsh	1	:*	1	:/Users/admin	1	zsh	:nvim .zshrc
+nvim .zshrc
+nvim .zshrc
+pane	1-local	2	:todo	0	:-	1	:/Users/admin/Documents/todo	0	nvim	:nvim dev.md
+pane	1-local	2	:todo	0	:-	2	:/Users/admin/Documents/todo	1	zsh	:
+pane	1-local	3	:nvim	0	:	1	:/Users/admin/Documents/Javascript	1	zsh	:
+pane	1-local	4	:zsh	0	:	1	:/Users/admin/Downloads	1	zsh	:
+pane	2-yabai	1	:skhd	0	:-	1	:/Users/admin/.config/skhd	1	zsh	:
+pane	2-yabai	2	:yabai	1	:*	1	:/Users/admin/.config/yabai	1	zsh	:
+window	0-proxy	1	1	:*	e227,156x68,0,0[156x34,0,0,1,156x33,0,35,2]
+window	1-local	1	1	:*	d2c0,156x68,0,0,3
+window	1-local	2	0	:-	b15d,156x68,0,0[156x34,0,0,4,156x33,0,35,11]
+window	1-local	3	0	:	d2c2,156x68,0,0,5
+window	1-local	4	0	:	d2c3,156x68,0,0,6
+window	2-yabai	1	0	:-	d2c4,156x68,0,0,7
+window	2-yabai	2	1	:*	d2c6,156x68,0,0,9
+state	1-local	2-yabai

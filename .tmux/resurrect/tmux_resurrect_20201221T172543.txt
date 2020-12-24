@@ -1,0 +1,17 @@
+pane	local	1	:zsh	0	:	1	:/Users/admin	1	zsh	:
+pane	local	2	:nvim	0	:	1	:/Users/admin/Documents/Javascript	1	zsh	:
+pane	local	3	:zsh	0	:-	1	:/Users/admin/Documents/todo	1	zsh	:
+pane	local	4	:ssh	1	:*	1	:/Users/admin	1	ssh	:ssh umr@192.168.50.200
+pane	proxy	1	:clash	1	:*	1	:/Users/admin/.config/clash	1	zsh	:
+pane	proxy	1	:clash	1	:*	2	:/Users/admin	0	zsh	:
+pane	yabai	1	:skhd	1	:*	1	:/Users/admin/.config/skhd	1	zsh	:
+pane	yabai	2	:yabai	0	:-	1	:/Users/admin/.config/yabai	1	zsh	:
+pane	yabai	2	:yabai	0	:-	2	:/Users/admin/.config/yabai	0	zsh	:
+window	local	1	0	:	6a12,158x68,0,0,13
+window	local	2	0	:	d3c1,158x68,0,0,4
+window	local	3	0	:-	d3c2,158x68,0,0,5
+window	local	4	1	:*	6a0f,158x68,0,0,10
+window	proxy	1	1	:*	4c02,103x48,0,0[103x24,0,0,1,103x23,0,25,12]
+window	yabai	1	1	:*	cc03,103x48,0,0,6
+window	yabai	2	0	:-	ab07,103x48,0,0[103x34,0,0,8,103x13,0,35,9]
+state	local	proxy

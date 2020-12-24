@@ -8,8 +8,11 @@
     "json"
   ],
   "imselect.defaultInput": "com.apple.keylayout.ABC",
+  "list.source.files.defaultOptions": [
+    "--number-select"
+  ],
   "explorer.width": 30,
-  "explorer.previewAction.onHover": true,
+  "explorer.previewAction.onHover": false,
   "explorer.file.autoReveal": true,
   "explorer.keyMappings.global": {
     "i": false,

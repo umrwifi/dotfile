@@ -1,0 +1,17 @@
+pane	proxy	1	:clash	1	:*	1	:/Users/admin/.config/clash	1	zsh	:
+pane	proxy	2	:todo	0	:-	1	:/Users/admin/Documents/hack	1	zsh	:
+pane	todo	1	:todo	1	:*	1	:/Users/admin/Documents	1	nvim	:nvim todo/todo.md
+pane	todo	2	:zsh	0	:-	1	:/Users/admin	1	zsh	:
+pane	yabai	1	:skhd	0	:-	1	:/Users/admin/.config/skhd	1	nvim	:nvim skhdrc
+pane	yabai	2	:spacebar	0	:	1	:/Users/admin/Library/Application\ Support/Übersicht/widgets/simple-bar	1	nvim	:nvim lib
+pane	yabai	3	:yabai	1	:*	1	:/Users/admin/.config/yabai	0	nvim	:nvim yabairc
+nvim yabairc
+pane	yabai	3	:yabai	1	:*	2	:/Users/admin/.config/yabai	1	zsh	:
+window	proxy	1	1	:*	d041,155x77,0,0,4
+window	proxy	2	0	:-	d042,155x77,0,0,5
+window	todo	1	1	:*	6571,313x76,0,0,12
+window	todo	2	0	:-	ca80,313x76,0,0,3
+window	yabai	1	0	:-	be23,203x54,0,0,6
+window	yabai	2	0	:	be24,203x54,0,0,7
+window	yabai	3	1	:*	25bd,203x54,0,0[203x38,0,0,18,203x15,0,39,19]
+state	todo	yabai

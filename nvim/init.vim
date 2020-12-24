@@ -31,10 +31,13 @@ set conceallevel=2
 set ofu=syntaxcomplete#Complete " 自动补全代码
 "set synmaxcol=1000
 set infercase
-set nosplitright nosplitbelow
+set splitright
+"set nosplitright 
+set nosplitbelow
 set nocompatible
 set history=200
 set foldopen=hor
+set foldlevel=99
 set path+=**
 set timeoutlen=1000 ttimeoutlen=0
 set mouse=a
@@ -91,45 +94,45 @@ nmap [b :bnext<CR>
 nmap @b :bprevious<CR>
 nmap <leader>q :xa<CR>
 nmap <RightMouse> :tag <CR>
+nmap <leader>b :ls<CR> :b 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-nnoremap <Down> <C-e>j
-nnoremap <Up> <C-y>k
+nnoremap <Down> 4<C-e>4j
+nnoremap <Up> 4<C-y>4k
 fun! Redraw()
   let l = winline()
   let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
   return cmd
 endf
 "nnoremap <expr>zz Redraw()
-noremap <leader>$  :e $MYVIMRC <CR> :sleep 100m <CR>:CocCommand explorer --width 30 --no-focus <CR>
+noremap <leader>$  :e $MYVIMRC <CR> :cd %:p:h <cr>
+cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 vnoremap < <gv
 vnoremap > >gv
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 nnoremap <leader>gc : !gcc % && ./a.out <CR>
 nmap <expr> <silent> <leader>d len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
-
 call plug#begin('~/.config/nvim/plugged')
 "移动
-" must after easymotion plugin
+Plug 'deton/jasegment.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'rhysd/clever-f.vim'
-Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/goyo.vim',{'on':'Goyo'}
 Plug 'rhysd/accelerated-jk'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jianshanbushishan/vim-PYSearch',{'on':'PYSearch'}
 Plug 'umrwifi/vim-hexo'
-Plug 't184256/vim-boring'
-Plug 'morhetz/gruvbox'
+Plug 't184256/vim-boring'  "theme
+Plug 'morhetz/gruvbox'  "theme
 "语法补全
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'alvan/vim-closetag'
-"Plug 'ferrine/md-img-paste.vim',{'for':['markdown','vim-plug']}
 "Plug 'ap/vim-buftabline'
 "Plug 'cohama/lexima.vim'
 call plug#end()            " 必须
+"wordmotion
 "easyalign
 au FileType markdown vmap <Bslash><Bslash> :EasyAlign*<Bar><Enter>
 "vim-hexo
@@ -140,14 +143,7 @@ let g:hexoRootPath='/Users/admin/hexo/'
 let g:clever_f_use_migemo = 1 
 let g:clever_f_mark_direct = 1
 let g:clever_f_show_prompt = 1
-"colorscheme
-function! s:SetHighlightings()
-    highlight Pmenu guibg=gray guifg=white
-    hi PmenuSel guibg=#6B8E30  guifg=white
-    hi default link BufTabLineActive  TabLine
-    highlight LineNr guifg=#72787e
-endfunction
-"autocmd ColorScheme * call s:SetHighlightings()
+
 colorscheme gruvbox
 inoremap <expr> <cr>  pumvisible() ? complete_info()["selected"] != "-1" ?
                  \ "\<C-y>"  : "\<c-e>" . '<CR>':  '<CR>'
@@ -162,18 +158,31 @@ inoremap <expr> <cr>  pumvisible() ? complete_info()["selected"] != "-1" ?
 "call lexima#add_rule({'char': '<CR>' , 'at': '\%#>', 'input': '<CR>','input_after':'<CR>', 'filetype': 'markdown'})
 
 "buftabline
-let g:buftabline_show = 2
-let g:buftabline_numbers = 2
-let g:buftabline_indicators = 1
-let g:buftabline_separators = 0
-nmap 1<leader> <Plug>BufTabLine.Go(1)
+"let g:buftabline_show = 2
+"let g:buftabline_numbers = 2
+"let g:buftabline_indicators = 1
+"let g:buftabline_separators = 0
+"nmap 1<leader> <Plug>BufTabLine.Go(1)
 "accelerated-jk
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
 "Far
 let g:far#default_file_mask = '*'
 "coc
-let g:coc_global_extensions = ['coc-html','coc-sh','coc-translator','coc-explorer','coc-imselect', 'coc-tasks',  'coc-highlight',  'coc-json',  'coc-vimlsp',  'coc-snippets',  'coc-lists' ,  'coc-markdownlint',  'coc-actions',  ]
+let g:coc_global_extensions = [
+      \'coc-html'
+      \,'coc-sh'
+      \,'coc-translator'
+      \,'coc-imselect'
+      \,'coc-tasks'
+      \,'coc-json'
+      \,'coc-vimlsp'
+      \,'coc-snippets'
+      \,'coc-lists' 
+      \,'coc-markdownlint'
+      \,'coc-actions'
+      \, ]
+
 inoremap <silent><expr> <TAB>
   \ pumvisible() ? "\<C-n>" :
   "\ pumvisible() ? coc#_select_confirm() :
@@ -221,8 +230,8 @@ endfunction
 autocmd FileType coc-explorer call Explorerinit()
 autocmd InsertEnter let g:path=""
 "coclist
-noremap <C-P> :CocList --number-select --ignore-case files <CR>
-noremap <leader><C-P> :CocList --number-select --ignore-case <CR> 
+noremap <C-P> :CocList --ignore-case files <CR>
+noremap <leader><C-P> :CocList  --ignore-case <CR> 
 nnoremap <leader>tg :CocList --auto-preview outline <CR>
 noremap <leader>f :CocList  grep <CR>
 
@@ -230,6 +239,7 @@ noremap <leader>f :CocList  grep <CR>
 map S <Nop>
 vmap  S"  s""<LEFT><C-r>"<ESC>
 vmap  S'  s''<LEFT><C-r>"<ESC>
+vmap  S`  s`'<LEFT><C-r>"<ESC>
 vmap  S(  s()<LEFT><C-r>"<ESC>
 vmap  S{  s{}<LEFT><C-r>"<ESC>
 vmap  S}} s{{}}<LEFT><LEFT><C-r>"<ESC>
@@ -241,29 +251,12 @@ vmap  S]]  s[[]]<LEFT><LEFT><C-r>"<ESC>
 "delete surround
 nmap  d'  di'"_da'P
 nmap  d"  di""_da"P
+nmap  d`  di``_da`P
 nmap  dt  dit"_datP
 nmap  d(  di("_datP
 nmap  d<  di("_datP
 nmap  d{  di{"_datP
 
-"markdown
-autocmd BufNewFile *.md call HexoTitle()
-au FileType markdown nmap <leader>p  :!open -a "Microsoft Edge" %:p  <cr>
-"quick look
-nmap gp :!killall qlmanage <cr> :!qlmanage -p %:p  &> /dev/null & <cr>  
-autocmd BufRead *.md !open -a "Microsoft Edge" %:p & >/dev/null &
-function! HexoTitle()
-  if getline(1)==""
-      call setline(1,"---")
-      call setline(2,"title: ".expand('%:r'))
-      call setline(3,"date:" .strftime("%F")."")
-      call setline(4,"tags: ")
-      call setline(5,"---")
-      exe  "normal G"
-    endif
-endfunction
-command! Sum :r!awk -F '|' '{print; sum+=$4}; END {print "Total: "sum}'
 "inoremap <silent><expr> <c-q> coc#refresh()
 " PYsearch
 let g:PYSearchOnlyChinese = 0
-map ? :PYSearch <cr>

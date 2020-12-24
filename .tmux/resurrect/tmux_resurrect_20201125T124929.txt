@@ -1,0 +1,34 @@
+pane	0	1	:zsh	1	:*	1	:/Users/admin/Documents/hack	1	zsh	:
+pane	0	1	:zsh	1	:*	1	:/Users/admin/Documents/hack	1	zsh	:
+pane	local	1	:ybai	0	:	1	:/Users/admin/.config/skhd	0	zsh	:
+pane	local	1	:ybai	0	:	1	:/Users/admin/.config/skhd	0	zsh	:
+pane	local	1	:ybai	0	:	2	:/Users/admin/Downloads	1	zsh	:
+pane	local	1	:ybai	0	:	2	:/Users/admin/Downloads	1	zsh	:
+pane	local	2	:clash	0	:	1	:/Users/admin/.config/clash	1	zsh	:
+pane	local	2	:clash	0	:	1	:/Users/admin/.config/clash	1	zsh	:
+pane	local	3	:zsh	0	:-	1	:/Users/admin/Documents/hack	1	zsh	:
+pane	local	3	:zsh	0	:-	1	:/Users/admin/Documents/hack	1	zsh	:
+pane	local	4	:nas	1	:*	1	:/Users/admin/.config/skhd	1	ssh	:ssh root@192.168.50.200
+pane	local	4	:nas	1	:*	1	:/Users/admin/.config/skhd	1	ssh	:ssh root@192.168.50.200
+pane	local	4	:nas	1	:*	2	:/Volumes	0	zsh	:
+pane	local	4	:nas	1	:*	2	:/Volumes	0	zsh	:
+pane	redhat	1	:doc	0	:#-	1	:/Users/admin/Documents/hack	1	nvim	:nvim rhcsa.md
+pane	redhat	1	:doc	0	:#-	1	:/Users/admin/Documents/hack	1	nvim	:nvim rhcsa.md
+pane	redhat	2	:zsh	1	:*	1	:/Users/admin/Downloads	1	zsh	:
+pane	redhat	2	:zsh	1	:*	1	:/Users/admin/Downloads	1	zsh	:
+window	0	1	1	:*	c41f,78x37,0,0,2
+window	local	1	0	:	fcef,158x37,0,0{78x37,0,0,4,79x37,79,0,6}
+window	local	2	0	:	c9c5,158x37,0,0,8
+window	local	3	0	:-	650f,158x37,0,0,10
+window	0	1	1	:*	c41f,78x37,0,0,2
+window	local	4	1	:*	ac27,158x37,0,0{79x37,0,0,20,78x37,80,0,21}
+window	local	1	0	:	fcef,158x37,0,0{78x37,0,0,4,79x37,79,0,6}
+window	redhat	1	0	:#-	6512,158x37,0,0,13
+window	local	2	0	:	c9c5,158x37,0,0,8
+window	redhat	2	1	:*	6516,158x37,0,0,17
+window	local	3	0	:-	650f,158x37,0,0,10
+window	local	4	1	:*	ac27,158x37,0,0{79x37,0,0,20,78x37,80,0,21}
+window	redhat	1	0	:#-	6512,158x37,0,0,13
+window	redhat	2	1	:*	6516,158x37,0,0,17
+state	local	0
+state	local	0

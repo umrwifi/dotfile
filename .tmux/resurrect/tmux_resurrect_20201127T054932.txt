@@ -1,0 +1,30 @@
+pane	local	1	:zsh	1	:*	1	:/Users/admin/Downloads	0	nvim	:nvim /Users/admin/Documents/shells/md.sh
+pane	local	1	:zsh	1	:*	1	:/Users/admin/Downloads	0	nvim	:nvim /Users/admin/Documents/shells/md.sh
+pane	local	1	:zsh	1	:*	2	:/Users/admin	1	zsh	:
+pane	local	1	:zsh	1	:*	2	:/Users/admin	1	zsh	:
+pane	local	2	:yabai	0	:	1	:/Users/admin/.config/skhd	0	zsh	:
+pane	local	2	:yabai	0	:	1	:/Users/admin/.config/skhd	0	zsh	:
+pane	local	2	:yabai	0	:	2	:/Users/admin/.config/skhd	1	zsh	:
+pane	local	2	:yabai	0	:	2	:/Users/admin/.config/skhd	1	zsh	:
+pane	local	3	:clash	0	:#	1	:/Users/admin/.config/clash	1	nvim	:nvim my.yaml
+pane	local	3	:clash	0	:#	1	:/Users/admin/.config/clash	1	nvim	:nvim my.yaml
+pane	local	4	:zsh	0	:#-	1	:/Users/admin/Documents/wiki	1	nvim	:nvim
+pane	local	4	:zsh	0	:#-	1	:/Users/admin/Documents/wiki	1	nvim	:nvim
+pane	redhat	1	:doc	1	:*	1	:/Users/admin/Documents/hack	1	zsh	:
+pane	redhat	1	:doc	1	:*	1	:/Users/admin/Documents/hack	1	zsh	:
+pane	redhat	2	:zsh	0	:-	1	:/Users/admin/Downloads	1	zsh	:
+pane	redhat	2	:zsh	0	:-	1	:/Users/admin/Downloads	1	zsh	:
+window	local	1	1	:*	3036,103x54,0,0{51x54,0,0,27,51x54,52,0,28}
+window	local	2	0	:	ac04,103x54,0,0{49x54,0,0,20,53x54,50,0,21}
+window	local	3	0	:#	df31,103x54,0,0,22
+window	local	4	0	:#-	bdff,103x54,0,0,2
+window	redhat	1	1	:*	5f33,103x54,0,0,14
+window	local	1	1	:*	3036,103x54,0,0{51x54,0,0,27,51x54,52,0,28}
+window	redhat	2	0	:-	5f35,103x54,0,0,16
+window	local	2	0	:	ac04,103x54,0,0{49x54,0,0,20,53x54,50,0,21}
+window	local	3	0	:#	df31,103x54,0,0,22
+window	local	4	0	:#-	bdff,103x54,0,0,2
+window	redhat	1	1	:*	5f33,103x54,0,0,14
+window	redhat	2	0	:-	5f35,103x54,0,0,16
+state	local	redhat
+state	local	redhat

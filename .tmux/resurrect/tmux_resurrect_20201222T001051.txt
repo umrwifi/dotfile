@@ -1,0 +1,19 @@
+pane	local	1	:zsh	0	:	1	:/Users/admin	1	zsh	:
+pane	local	2	:nvim	0	:	1	:/Users/admin/Documents/Javascript	1	zsh	:
+pane	local	3	:ssh	0	:-	1	:/Users/admin	1	ssh	:ssh umr@192.168.50.200
+pane	local	4	:nvim	1	:*	1	:/Users/admin/Documents/todo	0	zsh	:
+pane	local	4	:nvim	1	:*	2	:/Users/admin/.config/nvim	1	nvim	:nvim /Users/admin/.config/nvim/zhutf8.vim
+pane	local	4	:nvim	1	:*	3	:/Users/admin/.config/nvim	0	nvim	:nvim utf8.vim
+pane	proxy	1	:clash	1	:*	1	:/Users/admin/.config/clash	1	zsh	:
+pane	proxy	1	:clash	1	:*	2	:/Users/admin	0	zsh	:
+pane	yabai	1	:skhd	1	:*	1	:/Users/admin/.config/skhd	1	zsh	:
+pane	yabai	2	:yabai	0	:-	1	:/Users/admin/.config/yabai	1	zsh	:
+pane	yabai	2	:yabai	0	:-	2	:/Users/admin/.config/yabai	0	zsh	:
+window	local	1	0	:	6872,313x68,0,0,13
+window	local	2	0	:	d081,313x68,0,0,4
+window	local	3	0	:-	686f,313x68,0,0,10
+window	local	4	1	:*	23e0,313x68,0,0{156x68,0,0,16,156x68,157,0[156x34,157,0,21,156x33,157,35,24]}
+window	proxy	1	1	:*	e6d2,313x68,0,0[313x34,0,0,1,313x33,0,35,12]
+window	yabai	1	1	:*	d083,313x68,0,0,6
+window	yabai	2	0	:-	e0a8,313x68,0,0[313x44,0,0,8,313x23,0,45,9]
+state	local	proxy

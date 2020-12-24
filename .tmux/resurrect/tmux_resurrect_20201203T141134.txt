@@ -1,0 +1,42 @@
+pane	0	1	:zsh	1	:*	1	:/Users/admin	1	zsh	:
+pane	0	1	:zsh	1	:*	1	:/Users/admin	1	zsh	:
+pane	local	1	:yabai	0	:#	1	:/Users/admin/.config/yabai	1	zsh	:
+pane	local	1	:yabai	0	:#	1	:/Users/admin/.config/yabai	1	zsh	:
+pane	local	1	:yabai	0	:#	2	:/Users/admin/.config/skhd	0	nvim	:nvim skhdrc
+pane	local	1	:yabai	0	:#	2	:/Users/admin/.config/skhd	0	nvim	:nvim skhdrc
+pane	local	2	:clash	0	:#	1	:/Users/admin/Documents/wiki/hack	0	zsh	:
+pane	local	2	:clash	0	:#	1	:/Users/admin/Documents/wiki/hack	0	zsh	:
+pane	local	2	:clash	0	:#	2	:/Users/admin/.config/clash	1	zsh	:
+pane	local	2	:clash	0	:#	2	:/Users/admin/.config/clash	1	zsh	:
+pane	local	2	:clash	0	:#	3	:/Users/admin	0	zsh	:
+pane	local	2	:clash	0	:#	3	:/Users/admin	0	zsh	:
+pane	local	3	:todo	0	:-	1	:/Users/admin/Documents/wiki	1	zsh	:nvim
+pane	local	3	:todo	0	:-	1	:/Users/admin/Documents/wiki	1	zsh	:nvim
+pane	local	4	:	1	:*	1	:/Users/admin	0	nvim	:nvim .bashrc
+nvim genplaylist.sh
+pane	local	4	:	1	:*	1	:/Users/admin	0	nvim	:nvim .bashrc
+nvim genplaylist.sh
+pane	local	4	:	1	:*	2	:/Users/admin	1	zsh	:nvim gemero.sh
+pane	local	4	:	1	:*	2	:/Users/admin	1	zsh	:nvim gemero.sh
+pane	local	4	:	1	:*	3	:/Volumes/nfs/ero	0	zsh	:
+pane	local	4	:	1	:*	3	:/Volumes/nfs/ero	0	zsh	:
+pane	redhat	1	:doc	1	:*	1	:/Users/admin/Documents/wiki/hack	1	zsh	:
+pane	redhat	1	:doc	1	:*	1	:/Users/admin/Documents/wiki/hack	1	zsh	:
+pane	redhat	2	:zsh	0	:#-	1	:/Users/admin/Downloads	1	zsh	:
+pane	redhat	2	:zsh	0	:#-	1	:/Users/admin/Downloads	1	zsh	:
+window	0	1	1	:*	bc7d,100x54,0,0,0
+window	0	1	1	:*	bc7d,100x54,0,0,0
+window	local	1	0	:#	6da5,155x38,0,0{77x38,0,0,25,77x38,78,0,27}
+window	local	1	0	:#	6da5,155x38,0,0{77x38,0,0,25,77x38,78,0,27}
+window	local	2	0	:#	288f,155x38,0,0{78x38,0,0[78x19,0,0,8,78x18,0,20,22],76x38,79,0,23}
+window	local	2	0	:#	288f,155x38,0,0{78x38,0,0[78x19,0,0,8,78x18,0,20,22],76x38,79,0,23}
+window	local	3	0	:-	6655,155x38,0,0,16
+window	local	3	0	:-	6655,155x38,0,0,16
+window	local	4	1	:*	260c,155x38,0,0{77x38,0,0,14,77x38,78,0[77x19,78,0,30,77x18,78,20,32]}
+window	local	4	1	:*	260c,155x38,0,0{77x38,0,0,14,77x38,78,0[77x19,78,0,30,77x18,78,20,32]}
+window	redhat	1	1	:*	6257,155x55,0,0,18
+window	redhat	1	1	:*	6257,155x55,0,0,18
+window	redhat	2	0	:#-	e24f,155x55,0,0,20
+window	redhat	2	0	:#-	e24f,155x55,0,0,20
+state	local	
+state	local	

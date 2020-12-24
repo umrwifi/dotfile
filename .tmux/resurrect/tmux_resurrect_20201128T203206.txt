@@ -1,0 +1,34 @@
+pane	local	1	:yabai	0	:	1	:/Users/admin/.config/yabai	0	zsh	:
+pane	local	1	:yabai	0	:	1	:/Users/admin/.config/yabai	0	zsh	:
+pane	local	1	:yabai	0	:	2	:/Users/admin/.config/skhd	1	zsh	:
+pane	local	1	:yabai	0	:	2	:/Users/admin/.config/skhd	1	zsh	:
+pane	local	2	:clash	1	:*	1	:/Users/admin/.config/clash	0	nvim	:nvim my.yaml
+pane	local	2	:clash	1	:*	1	:/Users/admin/.config/clash	0	nvim	:nvim my.yaml
+pane	local	2	:clash	1	:*	2	:/Users/admin/.config/clash	0	zsh	:
+pane	local	2	:clash	1	:*	2	:/Users/admin/.config/clash	0	zsh	:
+pane	local	2	:clash	1	:*	3	:/Users/admin/Documents/hack	1	expect	:/usr/bin/expect ./umrwifi.top.sh
+pane	local	2	:clash	1	:*	3	:/Users/admin/Documents/hack	1	expect	:/usr/bin/expect ./umrwifi.top.sh
+pane	local	2	:clash	1	:*	4	:/Users/admin/Documents/hack	0	nvim	:nvim 科学上网.md
+pane	local	2	:clash	1	:*	4	:/Users/admin/Documents/hack	0	nvim	:nvim 科学上网.md
+pane	local	3	:todo	0	:#	1	:/Users/admin/Documents/wiki	1	nvim	:nvim
+pane	local	3	:todo	0	:#	1	:/Users/admin/Documents/wiki	1	nvim	:nvim
+pane	local	4	:zsh	0	:-	1	:/Volumes/nfs	1	zsh	:
+pane	local	4	:zsh	0	:-	1	:/Volumes/nfs	1	zsh	:
+pane	redhat	1	:doc	1	:*	1	:/Users/admin/Documents/hack	1	zsh	:
+pane	redhat	1	:doc	1	:*	1	:/Users/admin/Documents/hack	1	zsh	:
+pane	redhat	2	:zsh	0	:-	1	:/Users/admin/Downloads	1	zsh	:
+pane	redhat	2	:zsh	0	:-	1	:/Users/admin/Downloads	1	zsh	:
+window	local	1	0	:	6d75,100x55,0,0{47x55,0,0,20,52x55,48,0,21}
+window	local	2	1	:*	73e5,100x55,0,0{49x55,0,0[49x29,0,0,22,49x25,0,30,34],50x55,50,0[50x22,50,0,31,50x32,50,23,33]}
+window	local	3	0	:#	c07f,100x55,0,0,2
+window	local	4	0	:-	6077,100x55,0,0,37
+window	redhat	1	1	:*	6103,202x55,0,0,14
+window	redhat	2	0	:-	6105,202x55,0,0,16
+window	local	1	0	:	6d75,100x55,0,0{47x55,0,0,20,52x55,48,0,21}
+window	local	2	1	:*	73e5,100x55,0,0{49x55,0,0[49x29,0,0,22,49x25,0,30,34],50x55,50,0[50x22,50,0,31,50x32,50,23,33]}
+window	local	3	0	:#	c07f,100x55,0,0,2
+window	local	4	0	:-	6077,100x55,0,0,37
+window	redhat	1	1	:*	6103,202x55,0,0,14
+window	redhat	2	0	:-	6105,202x55,0,0,16
+state	local	redhat
+state	local	redhat

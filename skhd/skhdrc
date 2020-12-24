@@ -6,6 +6,8 @@ alt - j [
     else yabai -m window --focus south || true ; \
     fi
 ]
+
+
 alt - k [
     *           : yabai -m window --focus north
     "iterm2" : if [ $(tmux display-message -p '#{pane_at_top}') -ne 1 ]; \
@@ -27,6 +29,8 @@ alt - h [
     else yabai -m window --focus west || yabai -m window --focus stack.next || yabai -m window --focus stack.first || true; \
     fi
 ]
+alt - i :  yabai -m window --focus stack.next
+alt - o :  yabai -m window --focus stack.prev
 shift + alt - h : yabai -m window --swap west
 shift + alt - j : yabai -m window --swap south
 shift + alt - k : yabai -m window --swap north
@@ -100,8 +104,13 @@ alt - down : yabai -m window --stack south
 alt - s : yabai -m window --stack recent
 # alt - e : yabai -m config layout bsp
 
-shift - space : open /Volumes/nas ; \
+shift + cmd - space : open /Volumes/nas ; \
 sleep 0.6 ; \
 skhd -k  " cmd - f "
 
+alt - return [
+   * : open  "/Applications/iTerm.app"
+   "Microsoft Excel" ~
+   "Word" ~
+]
 # https://github.com/koekeishiya/yabai

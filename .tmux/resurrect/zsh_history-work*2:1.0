@@ -1,0 +1,64 @@
+j zhong
+git add .
+git commit
+git push
+tmux attach
+j zhong
+git add .\ngit commit -m "todo  fix textarea style"\ngit push
+brew services restart chunkwm
+chunkc tiling::window --grid-layout left:
+chunkc tiling::window --grid-layout left
+chunkc tiling::window --grid-layout :left
+chunkc tiling::window --grid-layout 
+chunkc tiling::window --grid-layout cols
+chunkc tiling::window --grid-layout cols:left
+chunkc tiling::window --grid-layout cols:left:
+chunkc tiling::window --grid-layout cols:left
+chunkc tiling::window --grid-layout cols:
+chunkc tiling::window --grid-layout cols:left:width
+j kara__
+cd assets/complex_modifications
+ls
+vi
+vi ~/.vimrc
+cd
+vi ~/.vimrc
+ping  119.29.29.29
+ping 133.18.172.221
+j zhong
+git add .\ngit commit -m "add modal"\ngit push
+git add .
+git commit
+git push
+git add .
+git commit
+git push
+git fetch
+git merge origin/master 
+git push
+git fetch
+git merge origin/master 
+vi app.json
+vi .
+git merge origin/master 
+vi miniprogram/app.json
+git merge origin/master 
+git add ,
+git add miniprogram/app.json
+git commit
+git merge origin/master 
+vi miniprogram/app.js
+git merge origin/master 
+git add .
+git commit
+git push
+vi .vimrc
+vi ~/.vimrc
+vi
+j kara
+vi .
+vi ~/.vimrc
+vi .
+vi
+vi ~/.vimrc
+vi .

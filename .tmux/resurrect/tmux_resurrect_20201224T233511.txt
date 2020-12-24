@@ -1,0 +1,17 @@
+pane	main	1	:zsh	1	:*	1	:/Users/admin	0	nvim	:nvim .zshrc
+nvim .zshrc
+nvim .zshrc
+nvim .tmux.conf
+pane	main	1	:zsh	1	:*	2	:/Users/admin	1	zsh	:
+pane	main	2	:todo	0	:-	1	:/Users/admin/Documents/todo	1	nvim	:nvim dev.md
+pane	main	3	:nvim	0	:	1	:/Users/admin/Documents/Javascript	1	zsh	:
+pane	main	4	:zsh	0	:	1	:/Users/admin/Downloads	1	zsh	:
+pane	yabai	1	:skhd	1	:*	1	:/Users/admin/.config/skhd	1	zsh	:
+pane	yabai	2	:yabai	0	:-	1	:/Users/admin/.config/yabai	1	zsh	:
+window	main	1	1	:*	b15e,156x68,0,0[156x34,0,0,3,156x33,0,35,15]
+window	main	2	0	:-	d2c1,156x68,0,0,4
+window	main	3	0	:	d2c2,156x68,0,0,5
+window	main	4	0	:	d2c3,156x68,0,0,6
+window	yabai	1	1	:*	d2c4,156x68,0,0,7
+window	yabai	2	0	:-	d2c6,156x68,0,0,9
+state	yabai	main
