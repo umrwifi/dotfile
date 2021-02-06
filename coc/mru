@@ -1,23 +1,240 @@
-/Users/admin/.config/.gitignore
-/Users/admin/.tmux.conf
-/Users/admin/.zshrc
-/Users/admin/.tm
+/Users/admin/Documents/note/tools.md
+/Users/admin/Documents/note/summary.md
+/private/tmp/zshEccUup
+/Users/admin/.config/skhd/skhdrc
+/Users/admin/ndsrom.search
+/Users/admin/nds.haste
+/Users/admin/game rom.haste
 /Users/admin/key-bindings.zsh
-/Library/.tmux.conf
+/Users/admin/.tmux.conf
+/Users/admin/.tmux-themepack/powerline/default/green.tmuxtheme
+/Users/admin/brewlist
+/Users/admin/.spacemacs
+/Users/admin/backup.sh
+/Users/admin/Documents/todo/entertainment/bangumi.org
+/Users/admin/Documents/todo/bangumi.org
+/Users/admin/Documents/js/mask.js
 /Users/admin/Documents/todo/dev.md
+/Users/admin/Documents/todo/inbox.org
+/Applications/neovim.app/Contents/document.wflow
+/Users/admin/Molokaiorigin.itermcolors
+/Users/admin/skhdrc
+/Users/admin/.vimrc
+/Users/admin/Documents/todo/.spacemacs
+/Users/admin/green.tmuxtheme
+/Users/admin/Documents/todo/inbox.
+/Users/admin/.config/nvim/init.vim
+/Users/admin/Documents/todo/entertainment/
+/Users/admin/entertainment
+/Users/admin/Documents/js/fuckbilibili.js
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_NCOP_(BD_720p_AAC)_[D5F34EF0].jp.ass
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_11_(BD_720p_AAC)_[1279E267].srt
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_10_(BD_720p_AAC)_[823BFDD4].srt
+/Users/admin/Documents/learn/jp/0125听写.md
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_09_(BD_720p_AAC)_[6690C158].srt
+/Users/admin/.config/karabiner/assets/complex_modifications/shift2capslock.json
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_08_(BD_720p_AAC)_[19D1625A].srt
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_07_(BD_720p_AAC)_[E74F78D4].srt
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_06_(BD_720p_AAC)_[472B92E9].srt
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[coc-explorer]-2
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_05v2_(BD_720p_AAC)_[4796C5DC].srt
+/Users/admin/.config/nvim/ftplugin/markdown.vim
+/Users/admin/.config/yabai/yabairc
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_04v2_(BD_720p_AAC)_[17B73B2A].srt
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[coc-explorer]-1
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_03v2_(BD_720p_AAC)_[A13D2D3B].srt
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_01v2_(BD_720p_AAC)_[788ACEEB].srt
+/Users/admin/Downloads/[Zurako] UN-GO.jp.ass/[Zurako]_UN-GO_02v2_(BD_720p_AAC)_[B952F210].srt
+/private/tmp/zshB9hazL
+/Users/admin/Documents/shells/v2ray/v2raygen.sh
+/Users/admin/Documents/server/233blog_v2ray_config.json
+/Users/admin/Documents/server/umrwifi.top.sh
+/Users/admin/Documents/shells/v2ray/yuikonnu.json
+/usr/local/etc/cloudflared/config.yaml
+/Users/admin/.config/tmuxinator/main.yml
+/Users/admin/Documents/Todo/[coc-explorer]-1
+/Users/admin/Documents/Todo/inbox.md
+/Users/admin/Documents/Todo/diary.md
+/Users/admin/Documents/JavaScript/0128.md
+/Users/admin/.config/coc/ultisnips/markdown.snippets
+/Users/admin/.config/nvim/coc-settings.json
+/Users/admin/Documents/Learn/jp/0125听写.md
+/private/etc/sudoers
+/private/etc/passwd
+/Users/admin/1
+/Users/admin/.config/nvim/plugged/smartim/plugin/smartim.vim
+/Users/admin/.config/nvim/plugged/smartim/plugin/
+/Users/admin/fcitx-remote-for-osx/fcitx-remote-general
+/Users/admin/fcitx-remote-for-osx/fcitx-remote-osx-pinyin
+/Users/admin/fcitx-remote-for-osx/fcitx-remote/main.m
+/usr/local/bin/fcitx-remote
+/usr/local/bin/fcitx-remote-general
+/Users/admin/.config/karabiner/assets/complex_modifications/left_control_alone.json
+/Users/admin/.config/karabiner/assets/complex_modifications/ctrlset.json
+/Users/admin/Documents/JavaScript/mask.js
+/Users/admin/Documents/Learn/jp/20210124日语听写.md
+/Users/admin/.config/.spacemacs
+/Users/admin/.config/.gitignore
+/Users/admin/.config/.emacs.d/init.el
+/Users/admin/.config/.emacs.d/elpa/27.1/develop/org-plus-contrib-20210111/org-mac-link.el
+/Users/admin/.config/.emacs.d/CHANGELOG.develop
+/private/tmp/zshdu2QxN
+/Users/admin/Documents/Learn/rhce/linux
+/Users/admin/test.sh
+/Users/admin/Documents/Todo/.tmux.conf
+/Users/admin/.bashrc
+/Users/admin/.zshrc
+/Users/admin/Documents/Shells/setmac.sh
+/Users/admin/.config/back.emacs
+/Users/admin/back.emacs
+/Users/admin/hexo/node_modules/nanomatch/lib/utils.js
+/Users/admin/[coc-explorer]-2
+/Users/admin/[coc-explorer]-1
+/Users/admin/.emacs.d/init.el
+/Users/admin/my.conf
+/Users/admin/Documents/Todo/mylife.org
+/private/etc/hosts
+/Users/admin/.emacs.d/layers/+intl/japanese/packages.el
+/Users/admin/.emacs.d/layers/+intl/chinese/config.el
+/Users/admin/Documents/Todo/sogui.md
+/Users/admin/Documents/Todo/life.org
+/Users/admin/Documents/Todo/inbox.org
+/Users/admin/Documents/Todo/org
+/Users/admin/.emacs
+/Users/admin/emacs
+/Users/admin/Documents/Todo/entertainment/bangumi.md
+/Users/admin/Documents/Todo/entertainment/).md
+/Users/admin/Documents/NOTE/summary.md
+/Users/admin/.ssh/known_hosts
+/Users/admin/Downloads/[AnimeKaizoku] BEASTARS 720p [Apognwsi]/Beastars - 08.srt
+/Users/admin/Documents/Todo/dev.md
+/Users/admin/.config/tmuxinator/proxy.yml
+/Users/admin/.config/clash/my.yaml
+/Users/admin/Documents/Server/yuikonnu.top.sh
+/Users/admin/Downloads/[AnimeKaizoku] BEASTARS 720p [Apognwsi]/BEASTARS - 12.srt
+/Users/admin/Downloads/[AnimeKaizoku] BEASTARS 720p [Apognwsi]/BEASTARS - 11.srt
+/Users/admin/Downloads/[AnimeKaizoku] BEASTARS 720p [Apognwsi]/BEASTARS - 10.srt
+/Users/admin/Downloads/[AnimeKaizoku] BEASTARS 720p [Apognwsi]/Beastars - 09.srt
+/Users/admin/Downloads/[AnimeKaizoku] BEASTARS 720p [Apognwsi]/Beastars - 07.srt
+/Users/admin/Downloads/[AnimeKaizoku] BEASTARS 720p [Apognwsi]/Beastars - 06.srt
+/Users/admin/Documents/JavaScript/fuckbilibili.user.js
+/Users/admin/Downloads/[AnimeKaizoku] BEASTARS 720p [Apognwsi]/Beastars - 05.srt
+/Users/admin/Downloads/BEASTARS.S01E04.CC.ja.srt
+/Users/admin/Downloads/[AnimeKaizoku] BEASTARS 720p [Apognwsi]/Beastars - 04.srt
+/Users/admin/Documents/Todo/[coc-explorer]-2
+/Users/admin/Downloads/BEASTARS.S01E03.CC.ja.srt
+/Users/admin/Documents/NOTE/tools.md
+/Users/admin/Downloads/BEASTARS.S01E02.CC.ja.srt
+/Users/admin/clip/index.html
+/Users/admin/Documents/NOTE/消毒品.md
+/Users/admin/linux中文.md
+/Users/admin/inbox.md
+/Users/admin/Documents/JavaScript/laxyman.js
+/Users/admin/Documents/JavaScript/lazyman.js
+/Users/admin/Documents/JavaScript/laxyman2.js
+/Users/admin/inbox
+/Users/admin/get-pip.py
+/Users/admin/Documents/JavaScript/macstorage.csv
+/Users/admin/playconfig.js
+/Users/admin/Library/Application Support/Microsoft Edge/Default/IndexedDB/https_www.acfun.cn_0.indexeddb.blob/1/00/1f
+/Users/admin/Documents/Todo/bill.md
+/Users/admin/findnas.sh
+/Users/admin/.config/skhd/txt.md
+/Users/admin/.config/yabai/.bashrc
+/Users/admin/.config/yabai/tmp.txt
+/Users/admin/Documents/todo/inbox.md
+/Users/admin/Documents/Pinboard/捐献干细胞的风险.mht
+/Users/admin/Documents/hack/iina设置.md
+/private/tmp/zshyPTF7D
+/Users/admin/rotatescreen.sh
+/Users/admin/Documents/Pinboard/ringfit.url
+/Users/admin/Documents/Pinboard/ringfit.md
+/Users/admin/Documents/pinboard/ringfit.url
+/Users/admin/hexo/source/_posts/123.md
+/Users/admin/Documents/JavaScript/package-lock.json
+/Users/admin/.config/tmuxinator/yabai.yml
+/private/etc/nsmb.conf
+/Users/admin/setmac.sh
+/Users/admin/Documents/hack/mac客制化.md
+/Users/admin/Documents/JavaScript/playconfig.js
+/Users/admin/Downloads/代码搜索中文.tid
+/Users/admin/Documents/server/package.json
+/Users/admin/Documents/JavaScript/fuckdouyu.user.js
+/Users/admin/Documents/JavaScript/localtemplate.user.js
+/Users/admin/Documents/JavaScript/package.json
+/Users/admin/Documents/JavaScript/mask.ts
+/Users/admin/Documents/JavaScript/skhdrc
+/Users/admin/Documents/pinboard/jskeycode.url
+/Users/admin/hexo/.zshrc
+/Users/admin/Documents/wiki/template/月计划month.md
+/Users/admin/rotate180.applescript
+/Users/admin/Documents/todo/[coc-explorer]-1
+/Users/admin/Documents/server/zipfiles.sh
+/Users/admin/Documents/Javascript/playconfig.js
+/Users/admin/Documents/Javascript/mask.js
+/Users/admin/Documents/wiki/template/
+/Users/admin/Documents/iceberg.itermcolors
+/Users/admin/Downloads/月计划-分享模板 db50c452efa84023b65313e363510e6c.md
+/Users/admin/.config/nvim/tmp.txt
+/Users/admin/Documents/wiki/1.jsx
+/Users/admin/Documents/wiki/summary.md
+/Users/admin/Documents/todo/diary.md
+/private/tmp/zshU7mj0Y
+/Users/admin/Documents/pinboard/nima.url
+/Users/admin/Documents/pinboard/1url
+/Users/admin/Documents/pwd/pwd_total.md
+/Volumes/smbnas/Literature/Tonikaku Cawaii vol 01-12/Tonikaku Cawaii v01/
+/Users/admin/Documents/Shells/zipfiles.sh
+/Users/admin/default.itermkeymap
+/Users/admin/Documents/hack/hexcode.md
+/Volumes/smbnas/Literature/zipfiles.sh
+/Users/admin/Documents/todo/bill.md
+/Users/admin/.config/nvim/[coc-explorer]-1
+/Users/admin/Documents/todo/entertainment.md
+/Users/admin/Documents/todo/].md
+/Users/admin/Documents/todo/entertainment/bangumi.md
+/Users/admin/Documents/pinboard/bangumiurl
+/private/tmp/zsh99yDNX
+/Users/admin/.config/nvim/1.md
+/Users/admin/Documents/Javascript/.tmux.conf
+/Users/admin/Documents/Javascript/2
+/Users/admin/Documents/Javascript/1
+/Users/admin/Documents/Javascript/fuckbilibili.user.js
+/Users/admin/Downloads/Nekomonogatari (Kuro) - 03 (BD 1280x720 AVC AACx2).ja.srt
+/Users/admin/Downloads/Nekomonogatari (Kuro) - 02 (BD 1280x720 AVC AACx2).ja.srt
+/Users/admin/Documents/pinboard/123url
+/Users/admin/.config/nvim/plugged/vim-hexo/plugin/hexo.vim
+/Users/admin/pinadd.sh
+/Users/admin/Documents/pinboard/munounanana.url
+/Users/admin/Documents/todo/entertainment/novel.md
+/Users/admin/Documents/todo/entertainment/anime.md
+/Users/admin/Documents/server/debian.sh
+/Users/admin/hexo/1.md
+/Users/admin/hexo/draft.md
+/Users/admin/Documents/todo/[coc-explorer]-4
+/Users/admin/hexo/reboot_without_monitor.md
+/Volumes/smbnas/Ero/Space Pirate Sara/Fap For Fun.url
+/Users/admin/pinboard.url
+/Users/admin/kitsunekko.url
+/Users/admin/Documents/server/sshnas.sh
+/Users/admin/Documents/server/yuikonnu.top.sh
+/Users/admin/Documents/Shells/genplaylist.sh
+/Users/admin/Documents/Shells/genero.sh
+/Users/admin/nfs.sh
+/Users/admin/Documents/Playlist/ero.m3u8
+/private/tmp/zshH8rcsf
+/Users/admin/Documents/todo/[coc-explorer]-3
+/Users/admin/Documents/todo/[coc-explorer]-2
+/Users/admin/.config/tmuxinator/javascript.yml
+/Users/admin/.tm
+/Library/.tmux.conf
 /Users/admin/.tmux.conf.local
 /Users/admin/.config/.tmux.conf
 /Users/admin/.tmux/
-/Users/admin/Documents/todo/inbox.md
-/Users/admin/.config/nvim/init.vim
-/Users/admin/Documents/todo/[coc-explorer]-1
 /Users/admin/Documents/hack/指定shell执行用户.md
-/Users/admin/.config/skhd/skhdrc
 /Users/admin/Downloads/Reading List bc00c207a0e64f3f88f1730bcc94b4fb.md
 /inbox/aa.md
 /Users/admin/Documents/todo/保护牙齿.md
-/Users/admin/.config/nvim/coc-settings.json
-/Users/admin/.config/nvim/ftplugin/markdown.vim
 /Users/admin/Documents/todo/ 饭后漱口 刷牙  右上外嘴唇  右下牙后跟  左下最后一颗槽牙后方圆柱体 换牙刷（每三个月）  左右下槽牙有凹槽.md
 /Users/admin/Documents/todo/inbox.md.md
 /Users/admin/Documents/todo/inbox.md dev.md.md
@@ -25,26 +242,16 @@
 /Users/admin/Documents/todo/<dev>[2:-2].md
 /Users/admin/Documents/todo/<dev>str[2:byteidx(<dev>,
 /Users/admin/Documents/todo/<dev>.md
-/Users/admin/Documents/todo/diary.md
-/Users/admin/Documents/todo/bill.md
-/Users/admin/Documents/todo/entertainment/anime.md
 /Users/admin/Documents/todo/开发.md
-/Users/admin/Documents/todo/entertainment/bangumi.md
-/Users/admin/.config/nvim/[coc-explorer]-1
 /Users/admin/Documents/todo/todo.md
-/Users/admin/Documents/todo/entertainment/novel.md
-/Users/admin/Documents/Javascript/mask.js
-/Users/admin/Documents/Shells/zipfiles.sh
 /Users/admin/.config/nvim/开发.md
 /private/tmp/zshrnA0x5
-/Users/admin/Documents/hack/hexcode.md
 /Users/admin/Documents/todo/.vimalt
 /Users/admin/.vimalt
 /Users/admin/.config/nvim/plugged/clever-f.vim/autoload/clever_f/migemo/utf8.vim
 /Users/admin/.config/nvim/utf8.vim
 /Users/admin/.config/nvim/zhutf8.vim
 /Users/admin/.npmrc
-/Users/admin/.config/nvim/tmp.txt
 /Users/admin/Documents/chunibyou/零之使魔20.txt
 /Users/admin/Documents/chunibyou/花吻1~8游戏文本/花吻6，日文文本.txt
 /Users/admin/Documents/chunibyou/黑血兄弟4.txt
@@ -55,26 +262,17 @@
 /Users/admin/.config/nvim/:
 /Users/admin/Documents/todo/[coc-explorer]-5
 /Users/admin/Documents/Javascript/[coc-explorer]-1
-/Users/admin/Documents/todo/[coc-explorer]-4
-/Users/admin/Documents/todo/[coc-explorer]-3
-/Users/admin/Documents/todo/[coc-explorer]-2
-/Users/admin/.bashrc
-/Users/admin/linux中文.md
-/Users/admin/.config/clash/my.yaml
 /Users/admin/Downloads/TickTick.popclipext/Config.plist
 /Users/admin/.config/spacebar/spacebarrc
 /Users/admin/Documents/hack/vimNote.md
-/Users/admin/.config/coc/ultisnips/markdown.snippets
 /Users/admin/.oh-my-tmux/
 /Users/admin/Documents/todo/.zshrc
 /Users/admin/.config/karabiner/assets/complex_modifications/capslock.json
-/Users/admin/.config/karabiner/assets/complex_modifications/left_control_alone.json
 /Users/admin/.config/karabiner/assets/complex_modifications/[coc-explorer]-1
 /Users/admin/.config/karabiner/assets/complex_modifications/[coc-explorer]-2
 /Users/admin/.config/karabiner/assets/complex_modifications/mouse_keys.json
 /Users/admin/.config/karabiner/assets/complex_modifications/enter2ctrl.json
 /Users/admin/.config/karabiner/assets/complex_modifications/eissu_kana_to_opt.json
-/Users/admin/.config/karabiner/assets/complex_modifications/ctrlset.json
 /Users/admin/.config/karabiner/assets/complex_modifications/
 /Users/admin/.config/karabiner/assets/complex_modifications/vimscroll.json
 /Users/admin/.config/karabiner/assets/complex_modifications/alt+s.json
@@ -85,15 +283,10 @@
 /Users/admin/.oh-my-zsh/themes/mininal.zsh-theme
 /Users/admin/.config/karabiner/assets/complex_modifications/.zshrc
 /Users/admin/.oh-my-zsh/themes/ys.zsh-theme
-/Users/admin/[coc-explorer]-1
 /Users/admin/.tmux.conffg
 /Users/admin/.config/coc/extensions/package.json
-/Users/admin/.config/yabai/yabairc
 /Users/admin/yabairc
-/private/etc/passwd
-/Users/admin/nfs.sh
 /private/tmp/zsh6UKoKJ
-/Users/admin/.config/karabiner/assets/complex_modifications/shift2capslock.json
 /Users/admin/Documents/shells/genplaylist.sh
 /Users/admin/Documents/shells/genero.sh
 /Users/admin/test/1.txt
@@ -104,7 +297,6 @@
 /Users/admin/Downloads/[coc-explorer]-2
 /Users/admin/Downloads/[coc-explorer]-1
 /Users/admin/Downloads/ma
-/Users/admin/.ssh/known_hosts
 /Users/admin/Documents/learn/javascript/zh.javascript.info/todo.md
 /Users/admin/Documents/learn/javascript/zh.javascript.info/[coc-explorer]-1
 /Users/admin/Documents/learn/javascript/zh.javascript.info/README.md
@@ -112,7 +304,6 @@
 /Users/admin/Documents/learn/javascript/zh.javascript.info/1-js/01-getting-started/1-intro/article.md
 /Users/admin/[coc-explorer]-4
 /Users/admin/[coc-explorer]-3
-/Users/admin/[coc-explorer]-2
 /Users/admin/tmp.txt
 /Users/admin/Documents/learn/javascript/zh.javascript.info/1-js/02-first-steps/02-structure/article.md
 /Users/admin/Documents/learn/javascript/zh.javascript.info/1-js/02-first-steps/index.md
@@ -182,7 +373,6 @@
 /Users/admin/.config/nvim/init.vim ; CocCommand explorer --width 30 --no-focus
 /Users/admin/.config/nvim/
 /Users/admin/Documents/shells/gemero.sh
-/Users/admin/.config/nvim/plugged/vim-hexo/plugin/hexo.vim
 /Users/admin/.oh-my-zsh/oh-my-zsh.sh
 /Users/admin/Documents/shells/googlesearch-master/scripts/key-bindings.zsh
 /Users/admin/.Trash/
@@ -208,7 +398,6 @@
 /Users/admin/Documents/[Command Line]
 /Users/admin/Documents/todo/index.md
 /private/tmp/zshSUeoWk
-/Users/admin/1
 /Users/admin/Downloads/-New userscript-.user.js
 /Users/admin/Documents/todo/dairy-project.md
 /Users/admin/Documents/wiki/skhdrc
@@ -223,7 +412,6 @@
 /Users/admin/Documents/wiki/bill.md
 /Users/admin/Documents/playlist/ Happy Sugar Life .m3u8
 /Users/admin/.config/skhd/test.txt
-/Users/admin/get-pip.py
 /Users/admin/.config/skhd/test.sh
 /Users/admin/genplaylist.sh
 /Users/admin/Documents/wiki/index.md
@@ -236,7 +424,6 @@
 /Users/admin/cloudflare.sh
 /Users/admin/Documents/shells/.bashrc
 /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/gdal.rb
-/usr/local/etc/cloudflared/config.yaml
 /Users/admin/Documents/shells/test.sh
 /Users/admin/Documents/shells/mountnfs.sh
 /Users/admin/mountnfs.sh
@@ -280,7 +467,6 @@
 /Users/admin/Documents/my.yaml
 /Users/admin/Documents/yuikonnu.top.sh
 /private/tmp/zshlSrPbu
-/Users/admin/findnas.sh
 /Users/admin/Documents/shells/md.sh
 /private/tmp/zshwSp7Bz
 /Users/admin/open
@@ -336,7 +522,6 @@
 /Users/admin/Documents/hack/rhc
 /Users/admin/Documents/hack/rhec.md
 /Users/admin/Documents/hack/.bashrc
-/private/etc/hosts
 /Users/admin/.bash_profile
 /private/tmp/zshVtPw7V
 /Users/admin/Library/Mobile Documents/iCloud~com~liguangming~Shadowrocket/Documents/default.db
@@ -383,7 +568,6 @@
 /Users/admin/hexo/source/_posts/11.md.md
 /Users/admin/hexo/11.md
 /Users/admin/Downloads/pinboard_export.2020.10.16_04.19.html
-/Users/admin/.emacs
 /Users/admin/Downloads/bookmarks_all_20201015_045107.html
 /Users/admin/Downloads/pinboard_export.2020.10.15_17.20.html
 /Users/admin/.config/1.html
@@ -417,13 +601,10 @@
 /Users/admin/Documents/shells/一键恢复postgres.sh
 /Users/admin/Documents/shells/docker导出postgres数据库备份.md
 /Users/admin/.config/README.md
-/Users/admin/Documents/wiki/summary.md
-/Users/admin/Documents/shells/v2ray/yuikonnu.json
 /Users/admin/Documents/shells/v2ray/nyanpath.json
 /Users/admin/Documents/shells/v2ray/
 /Users/admin/Documents/shells/postgres.sh
 /Users/admin/.config/nvim/.bashrc
-/Users/admin/.config/nvim/1.md
 /Users/admin/.config/nvim/2.md
 /Users/admin/.config/nvim/3.md
 /Users/admin/.config/nvim/4.md
@@ -456,7 +637,6 @@
 /Users/admin/dotfilelink.sh
 /Users/admin/hexo/.tmux.conf
 /Users/admin/hexo/db.json
-/Users/admin/hexo/1.md
 /private/tmp/zshZLqNdw
 /Users/admin/hexo/.nojekyll
 /Users/admin/Documents/wiki/svn.md
@@ -478,7 +658,6 @@
 /Volumes/nas/中二回忆/SHINO1.txt
 /Volumes/nas/中二回忆/campione.txt
 /Volumes/192.168.50.200/nas/中二回忆/campione.txt
-/private/etc/nsmb.conf
 /Users/admin/.config/clash/.bash_profile
 /Users/admin/todo.txt
 /Users/admin/Documents/pwd/pwd.md
@@ -608,7 +787,6 @@
 /Users/admin/.z-e
 /Users/admin/.grip/
 /Users/admin/.cups/lpoptions
-/Users/admin/inbox.md
 /Users/admin/.config/menus/applications-merged/wine-Programs-Windows Media Player.menu
 /Users/admin/.config/menus/applications-merged/
 /Users/admin/.config/1.md

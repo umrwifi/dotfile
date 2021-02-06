@@ -8,6 +8,18 @@
     "file"
   ],
   "L1VzZXJzL2FkbWluL0RvY3VtZW50cy90b2Rv": [
-    "serv"
+    "serv",
+    "mru"
+  ],
+  "L1VzZXJzL2FkbWluL0RvY3VtZW50cy9KYXZhc2NyaXB0": [
+    "tag"
+  ],
+  "L1VzZXJzL2FkbWlu": [
+    "tag",
+    "out"
+  ],
+  "L1VzZXJzL2FkbWluL0RvY3VtZW50cy9Ub2Rv": [
+    "gre",
+    "mr"
   ]
 }

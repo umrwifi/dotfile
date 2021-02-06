@@ -8,6 +8,8 @@
     "json"
   ],
   "imselect.defaultInput": "com.apple.keylayout.ABC",
+  "imselect.enableFloating": false,
+  "imselect.enableStatusItem": false,
   "list.source.files.defaultOptions": [
     "--number-select"
   ],
@@ -91,5 +93,11 @@
     ">>": "gitUnstage"
   },
   "html.autoClosingTags": true,
-  "html.format.preserveNewLines": true
+  "html.format.preserveNewLines": true,
+  "eslint.quiet": true,
+  "list.source.grep.defaultOptions": [
+    "--interactive",
+    "--no-quit",
+    "--number-select"
+  ]
 }

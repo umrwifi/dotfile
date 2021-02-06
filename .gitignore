@@ -17,3 +17,4 @@ configstore/update-notifier-npm.json/
 .tmux/resurrect/
 .tmux/plugins/
 nvim/.netrwhist/
+*history

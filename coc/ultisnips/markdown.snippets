@@ -35,6 +35,21 @@ snippet 'h5' "heading5" Ab
 ##### 
 endsnippet
 
+snippet 'cc' "line comment" b
+[>_<] 
+endsnippet
+
+snippet cc "block comment"
+<!--
+${1: `!p snip.rv = snip.v.text.strip("*")`}
+-->
+$0
+endsnippet
+
+snippet todo "checkbox "
+- [ ] ${1: `!p snip.rv = snip.v.text.strip("*")`}
+$0
+endsnippet
 # Link 
 snippet url "markdown url"
 <${1: `!p snip.rv = snip.v.text.strip("*")`}>

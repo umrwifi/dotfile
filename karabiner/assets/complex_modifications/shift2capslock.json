@@ -1,15 +1,17 @@
 {
-  "title": "Change shift key (rev 2)",
+  "title": "Change shift key (rev 3)",
   "rules": [
     {
-      "description": "Change left_shift to caps_lock if pressed alone (rev 2)",
+      "description": "Change left_shift to caps_lock if pressed alone (rev 3)",
       "manipulators": [
         {
           "type": "basic",
           "from": {
             "key_code": "left_shift",
             "modifiers": {
-              "optional": ["any"]
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -19,8 +21,7 @@
           ],
           "to_if_alone": [
             {
-              "key_code": "caps_lock",
-              "hold_down_milliseconds": 100
+              "key_code": "caps_lock"
             }
           ]
         }
@@ -34,7 +35,9 @@
           "from": {
             "key_code": "right_shift",
             "modifiers": {
-              "optional": ["any"]
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -59,8 +62,12 @@
           "from": {
             "key_code": "left_shift",
             "modifiers": {
-              "mandatory": ["right_shift"],
-              "optional": ["caps_lock"]
+              "mandatory": [
+                "right_shift"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
             }
           },
           "to": [
@@ -79,8 +86,12 @@
           "from": {
             "key_code": "right_shift",
             "modifiers": {
-              "mandatory": ["left_shift"],
-              "optional": ["caps_lock"]
+              "mandatory": [
+                "left_shift"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
             }
           },
           "to": [

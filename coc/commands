@@ -1,6 +1,12 @@
 snippets.editSnippets
+snippets.openSnippetFiles
+eslint.executeAutofix
+tsserver.executeAutofix
+eslint.createConfig
+eslint.
+tslint.lintProject
+tsserver.restart
 explorer
 prettier.formatFile
-snippets.openSnippetFiles
 snippets.openSnippets
 markdownlint.fixAll

@@ -16,55 +16,46 @@ function! MarkdownLevel()
   if getline(v:lnum) =~ '^## .*$'
     return "=1"
   endif
-  if getline(v:lnum) =~ '^### .*$'
-    return "=2"
-  endif
-  if getline(v:lnum) =~ '^#### .*$'
-    return "=3"
-  endif
-  if getline(v:lnum) =~ '^##### .*$'
-    return "=4"
-  endif
-  if getline(v:lnum) =~ '^###### .*$'
-    return "=5"
-  endif
-  if getline(v:lnum) =~ '^####### .*$'
-    return "=6"
-  endif
-
   if getline(v:lnum-1) =~ '^## .*$'
     return ">2"
+  endif
+  if getline(v:lnum+2) =~ '^## .*$'
+    return "<2"
+  endif
+
+  if getline(v:lnum) =~ '^### .*$'
+    return "=2"
   endif
   if getline(v:lnum-1) =~ '^### .*$'
     return ">3"
   endif
-  if getline(v:lnum-1) =~ '^#### .*$'
-    return ">4"
-  endif
-  if getline(v:lnum-1) =~ '^##### .*$'
-    return ">5"
-  endif
-  if getline(v:lnum-1) =~ '^###### .*$'
-    return ">6"
-  endif
-
-  if getline(v:lnum+2) =~ '^## .*$'
-    return "<2"
-  endif
   if getline(v:lnum+2) =~ '^### .*$'
     return "<3"
+  endif
+
+  if getline(v:lnum) =~ '^#### .*$'
+    return "=3"
+  endif
+  if getline(v:lnum-1) =~ '^#### .*$'
+    return ">4"
   endif
   if getline(v:lnum+2) =~ '^#### .*$'
     return "<4"
   endif
+
+  if getline(v:lnum) =~ '^##### .*$'
+    return "=4"
+  endif
+  if getline(v:lnum-1) =~ '^##### .*$'
+    return ">5"
+  endif
   if getline(v:lnum+2) =~ '^##### .*$'
     return "<5"
   endif
-  if getline(v:lnum+2) =~ '^###### .*$'
-    return "<6"
+  if line(v:lnum) == line('$')
+    echo 1
+    return "=1"
   endif
-
-  " if getline(v:lnum) =~ '^- \(\[x]\)\@!.*$  " match - / - [ ] but not - [x] 
   "     return ">7"
   " endif
  "if getline(v:lnum) =~ '^- \[.\] .*$'
@@ -77,10 +68,10 @@ function! MarkdownLevel()
   return "=" 
 endfunction
 
-autocmd BufNewFile *.md call HexoTitle()
 nmap <leader>p  :silent exec "!pandoc -s %:p -o .%:r.html"<cr> :silent exec "!open -a 'Microsoft Edge' .%:r.html" <cr>
 nnoremap ge g_yiw:vs <c-r>".md <cr>
-set foldmethod=expr
+" set foldmethod=expr
+set foldmethod=manual
 set foldexpr=MarkdownLevel()
 
 "quicklook file
@@ -95,10 +86,8 @@ function! HexoTitle()
       exe  "normal G"
     endif
 endfunction
+"autocmd BufNewFile *.md call HexoTitle()
 command! Sum :r!awk -F '|' '{print; sum+=$4}; END {print "Total: "sum}'
-
-autocmd BufWritePost *.md mkview
-autocmd BufEnter *.md silent! loadview
 " markdown-preview
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
