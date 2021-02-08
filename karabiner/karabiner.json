@@ -63,11 +63,11 @@
                         ]
                     },
                     {
-                        "description": "Post escape if left_control is pressed alone.",
+                        "description": "Change left_shift to caps_lock if pressed alone (rev 3)",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "left_control",
+                                    "key_code": "left_shift",
                                     "modifiers": {
                                         "optional": [
                                             "any"
@@ -76,12 +76,12 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_control"
+                                        "key_code": "left_shift"
                                     }
                                 ],
                                 "to_if_alone": [
                                     {
-                                        "key_code": "escape"
+                                        "key_code": "caps_lock"
                                     }
                                 ],
                                 "type": "basic"
@@ -456,7 +456,7 @@
                     ]
                 }
             ],
-            "name": "Default",
+            "name": "jis layout",
             "parameters": {
                 "delay_milliseconds_before_open_device": 1000
             },

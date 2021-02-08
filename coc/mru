@@ -1,14 +1,20 @@
+/Users/admin/.config/README.md
+/Users/admin/.bashrc
+/Users/admin/.config/tmuxinator/main.yml
+/Users/admin/Documents/hack/mac配置.md
+/Users/admin/修复键盘失灵.sh
+/Users/admin/key-bindings.zsh
+/Users/admin/zsh
+/Users/admin/brewlist
+/Users/admin/.config/skhd/skhdrc
 /Users/admin/Documents/note/tools.md
 /Users/admin/Documents/note/summary.md
 /private/tmp/zshEccUup
-/Users/admin/.config/skhd/skhdrc
 /Users/admin/ndsrom.search
 /Users/admin/nds.haste
 /Users/admin/game rom.haste
-/Users/admin/key-bindings.zsh
 /Users/admin/.tmux.conf
 /Users/admin/.tmux-themepack/powerline/default/green.tmuxtheme
-/Users/admin/brewlist
 /Users/admin/.spacemacs
 /Users/admin/backup.sh
 /Users/admin/Documents/todo/entertainment/bangumi.org
@@ -51,7 +57,6 @@
 /Users/admin/Documents/server/umrwifi.top.sh
 /Users/admin/Documents/shells/v2ray/yuikonnu.json
 /usr/local/etc/cloudflared/config.yaml
-/Users/admin/.config/tmuxinator/main.yml
 /Users/admin/Documents/Todo/[coc-explorer]-1
 /Users/admin/Documents/Todo/inbox.md
 /Users/admin/Documents/Todo/diary.md
@@ -82,7 +87,6 @@
 /Users/admin/Documents/Learn/rhce/linux
 /Users/admin/test.sh
 /Users/admin/Documents/Todo/.tmux.conf
-/Users/admin/.bashrc
 /Users/admin/.zshrc
 /Users/admin/Documents/Shells/setmac.sh
 /Users/admin/.config/back.emacs
@@ -600,7 +604,6 @@
 /Users/admin/Documents/hack/v2ray安装.md
 /Users/admin/Documents/shells/一键恢复postgres.sh
 /Users/admin/Documents/shells/docker导出postgres数据库备份.md
-/Users/admin/.config/README.md
 /Users/admin/Documents/shells/v2ray/nyanpath.json
 /Users/admin/Documents/shells/v2ray/
 /Users/admin/Documents/shells/postgres.sh

@@ -103,10 +103,10 @@ shift + alt - 0x2B : yabai -m space --swap prev
 shift + alt - 0x2F : yabai -m space --swap next
 
 # stack
-alt - left : yabai -m window --stack west
-alt - up : yabai -m window --stack north
-alt - right : yabai -m window --stack east
-alt - down : yabai -m window --stack south
+shift + alt - left : yabai -m window --stack west
+shift + alt - up : yabai -m window --stack north
+shift + alt - right : yabai -m window --stack east
+shift + alt - down : yabai -m window --stack south
 # alt - e : yabai -m config layout bsp
 
 shift + cmd - space : open ~/nas.savedSearch; \
@@ -125,7 +125,7 @@ alt - space  : open  "/Applications/Microsoft Edge.app";\
 ctrl - c [
    * : open  "/Applications/Emacs.app" ;\
    sleep 0.6; \
-   skhd -k "ctrl - c "; skhd -k "c" ;
+   skhd -k "ctrl - c "
    "iterm2" ~
    "Emacs" ~
 ]
