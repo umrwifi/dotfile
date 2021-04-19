@@ -1,3 +1,10 @@
+pasteFile
+copyFile
+delete
+refresh
+deleteForever
+select
+cd
 expandableNext
 toggleSelection
 rename
@@ -6,15 +13,10 @@ preview:labeling
 previewOnHover
 preview
 unselect
-select
 copyFilepath
-refresh
 reveal:0
 open:sourceWindow
-cd
 open
-delete
-pasteFile
 cutFile
 reveal
 cd:<path>

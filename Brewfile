@@ -28,8 +28,18 @@ brew "cmigemo"
 brew "ctags", link: false
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
 # Validating, recursive, caching DNS resolver
 brew "unbound"
+# Generate introspection data for GObject libraries
+brew "gobject-introspection"
+# OpenType text shaping engine
+brew "harfbuzz"
+# Subtitle renderer for the ASS/SSA subtitle format
+brew "libass"
+# Blu-Ray disc playback library for media players like VLC
+brew "libbluray"
 # Secure Reliable Transport
 brew "srt"
 # Play, record, convert, and stream audio and video
@@ -38,6 +48,16 @@ brew "ffmpeg"
 brew "fzf"
 # Distributed revision control system
 brew "git"
+# GitHub Markdown previewer
+brew "grip", link: false
+# Get events and tasks from the macOS calendar database
+brew "ical-buddy"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
+# Tool to measure maximum TCP and UDP bandwidth
+brew "iperf"
+# Dead simple terminal plots from JSON data
+brew "jp"
 # Regular expressions library
 brew "oniguruma"
 # Lightweight and flexible command-line JSON processor
@@ -52,12 +72,16 @@ brew "nnn"
 brew "node"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
+# Collection of PostScript document handling utilities
+brew "psutils"
 # Python 3 bindings for the Cairo graphics library
 brew "py3cairo"
 # Generic syntax highlighter
 brew "pygments", link: false
 # GNOME Python bindings (based on GObject Introspection)
 brew "pygobject3"
+# Utility that provides fast incremental file transfer
+brew "rsync"
 # Powerful, clean, object-oriented scripting language
 brew "ruby"
 # Manipulate and query tags on macOS files
@@ -72,6 +96,8 @@ brew "tmuxinator"
 brew "ttygif"
 # Internet file retriever
 brew "wget"
+# Automatic workarounds for problems in Wine
+brew "winetricks"
 # Download YouTube videos from the command-line
 brew "youtube-dl"
 # UNIX shell (command interpreter)

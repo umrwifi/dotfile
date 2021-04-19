@@ -29,7 +29,7 @@ set expandtab  "用space代替tab
 set hidden "跳转文件时无需保存
 "encoding
 set encoding=utf-8  termencoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936 "防windows 中文乱码
+set fileencodings=ucs-bom,utf-8,sjis,cp936 "防windows 中文乱码
 set wildmenu  wildmode=full "补全提示
 set ofu=syntaxcomplete#Complete " 自动补全代码
 set backspace=indent,eol,start "退格可换行
@@ -87,7 +87,7 @@ set wildignore+=.git*
 "mappings
 let mapleader = ","
 nmap [b :bnext<CR>
-nmap @b :bprevious<CR>
+nmap ]b :bprevious<CR>
 nmap <leader>b :ls<CR>:b 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -147,13 +147,14 @@ function! IsCharsBetween()
   endif
  return 0
 endfunction
-inoremap {<cr>  {}<left><cr><C-o>O<TAB>
-inoremap <expr> <silent>' IsCharsBetween()==0 ? "\'\'\<left>" : "\'"
+"inoremap {<cr>  {}<left><cr><C-o>O<TAB>
+"inoremap <expr> <silent>' IsCharsBetween()==0 ? "\'\'\<left>" : "\'"
 "inoremap <expr> <silent>( IsCharsBetween()==0 ? "\(\)\<left>" : "\("
 " inoremap <expr> <silent>{ IsCharsBetween()==0 ? "\{\}\<left>" : "\{"
 command! CountMatch :%s///gn
 call plug#begin('~/.config/nvim/plugged')
 " https://github.com/tpope/vim-dadbod
+Plug 'mattn/calendar-vim'
 Plug 'jceb/vim-orgmode'
 Plug 'ybian/smartim' "ime
 Plug 'tpope/vim-fugitive' "git
@@ -212,9 +213,11 @@ let g:coc_global_extensions = [
       \'coc-vimlsp',
       \'coc-snippets',
       \'coc-lists',
-      \'coc-markdownlint',
       \'coc-actions',
       \'coc-eslint',
+      \'coc-diagnostic',
+      \'coc-highlight',
+      \'coc-explorer',
       \ ]
 inoremap <silent><expr><TAB>
   \ pumvisible() ? "\<C-n>" :

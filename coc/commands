@@ -1,4 +1,5 @@
 snippets.editSnippets
+actions.open
 snippets.openSnippetFiles
 eslint.executeAutofix
 tsserver.executeAutofix

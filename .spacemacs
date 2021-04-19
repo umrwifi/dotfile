@@ -7,7 +7,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-ask-for-lazy-installation t
    dotspacemacs-configuration-layer-path '()
    dotspacemacs-configuration-layers
-   '(
+   '(html
      emacs-lisp
      helm
      multiple-cursors
@@ -139,8 +139,35 @@ dump."
   )
 (defun dotspacemacs/user-config ()
 (with-eval-after-load 'org
+(setq split-width-threshold 0)
+(setq split-height-threshold nil)
+(setq org-agenda-start-day "1d")
+(setq org-agenda-span 1)
+(setq org-agenda-start-on-weekday nil)
+
+(setq org-agenda-custom-commands
+    '(
+    ("d" "Today Priority"
+               (;; important things to do
+                (tags-todo "+SCHEDULED<\"<tomorrow>\"+PRIORITY={A}")
+                ;; medium important things to do
+                (tags-todo "+SCHEDULED<\"<tomorrow>\"+PRIORITY={B}")
+                ;; other things to do
+                (tags-todo "+SCHEDULED<\"<tomorrow>\"+PRIORITY={C}")))
+    ("w" . "任务安排") ; describe prefix "w"
+    ("ww" "Actions Grouped by Priority"
+               (
+                (tags-todo "+SCHEDULED<=\"0\"+PRIORITY={A}")
+                (tags-todo "+SCHEDULED<=\"0\"+PRIORITY={B}")
+                (tags-todo "+SCHEDULED<=\"0\"+PRIORITY={C}")))
+    ))
+
 (setq org-agenda-files (list "~/Documents/todo/inbox.org"
-                             "~/Documents/todo/bangumi.org" ))
+                             "~/Documents/todo/bangumi.org" 
+                             "~/Documents/todo/bookmark.org" 
+                             "~/Documents/todo/diary.org" 
+                             "/Users/admin/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org" 
+                             ))
 (setq org-default-notes-file "~/Documents/todo/inbox.org")
 (setq org-agenda-file-task  "~/Documents/todo/inbox.org")
 (setq org-default-bookmark-file "~/Documents/todo/bookmark.org")
@@ -154,18 +181,28 @@ dump."
   (goto-char (point-max))))
 (setq org-capture-templates
         '(
-          ("t" "Todo" entry (file+headline org-default-notes-file "今天")
-           "* TODO %?  %i\nSCHEDULED: <%(org-read-date nil nil )>"
-           :empty-lines 1)
+          ("t" "Todo" entry (file+headline org-default-notes-file "待办事项")
+           "* TODO %? %(org-mac-chrome-get-frontmost-url) %i\nSCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))"
+           )
           ("n" "notes" entry (file+headline org-agenda-file-task "笔记")
-           "* %?\n  %i\n %U"
-           :empty-lines 1)
+           "* %?\n  %i\n %U%(org-mac-chrome-get-frontmost-url)"
+           )
           ("i" "ideas" entry (file+headline org-agenda-file-task "收件箱")
-           "* %?\n  %i\n %U"
-           :empty-lines 1)
-          ("b" "bookmark" plain (file+headline org-default-bookmark-file "书签")
+           "* %?\n  %i\n %U%(org-mac-chrome-get-frontmost-url)"
+           )
+          ("d" "dream" entry (file+headline org-agenda-file-task "梦")
+           "* %?\n  %i\n %U" )
+          ("l" "quick link" plain (file+headline org-default-agenda-file "书签")
            "%(org-mac-chrome-get-frontmost-url)"
-           :empty-lines 1)
+           :immediate-finish t
+           )
+          ("bk" "quick link" plain (file+headline org-default-agenda-file "书签")
+           "%(org-mac-chrome-get-frontmost-url)#:~:text=%(evil-paste-after)"
+           :immediate-finish t
+           )
+          ("b" "bookmark describe" plain (file+headline org-default-bookmark-file "书签")
+           "%(org-mac-chrome-get-frontmost-url)"
+           )
            ("a" "foo" plain
             (function my-visit-timestamped-file)
            "%(org-mac-chrome-get-frontmost-url)"
@@ -180,9 +217,19 @@ This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
+ '(org-agenda-files
+   '("~/Documents/todo/inbox.org" "~/Documents/todo/bangumi.org" "~/Documents/todo/bookmark.org"))
  '(package-selected-packages
-   '(unfill smeargle reveal-in-osx-finder osx-trash osx-dictionary osx-clipboard org-rich-yank org-category-capture org-present gntp org-mime org-download org-cliplink org-brain mwim mmm-mode markdown-mode magit-section launchctl htmlize helm-org-rifle helm-git-grep gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-messenger git-link gh-md fuzzy evil-org transient company yasnippet auto-complete ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(pinyin-search  unfill smeargle reveal-in-osx-finder osx-trash osx-dictionary osx-clipboard org-rich-yank org-category-capture org-present gntp org-mime org-download org-cliplink org-brain mwim mmm-mode markdown-mode magit-section launchctl htmlize helm-org-rifle helm-git-grep gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-messenger git-link gh-md fuzzy evil-org transient company yasnippet auto-complete ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 )

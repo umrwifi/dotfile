@@ -46,5 +46,5 @@ root: ~/
 
 windows:
   - shell:
-  - todo: z todo; vim -c "normal ,e" inbox.md dev.md
+  - note: z note; 
   - server: z server; ./debian.sh

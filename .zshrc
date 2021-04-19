@@ -4,8 +4,6 @@ export ZSH="/Users/admin/.oh-my-zsh"
 ZSH_THEME="mini"
 TERM=xterm-256color
 autoload colors
-# bindkey '^f' autosuggest-execute
-# bindkey '^ ' autosuggest-accept
 plugins=( 
   git 
   z 
@@ -32,10 +30,11 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey '^V' autosuggest-accept
+# bindkey '^f' autosuggest-execute
 source ~/.bashrc
 # fzf keybinding
 source ~/key-bindings.zsh
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND="rg --files --hidden -g'!.git'"
 #export FZF_DEFAULT_OPTS="--height 60% --layout=reverse"

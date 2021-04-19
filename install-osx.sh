@@ -24,3 +24,5 @@ for i in $link ; do
   fi
 done
 
+# iina 设置
+ln /Users/admin/.config/mpv/my.conf  /Users/admin/Library/Application\ Support/com.colliderli.iina/input_conf/
