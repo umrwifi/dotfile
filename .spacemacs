@@ -137,6 +137,7 @@ This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
   )
+ (add-hook 'after-init-hook  (lambda () (org-agenda)))
 (defun dotspacemacs/user-config ()
 (with-eval-after-load 'org
 (setq split-width-threshold 0)
@@ -162,15 +163,15 @@ dump."
                 (tags-todo "+SCHEDULED<=\"0\"+PRIORITY={C}")))
     ))
 
-(setq org-agenda-files (list "~/Documents/todo/inbox.org"
-                             "~/Documents/todo/bangumi.org" 
-                             "~/Documents/todo/bookmark.org" 
-                             "~/Documents/todo/diary.org" 
+(setq org-agenda-files (list "~/Documents/org/inbox.org"
+                             "~/Documents/org/bangumi.org" 
+                             "~/Documents/org/bookmark.org" 
+                             "~/Documents/org/diary.org" 
                              "/Users/admin/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org" 
                              ))
-(setq org-default-notes-file "~/Documents/todo/inbox.org")
-(setq org-agenda-file-task  "~/Documents/todo/inbox.org")
-(setq org-default-bookmark-file "~/Documents/todo/bookmark.org")
+(setq org-default-notes-file "~/Documents/org/inbox.org")
+(setq org-agenda-file-task  "~/Documents/org/inbox.org")
+(setq org-default-bookmark-file "~/Documents/org/bookmark.org")
 (defun my-visit-timestamped-file ()
   "Visit a new file named by the current timestamp"
   (interactive)
@@ -221,9 +222,10 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
-   '("~/Documents/todo/inbox.org" "~/Documents/todo/bangumi.org" "~/Documents/todo/bookmark.org"))
+   '("~/Documents/org/inbox.org" "~/Documents/org/bangumi.org" "~/Documents/org/bookmark.org"))
  '(package-selected-packages
    '(pinyin-search  unfill smeargle reveal-in-osx-finder osx-trash osx-dictionary osx-clipboard org-rich-yank org-category-capture org-present gntp org-mime org-download org-cliplink org-brain mwim mmm-mode markdown-mode magit-section launchctl htmlize helm-org-rifle helm-git-grep gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-messenger git-link gh-md fuzzy evil-org transient company yasnippet auto-complete ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces

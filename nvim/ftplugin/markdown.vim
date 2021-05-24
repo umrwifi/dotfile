@@ -14,42 +14,30 @@ function! MarkdownLevel()
   endif
 
   if getline(v:lnum) =~ '^## .*$'
-    return "=1"
-  endif
-  if getline(v:lnum-1) =~ '^## .*$'
     return ">2"
   endif
-  if getline(v:lnum+2) =~ '^## .*$'
+  if getline(v:lnum+1) =~ '^## .*$'
     return "<2"
   endif
 
   if getline(v:lnum) =~ '^### .*$'
-    return "=2"
-  endif
-  if getline(v:lnum-1) =~ '^### .*$'
     return ">3"
   endif
-  if getline(v:lnum+2) =~ '^### .*$'
+  if getline(v:lnum+1) =~ '^### .*$'
     return "<3"
   endif
 
   if getline(v:lnum) =~ '^#### .*$'
-    return "=3"
-  endif
-  if getline(v:lnum-1) =~ '^#### .*$'
     return ">4"
   endif
-  if getline(v:lnum+2) =~ '^#### .*$'
+  if getline(v:lnum+1) =~ '^#### .*$'
     return "<4"
   endif
 
   if getline(v:lnum) =~ '^##### .*$'
-    return "=4"
-  endif
-  if getline(v:lnum-1) =~ '^##### .*$'
     return ">5"
   endif
-  if getline(v:lnum+2) =~ '^##### .*$'
+  if getline(v:lnum+1) =~ '^##### .*$'
     return "<5"
   endif
   if line(v:lnum) == line('$')
@@ -70,8 +58,8 @@ endfunction
 
 nmap <leader>p  :silent exec "!pandoc -s %:p -o .%:r.html"<cr> :silent exec "!open -a 'Microsoft Edge' .%:r.html" <cr>
 nnoremap ge g_yiw:vs <c-r>".md <cr>
-" set foldmethod=expr
-set foldmethod=manual
+set foldmethod=expr
+" set foldmethod=manual
 set foldexpr=MarkdownLevel()
 
 "quicklook file

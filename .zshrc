@@ -5,10 +5,9 @@ ZSH_THEME="mini"
 TERM=xterm-256color
 autoload colors
 plugins=( 
-  git 
+  # git 
   z 
   zsh-autosuggestions 
-  zsh-syntax-highlighting
   zsh-completions
 )
 function quick-look() {
@@ -30,8 +29,7 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey '^V' autosuggest-accept
-# bindkey '^f' autosuggest-execute
+bindkey '^V' autosuggest-execute
 source ~/.bashrc
 # fzf keybinding
 source ~/key-bindings.zsh

@@ -48,6 +48,16 @@ hack(){
     nvim -c "cd ~/Documents/hack" ~/Documents/hack/$*.md
   fi
 }
+
+vnote(){
+  if [[ $# == 0 ]]
+  then
+    nvim ~/Documents/ -c "cd ~/Documents "
+  else
+    nvim -c "cd ~/Documents" ~/Documents/org/$*.md
+  fi
+}
+alias vn="vnote"
 export PATH=/usr/local/Cellar/python@3.9/3.9.0/bin/:$PATH
 export LANG="en_GB.UTF-8"
 #todo add /usr/local/etc to path

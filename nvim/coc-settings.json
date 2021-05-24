@@ -8,14 +8,27 @@
     "json"
   ],
   "imselect.defaultInput": "com.apple.keylayout.ABC",
-  "imselect.enableFloating": false,
-  "imselect.enableStatusItem": false,
+  "imselect.enableFloating": true,
+  "imselect.enableStatusItem": true,
   "list.source.files.defaultOptions": [
     "--number-select"
   ],
-  "explorer.width": 30,
   "explorer.previewAction.onHover": false,
   "explorer.file.autoReveal": true,
+  "explorer.file.hiddenRules": {
+    "extensions": [
+      "o",
+      "a",
+      "obj",
+      "pyc"
+    ],
+    "filenames": [
+      "Leaf"
+    ],
+    "patternMatches": [
+      "^\\."
+    ]
+  },
   "explorer.keyMappings.global": {
     "i": false,
     "gk": "expandablePrev",
@@ -40,7 +53,7 @@
     ],
     "gl": "expandRecursive",
     "gh": "collapseRecursive",
-    "<LeftMouse>": [
+    "<2-LeftMouse>": [
       "expandable?",
       [
         "expanded?",
@@ -54,7 +67,13 @@
       "collapse",
       "expand"
     ],
-    "<cr>": false,
+    "<cr>": [
+      "expandable?",
+      [
+        "expand"
+      ],
+      "open"
+    ],
     "e": "open",
     "s": "open:split",
     "S": "open:split:plain",
@@ -95,10 +114,12 @@
   "html.autoClosingTags": true,
   "html.format.preserveNewLines": true,
   "eslint.quiet": true,
+  "list.source.grep.command": "rg",
+  "list.source.grep.args": [
+    "--smart-case"
+  ],
   "list.source.grep.defaultOptions": [
     "--interactive",
-    "--no-quit",
-    "--number-select",
-    "--ignore-case"
+    "--no-quit"
   ]
 }

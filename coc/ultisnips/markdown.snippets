@@ -35,35 +35,31 @@ snippet 'h5' "heading5" Ab
 ##### 
 endsnippet
 
-snippet 'cc' "line comment" b
+snippet 'comment' "line comment" b
 [>_<] 
 endsnippet
 
-snippet cc "block comment"
+snippet comment "block comment"
 <!--
 ${1: `!p snip.rv = snip.v.text.strip("*")`}
 -->
 $0
 endsnippet
 
-snippet todo "checkbox "
-- [ ] ${1: `!p snip.rv = snip.v.text.strip("*")`}
-$0
-endsnippet
+# snippet todo "checkbox "
+# - [ ] ${1: `!p snip.rv = snip.v.text.strip("*")`} $0
+# endsnippet
 # Link 
 snippet url "markdown url"
-<${1: `!p snip.rv = snip.v.text.strip("*")`}>
-$0
+<${1:`!p snip.rv = snip.v.text.strip("*")`}> $0
 endsnippet
 
 snippet link  "markdown link"
-[${1:${visual:Link Title}}](${2:`!p snip.rv = snip.v.text.strip("*")`})
-$0
+[${1:${visual:Link Title}}](${2:`!p snip.rv = snip.v.text.strip("*")`}) $0
 endsnippet
 
 snippet img  "markdown image"
-![${1:${visual:Image Title}}](${2:`!p snip.rv = snip.v.text.strip("*")`})
-$0
+![${1:${visual:Image Title}}](${2:`!p snip.rv = snip.v.text.strip("*")`}) $0
 endsnippet
 
 # Other
@@ -76,17 +72,15 @@ endsnippet
 
 # table
 snippet table "markdown table"
-| ${1:${visual:Column}} | ${2:${visual:Column}} |$7
+| $1:| $2 |
 | ------ | ------ |
-| ${3:${visual:Cell}}   | ${4:${visual:Cell}}   |$8
-| ${5:${visual:Cell}}   | ${6:${visual:Cell}}   |$0 
+| ${3:${visual:Cell}}   | ${4:${visual:Cell}}   |
+| ${5:${visual:Cell}}   | ${6:${visual:Cell}}   | 
 endsnippet
 
-code
-
-snippet backqupte  "single code block"
-\`${1:`!p snip.rv = snip.v.text.strip("*")`}\`$0
-endsnippet
+# snippet backqupte  "single code block"
+# \`${1:`!p snip.rv = snip.v.text.strip("*")`}\`$0
+# endsnippet
 
 snippet code "codeblock with lan" b
 \`\`\`${1:${visual:bash}}
@@ -95,16 +89,6 @@ snip.rv = snip.v.text.strip("*")
 `
 }
 \`\`\`
-endsnippet
-
-# python visual
-snippet d "Description" 
-if(${1:variable}){
-${`!p
-snip.rv = snip.v.text.strip("*")
-`
-}
-}
 endsnippet
 
 # caculater

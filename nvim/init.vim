@@ -13,9 +13,15 @@ filetype plugin on
 filetype on
 syntax on
 syntax enable 
+set re=1
+set lazyredraw
+set synmaxcol=128
+syntax sync minlines=256
+set nocursorline
+set nocursorcolumn
 "自动刷新文件
 set autoread 
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if !bufexists("[Command Line]") | checktime | endif
+autocmd FocusGained,CursorHold,CursorHoldI * if !bufexists("[Command Line]") | checktime | endif
 "记录折叠
 autocmd BufWritePost *md,*.vim,*.js mkview
 autocmd BufEnter *md,*.vim,*.js silent! loadview
@@ -49,7 +55,6 @@ set noswapfile
 set showcmd
 set showmatch
 set laststatus=2
-"set cursorline
 set ruler
 set number "relativenumber
 set incsearch  "输入搜索内容时就显示搜索结果
@@ -74,8 +79,7 @@ let g:python3_host_prog  = '/usr/local/bin/python3'
 let g:python3_host_skip_check=1
 let g:python_host_skip_check=1
 set updatetime=1000
-set lazyredraw            " improve scrolling performanc
-set regexpengine=1        " use old regexp engine
+"set regexpengine=1        " use old regexp engine
 set vdir=~/Documents/.nvim/view
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number       column into one
@@ -88,6 +92,7 @@ set wildignore+=.git*
 let mapleader = ","
 nmap [b :bnext<CR>
 nmap ]b :bprevious<CR>
+nmap // :noh <cr>
 nmap <leader>b :ls<CR>:b 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
@@ -98,35 +103,12 @@ nnoremap <leader>gc : !gcc % && ./a.out <CR>
 nmap <expr> <silent> <leader>d len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1 ? ':bd<CR>' : ':bp<CR>:bd #<CR>'
 noremap <expr> H winline()==1 ? "\<C-u>" : "H"
 noremap <expr> L winline()==winheight(0) ? "\<C-d>" : "L"
-"surround
-map S <Nop>
-vmap  S"  s""<LEFT><C-r>"<ESC>
-vmap  S'  s''<LEFT><C-r>"<ESC>
-vmap  S`  s``<LEFT><C-r>"<ESC>
-vmap  S(  s()<LEFT><C-r>"<ESC>
-vmap  S{  s{}<LEFT><C-r>"<ESC>
-vmap  S}} s{{}}<LEFT><LEFT><C-r>"<ESC>
-vmap  S{% s{%%}<LEFT><LEFT><C-r>"<ESC>
-vmap  S> s<><LEFT><C-r>"<ESC>
-vmap  S[  s[]<LEFT><C-r>"<ESC>
-vmap  S]]  s[[]]<LEFT><LEFT><C-r>"<ESC>
-"delete surround
-nmap  d'  di'"_da'P
-nmap  d"  di""_da"P
-nmap  d`  di``_da`P
-nmap  dt  dit"_datP
-nmap  d(  di("_datP
-nmap  d<  di("_datP
-nmap  d{  di{"_datP
-nmap  d[  di["_datP
-nmap  d(  di("_datP
-"text-object
-"file
+"file text-object
 omap ae :<c-u>normal! mzggVG<cr>`z
 omap ie :<c-u>normal! mzggVG<cr>`z
 vmap ae :<c-u>normal! mzggVG<cr> 
 vmap ie :<c-u>normal! mzggVG<cr>
-"fold
+"fold text-object
 omap if :<c-u>normal! mGzcV<cr>`z
 omap af :<c-u>normal! mGzcV<cr>`z
 vmap if :<c-u>normal! mGzcV<cr>`z
@@ -137,60 +119,30 @@ inoremap <C-f> <right>
 inoremap <C-a> <home>
 inoremap <C-e> <end>
 inoremap <C-d> <delete>
-"auto pair
-function! IsCharsBetween()
-  if getline('.')[col('.')] =~'[0-9A-Za-z_]'
-    return 1
-  endif
-  if getline('.')[col('.') -2 ] =~'[0-9A-Za-z_]'
-    return 1
-  endif
- return 0
-endfunction
-"inoremap {<cr>  {}<left><cr><C-o>O<TAB>
-"inoremap <expr> <silent>' IsCharsBetween()==0 ? "\'\'\<left>" : "\'"
-"inoremap <expr> <silent>( IsCharsBetween()==0 ? "\(\)\<left>" : "\("
-" inoremap <expr> <silent>{ IsCharsBetween()==0 ? "\{\}\<left>" : "\{"
 command! CountMatch :%s///gn
 call plug#begin('~/.config/nvim/plugged')
-" https://github.com/tpope/vim-dadbod
-Plug 'mattn/calendar-vim'
-Plug 'jceb/vim-orgmode'
+Plug 'leafgarland/typescript-vim' ,{'for':'typescript'}
+Plug 'peitalin/vim-jsx-typescript' ,{'for':'typescript'}
+Plug 'othree/yajs.vim' ,{'for':'typescript'}
 Plug 'ybian/smartim' "ime
-Plug 'tpope/vim-fugitive' "git
 Plug 'dhruvasagar/vim-table-mode' 
-"Plug 'deton/jasegment.vim' "japanese text-object
+Plug 'deton/jasegment.vim' "japanese text-object
 Plug 'junegunn/vim-easy-align' 
 Plug 'rhysd/clever-f.vim' "find jump
 Plug 'itchyny/lightline.vim' "status bar
 Plug 'tpope/vim-commentary' 
 Plug 'rhysd/accelerated-jk'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'umrwifi/vim-hexo'
-Plug 'mhinz/vim-startify' "mru
 Plug 'morhetz/gruvbox'  "theme
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "lsp lint  the extensions extension by nodejs
-"Plug 'cohama/lexima.vim'
 call plug#end()            " 必须
-let g:org_agenda_files=[ '~/Documents/todo/inbox.org', '~/Documents/todo/bangumi.org' ]
-let g:EasyMotion_use_migemo = 1
 let g:smartim_default = 'com.apple.keylayout.ABC'
 let g:input_toggle = 0
-function! Fcitx2en()
-   let s:input_status = system("fcitx-remote")
-   if s:input_status == 2
-      let g:input_toggle = 1
-      let l:a = system("skhd -k  0x66")
-   endif
-endfunction
 nmap <leader>cc :Commentary<cr>
 vmap <leader>cc :Commentary<cr>
 "easyalign
 au FileType markdown vmap <Bslash><Bslash> :EasyAlign*<Bar><Enter>
 "vim-hexo
-let g:hexoRootPath='/Users/admin/hexo/'
-"indent-guide
-"let g:indent_guides_enable_on_vim_startup = 1
 "clever-f
 let g:clever_f_use_migemo = 1 
 "let g:clever_f_mark_direct = 1
@@ -214,10 +166,11 @@ let g:coc_global_extensions = [
       \'coc-snippets',
       \'coc-lists',
       \'coc-actions',
-      \'coc-eslint',
       \'coc-diagnostic',
       \'coc-highlight',
       \'coc-explorer',
+      \'coc-eslint',
+      \'coc-pairs'
       \ ]
 inoremap <silent><expr><TAB>
   \ pumvisible() ? "\<C-n>" :
@@ -230,41 +183,25 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-nmap <silent> @d <Plug>(coc-diagnostic-prev)
-nmap <silent> [d <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 "coc-snippets 
 vmap <tab> <Plug>(coc-snippets-select)
 command! SnipConfig :CocCommand snippets.editSnippets
 command! SnipFile :CocCommand snippets.openSnippetFiles
 "coc-explorer
-nmap <leader>e :CocCommand explorer --width 30 <CR>
-let g:path =""
-function! Explorer_preview()
-"TODO 判断他在buffer列表中
-if (g:path!='')
-exe "wincmd w"
-if(len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1)
-silent! exe "bd" .g:path
-else
-exe "bp"
-silent! exe "bd" .g:path
-endif
-exe "wincmd p"
-endif
-let g:path = CocAction('runCommand','explorer.getNodeInfo',0 ).fullpath
-call CocAction('runCommand', 'explorer.doAction', 0, ['expandable?', 'expand', 'open'])
-"exe "vs ". g:path
-endfunction
-function! Explorerinit()
-  nnoremap <buffer><CR> :call Explorer_preview()<CR>
-  nnoremap <buffer>q :bd <CR>
-  set winblend=50
-endfunction
-autocmd FileType coc-explorer call Explorerinit()
-autocmd InsertEnter let g:path=""
+nmap <leader>e :CocCommand explorer <CR>
 "coclist
 noremap <C-P> :CocList --ignore-case files <CR>
-noremap <C-c>c :CocList  --ignore-case <CR> 
 nnoremap tg :CocList outline <CR>
-noremap <leader>f :CocList  grep <CR>
+" grep word under cursor
+command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+function! s:GrepArgs(...)
+  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension',"-no-quit"]
+  return join(list, "\n")
+endfunction
+" Keymapping for grep word under cursor with interactive mode
+"nnoremap <silent> <Leader>f :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+noremap <leader>f :CocList grep <CR>
 command! Mru :CocList --number-select mru

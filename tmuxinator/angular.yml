@@ -1,7 +1,7 @@
-# /Users/admin/.config/tmuxinator/javascript.yml
+# /Users/admin/.config/tmuxinator/angular.yml
 
-name: javascript
-root: ~/
+name: angular
+root: ~/Product/angular-tutorial
 
 # Optional tmux socket
 # socket_name: foo
@@ -45,11 +45,6 @@ root: ~/
 # attach: false
 
 windows:
-  - editor:
-      layout: main-vertical
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
-      panes:
-        - "cd /Users/admin/Documents/Javascript ; nvim mask.js"
-  - todo: "z todo ; nvim dev.md"
+  - server: ng serve -o
+  - editor: vim .
+  - logs: 

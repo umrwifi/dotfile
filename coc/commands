@@ -1,13 +1,14 @@
+explorer
 snippets.editSnippets
-actions.open
 snippets.openSnippetFiles
+eslint.showOutputChannel
+actions.open
 eslint.executeAutofix
 tsserver.executeAutofix
 eslint.createConfig
 eslint.
 tslint.lintProject
 tsserver.restart
-explorer
 prettier.formatFile
 snippets.openSnippets
 markdownlint.fixAll
